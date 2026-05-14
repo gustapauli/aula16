@@ -1,1 +1,1690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Aula 16 — Brasil Colônia: o país nasceu torto</title>
+<style>
+  :root {
+    --bg: #F4EFE6;
+    --bg-deep: #1A1814;
+    --ink: #1A1814;
+    --ink-soft: #4A4640;
+    --paper: #FBF7EF;
+    --accent: #B8862F;
+    --accent-soft: #E8C77A;
+    --line: rgba(26,24,20,0.12);
+    --correct: #2E7D4F;
+    --wrong: #B5342B;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .app {
+    position: fixed;
+    inset: 0;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  .progress {
+    position: absolute;
+    top: 10px; left: 12px; right: 12px;
+    height: 18px;
+    display: flex;
+    gap: 3px;
+    z-index: 50;
+    align-items: center;
+    cursor: pointer;
+  }
+  .seg {
+    flex: 1;
+    height: 3px;
+    background: rgba(26,24,20,0.12);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    transition: height 0.2s ease;
+  }
+  .seg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .seg.done::after { transform: scaleX(1); }
+  .seg.current::after { transform: scaleX(1); }
+  .seg.current { height: 4px; }
+
+  .header {
+    position: absolute;
+    top: 34px; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 40;
+    pointer-events: none;
+  }
+  .header span {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .slides { position: absolute; inset: 0; }
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 80px 28px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+    overflow-y: auto;
+  }
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  .slide.prev { transform: translateX(-40px); }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(28px, 8vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  h1 em, h2 em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(24px, 7vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+  }
+  h3 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  p {
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  p + p { margin-top: 14px; }
+  .big {
+    font-family: var(--serif);
+    font-size: clamp(22px, 6.5vw, 28px);
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding-left: 18px;
+    margin: 8px 0;
+  }
+  .number {
+    font-family: var(--serif);
+    font-size: 88px;
+    font-weight: 800;
+    line-height: 0.9;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  .label {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  .slide.active > * {
+    animation: fadeUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+  }
+  .slide.active > *:nth-child(1) { animation-delay: 0.05s; }
+  .slide.active > *:nth-child(2) { animation-delay: 0.18s; }
+  .slide.active > *:nth-child(3) { animation-delay: 0.31s; }
+  .slide.active > *:nth-child(4) { animation-delay: 0.44s; }
+  .slide.active > *:nth-child(5) { animation-delay: 0.57s; }
+  .slide.active > *:nth-child(6) { animation-delay: 0.70s; }
+  .slide.active > *:nth-child(7) { animation-delay: 0.83s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .tap-zone {
+    position: absolute;
+    top: 60px; bottom: 0;
+    width: 35%;
+    z-index: 30;
+    cursor: pointer;
+  }
+  .tap-zone.left { left: 0; }
+  .tap-zone.right { right: 0; }
+
+  .footer-hint {
+    position: absolute;
+    bottom: 18px; left: 0; right: 0;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    opacity: 0.6;
+    z-index: 20;
+    pointer-events: none;
+  }
+  .footer-hint .arrow {
+    display: inline-block;
+    animation: nudge 2s ease-in-out infinite;
+  }
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+  }
+
+  .illu {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 18px;
+    display: block;
+  }
+  .illu.sm { max-width: 180px; }
+  .illu.lg { max-width: 320px; }
+  .illu svg { width: 100%; height: auto; display: block; }
+
+  .draw path, .draw line, .draw circle, .draw rect, .draw polygon, .draw polyline {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 1.6s 0.3s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .pulse-dot { animation: pulseDot 1.8s ease-in-out infinite; }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  .cover {
+    background: var(--bg-deep);
+    color: var(--paper);
+  }
+  .cover h1 { color: var(--paper); }
+  .cover .eyebrow { color: var(--accent-soft); }
+  .cover p { color: rgba(251,247,239,0.7); }
+  .cover .footer-hint { color: rgba(251,247,239,0.5); }
+
+  .quiz-intro { text-align: center; }
+  .quiz-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--paper);
+    animation: popIn 0.6s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .question-num {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .question {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.3;
+    font-weight: 600;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .option:active { transform: scale(0.98); }
+  .option .letter {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 1px;
+    transition: all 0.2s ease;
+  }
+  .option.correct {
+    background: rgba(46, 125, 79, 0.08);
+    border-color: var(--correct);
+    color: var(--correct);
+  }
+  .option.correct .letter {
+    background: var(--correct);
+    color: white;
+    border-color: var(--correct);
+  }
+  .option.wrong {
+    background: rgba(181, 52, 43, 0.06);
+    border-color: var(--wrong);
+    color: var(--wrong);
+  }
+  .option.wrong .letter {
+    background: var(--wrong);
+    color: white;
+    border-color: var(--wrong);
+  }
+  .option.disabled { pointer-events: none; opacity: 0.55; }
+
+  .feedback {
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 12px;
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+  .feedback.show {
+    opacity: 1;
+    max-height: 500px;
+  }
+  .feedback.right {
+    background: rgba(46, 125, 79, 0.08);
+    color: var(--correct);
+    border: 1px solid rgba(46, 125, 79, 0.2);
+  }
+  .feedback.miss {
+    background: rgba(181, 52, 43, 0.06);
+    color: var(--ink);
+    border: 1px solid rgba(181, 52, 43, 0.2);
+  }
+  .feedback strong { font-weight: 700; }
+  .feedback .head {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    margin-bottom: 6px;
+    display: block;
+    font-weight: 600;
+  }
+
+  .end {
+    background: var(--bg-deep);
+    color: var(--paper);
+    text-align: center;
+  }
+  .end h2 { color: var(--paper); }
+  .end p { color: rgba(251,247,239,0.7); }
+  .end .score {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 800;
+    color: var(--accent-soft);
+    line-height: 1;
+    margin: 20px 0;
+  }
+  .restart {
+    margin-top: 28px;
+    background: var(--accent);
+    color: var(--paper);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .restart:active { transform: scale(0.96); }
+
+  .slide::-webkit-scrollbar { display: none; }
+  .slide { scrollbar-width: none; }
+
+  .card-soft {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .stamp {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+  .stamp.dark {
+    background: var(--bg-deep);
+    color: var(--accent-soft);
+  }
+
+  .pyramid-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 14px;
+    align-items: center;
+  }
+  .pyramid-row {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    text-align: center;
+    padding: 10px;
+    font-family: var(--serif);
+    font-size: 14px;
+  }
+  .pyramid-row.top { width: 40%; background: var(--accent); color: var(--paper); border-color: var(--accent); border-radius: 8px 8px 0 0; }
+  .pyramid-row.mid { width: 70%; }
+  .pyramid-row.base { width: 100%; background: var(--bg-deep); color: var(--paper); border-color: var(--bg-deep); border-radius: 0 0 8px 8px; }
+
+  .tri-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .tri-cell {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+  .tri-cell svg { width: 36px; height: 36px; margin: 0 auto 6px; display: block; }
+  .tri-cell .name {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="progress" id="progress"></div>
+  <div class="header">
+    <span>Aula 16</span>
+    <span id="counter">1 / 1</span>
+  </div>
+
+  <div class="slides" id="slides">
+
+    <!-- 1 - CAPA -->
+    <section class="slide cover active">
+      <div class="eyebrow">História · Aula 16</div>
+      <h1>Brasil Colônia: o país nasceu <em>torto</em>.</h1>
+      <p style="margin-top: 16px;">E isso explica quase tudo do que você vê por aí hoje.</p>
+      <div class="illu" style="margin-top: 36px;">
+        <svg viewBox="0 0 240 140" class="draw" fill="none" stroke="#E8C77A" stroke-width="1.5">
+          <!-- navio chegando -->
+          <path d="M30 90 L80 90 L70 105 L40 105 Z"/>
+          <path d="M55 90 L55 55"/>
+          <path d="M55 55 L80 80 L55 80 Z"/>
+          <path d="M55 55 L30 80 L55 80 Z"/>
+          <!-- onda -->
+          <path d="M10 115 Q30 110 50 115 T90 115" stroke-dasharray="3 3"/>
+          <!-- terra -->
+          <path d="M110 115 Q160 95 220 115"/>
+          <!-- engenho na terra -->
+          <path d="M140 100 L150 85 L160 100 Z"/>
+          <rect x="142" y="100" width="16" height="14"/>
+          <path d="M175 100 L185 90 L195 100 Z"/>
+          <rect x="177" y="100" width="16" height="14"/>
+          <!-- seta extrair -->
+          <path d="M100 75 L75 90" stroke-dasharray="2 2"/>
+          <path d="M80 86 L75 90 L80 95"/>
+        </svg>
+      </div>
+      <div class="footer-hint">toque na lateral pra avançar <span class="arrow">→</span></div>
+    </section>
+
+    <!-- 2 - epígrafe -->
+    <section class="slide">
+      <div class="eyebrow">Antes de começar</div>
+      <p class="quote">Todo país carrega o DNA de como nasceu. O Brasil nasceu como negócio. E negócio mal-feito, ainda por cima.</p>
+    </section>
+
+    <!-- 3 - o salto -->
+    <section class="slide">
+      <p>Nas últimas aulas, a gente passeou pelo mundo.</p>
+      <p style="margin-top: 10px;">Iluminismo. Revoluções. Industrialização. Imperialismo.</p>
+      <p style="margin-top: 14px;">Agora vira a câmera.</p>
+      <p class="big" style="margin-top: 12px; color: var(--accent);">Aponta pra cá.</p>
+    </section>
+
+    <!-- 4 - contraste -->
+    <section class="slide">
+      <p>Enquanto <strong>Locke</strong> escrevia na Inglaterra…</p>
+      <p>Enquanto <strong>Jefferson</strong> redigia a Independência americana…</p>
+      <p class="big" style="margin-top: 14px;">O que rolava aqui?</p>
+      <p style="margin-top: 12px; font-family: var(--serif); font-style: italic; color: var(--accent);">Spoiler: coisa muito diferente.</p>
+    </section>
+
+    <!-- 5 - bloco 3 -->
+    <section class="slide">
+      <span class="stamp">Bloco 3 · Brasil</span>
+      <p style="margin-top: 18px;">Esta é a <strong>primeira aula</strong> do bloco sobre o Brasil.</p>
+      <p>As próximas oito vão dissecar o DNA do nosso país.</p>
+      <p class="big" style="margin-top: 14px;">Não pra você decorar.</p>
+      <p style="margin-top: 10px;">Pra você <strong>entender</strong> por que as coisas aqui funcionam (ou não funcionam) do jeito que funcionam.</p>
+    </section>
+
+    <!-- 6 - pergunta-chave -->
+    <section class="slide">
+      <div class="eyebrow">A pergunta que organiza tudo</div>
+      <h2>Pra que o Brasil foi <em>criado</em>?</h2>
+      <p style="margin-top: 18px;">Antes de qualquer data, segura essa pergunta.</p>
+    </section>
+
+    <!-- 7 - resposta -->
+    <section class="slide">
+      <p>Não foi pra ser um país.</p>
+      <p>Não foi pra abrigar gente livre.</p>
+      <p>Não foi pra construir civilização.</p>
+      <p class="big" style="margin-top: 16px; color: var(--accent);">Foi pra dar lucro pra Portugal.</p>
+      <p style="margin-top: 10px;">Ponto.</p>
+    </section>
+
+    <!-- 8 - contraste EUA -->
+    <section class="slide">
+      <div class="eyebrow">Compara aí</div>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+        <div class="card-soft" style="border-left: 3px solid var(--accent);">
+          <div class="label" style="margin-bottom: 6px;">EUA</div>
+          <p style="font-size: 15px;">Colonizado por gente <strong>fugindo</strong>. Perseguidos religiosos, famílias, gente buscando terra. Vinham pra <em>ficar</em>.</p>
+        </div>
+        <div class="card-soft" style="border-left: 3px solid var(--accent);">
+          <div class="label" style="margin-bottom: 6px;">Brasil</div>
+          <p style="font-size: 15px;">Colonizado por gente vindo <strong>extrair</strong>. Tirar riqueza, mandar pra Portugal, voltar rico. A colônia era <em>mina</em>, não lar.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 - lição -->
+    <section class="slide">
+      <div class="eyebrow">Guarda essa</div>
+      <p class="quote">Entenda a finalidade original de uma estrutura, e você entende boa parte do comportamento dela depois.</p>
+      <p style="margin-top: 14px;">Empresa que nasce pra vender rápido se comporta diferente de empresa que nasce pra durar 100 anos.</p>
+      <p class="big" style="margin-top: 10px;">País é igual.</p>
+    </section>
+
+    <!-- 10 - 1500 -->
+    <section class="slide">
+      <div class="number">1500</div>
+      <div class="label" style="margin-top: 8px;">22 de abril</div>
+      <h2 style="margin-top: 12px;">Cabral chega.</h2>
+      <p style="margin-top: 14px;">Versão oficial: descobriu por acaso, indo pra Índia.</p>
+      <p style="margin-top: 10px;">Versão sóbria: já <strong>desconfiavam</strong> que tinha terra ali.</p>
+    </section>
+
+    <!-- 11 - Tordesilhas -->
+    <section class="slide">
+      <div class="eyebrow">Tratado de Tordesilhas · 1494</div>
+      <p>Seis anos <strong>antes</strong> do "descobrimento", Portugal e Espanha já tinham dividido o mundo.</p>
+      <div class="illu" style="margin: 18px auto; max-width: 220px;">
+        <svg viewBox="0 0 220 130" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <circle cx="110" cy="65" r="55"/>
+          <path d="M110 10 L110 120" stroke-dasharray="4 3" stroke="#B5342B" stroke-width="2"/>
+          <text x="55" y="70" font-family="Georgia" font-size="13" fill="#B8862F" font-style="italic">Espanha</text>
+          <text x="125" y="70" font-family="Georgia" font-size="13" fill="#B8862F" font-style="italic">Portugal</text>
+          <path d="M70 30 Q90 35 95 50"/>
+          <path d="M130 80 Q145 90 140 105"/>
+        </svg>
+      </div>
+      <p>Linha imaginária no meio do Atlântico. Tudo a leste, de Portugal. A oeste, da Espanha.</p>
+    </section>
+
+    <!-- 12 - pausa -->
+    <section class="slide">
+      <p class="big">Pausa. Pensa nisso.</p>
+      <p style="margin-top: 14px;">Dois reinos europeus, com bênção do Papa, sentaram numa mesa…</p>
+      <p>…e dividiram o <strong>mundo inteiro</strong> entre eles.</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 6px;">
+        <p style="color: var(--ink-soft); font-style: italic;">Sem perguntar pra ninguém.</p>
+        <p style="color: var(--ink-soft); font-style: italic;">Sem consultar os povos das terras.</p>
+        <p style="color: var(--ink-soft); font-style: italic;">Sem nem saber o que essas terras eram.</p>
+      </div>
+    </section>
+
+    <!-- 13 - mentalidade -->
+    <section class="slide">
+      <p>Pra Europa de 1494, terra fora da Europa <strong>não era de ninguém</strong>.</p>
+      <p style="margin-top: 10px;">Exceto, claro, de quem chegasse primeiro <em>com canhão</em>.</p>
+      <p class="big" style="margin-top: 16px;">Guarda: essa mentalidade nunca morreu.</p>
+      <p style="margin-top: 10px;">Hoje você vê isso em disputa pelo Ártico. Em rotas marítimas. Em chips. Em IA.</p>
+      <p style="margin-top: 10px; font-family: var(--serif); font-style: italic; color: var(--accent);">Nome muda, lógica é a mesma — poder define quem fica com o quê.</p>
+    </section>
+
+    <!-- 14 - 30 anos esquecido -->
+    <section class="slide">
+      <p>Cabral chega em 1500.</p>
+      <p>Manda carta pro rei. Segue viagem pra Índia.</p>
+      <p class="big" style="margin-top: 14px;">E o Brasil fica esquecido por <em>30 anos</em>.</p>
+    </section>
+
+    <!-- 15 - por quê esquecido -->
+    <section class="slide">
+      <div class="eyebrow">Por quê?</div>
+      <p>Porque Portugal ganhava <strong>rios de dinheiro</strong> com especiarias na Ásia.</p>
+      <div class="illu sm" style="margin: 18px auto;">
+        <svg viewBox="0 0 160 60" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <rect x="15" y="25" width="20" height="25" rx="2"/>
+          <path d="M25 25 L25 18"/>
+          <rect x="50" y="25" width="20" height="25" rx="2"/>
+          <path d="M60 25 L60 18"/>
+          <rect x="85" y="25" width="20" height="25" rx="2"/>
+          <path d="M95 25 L95 18"/>
+          <rect x="120" y="25" width="20" height="25" rx="2"/>
+          <path d="M130 25 L130 18"/>
+        </svg>
+      </div>
+      <p>Pimenta, cravo, canela — na Europa do século 16, valiam <strong>ouro</strong>. Literalmente.</p>
+    </section>
+
+    <!-- 16 - pau-brasil -->
+    <section class="slide">
+      <p>O Brasil, comparado a isso, parecia pobre.</p>
+      <p>Sem cidades cheias de ouro (como os astecas, no México).</p>
+      <p>Tinha mato, índio e uma árvore vermelha:</p>
+      <p class="big" style="margin-top: 12px; color: var(--accent);">O pau-brasil.</p>
+      <div class="illu sm" style="margin: 14px auto;">
+        <svg viewBox="0 0 120 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <path d="M60 90 L60 30"/>
+          <path d="M60 30 Q40 25 35 15"/>
+          <path d="M60 30 Q80 25 85 15"/>
+          <path d="M60 45 Q45 42 40 32"/>
+          <path d="M60 45 Q75 42 80 32"/>
+          <path d="M60 60 Q48 58 44 50"/>
+          <path d="M60 60 Q72 58 76 50"/>
+        </svg>
+      </div>
+      <p style="font-size: 14px; color: var(--ink-soft);">Dava um corante caro pra tingir tecidos na Europa.</p>
+    </section>
+
+    <!-- 17 - escambo -->
+    <section class="slide">
+      <div class="eyebrow">Os primeiros 30 anos</div>
+      <p>Foi basicamente isso:</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Navio português encosta no litoral.</div>
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Troca bugiganga — espelho, faca, machado — com índio.</div>
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Índio corta o pau-brasil. Carrega pro navio.</div>
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Navio volta pra Europa.</div>
+      </div>
+      <p class="big" style="margin-top: 14px;">Extração pura. Nem morar queriam.</p>
+    </section>
+
+    <!-- 18 - franceses -->
+    <section class="slide">
+      <p>Aí os <strong>franceses</strong> começaram a fazer a mesma coisa por aqui.</p>
+      <p style="margin-top: 12px;">E o Tratado de Tordesilhas, na prática, valia o quê?</p>
+      <p class="big" style="margin-top: 12px;">Valia o tamanho do canhão de quem o defendia.</p>
+      <p style="margin-top: 10px;">França nunca aceitou. Inglaterra também não. Holanda também não.</p>
+      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">"Tratado entre Portugal e Espanha não é problema meu", diziam.</p>
+    </section>
+
+    <!-- 19 - lição contrato -->
+    <section class="slide">
+      <div class="eyebrow">Lição</div>
+      <p class="quote">Acordo só vale enquanto houver força pra fazer cumprir. Contrato sem fiscalização é decoração.</p>
+      <p style="margin-top: 14px;">Vale pra país. Vale pra negócio.</p>
+      <p class="big" style="margin-top: 8px;">Vale pra sua vida.</p>
+    </section>
+
+    <!-- 20 - 1534 -->
+    <section class="slide">
+      <div class="number">1534</div>
+      <div class="label" style="margin-top: 8px;">Dom João III</div>
+      <h2 style="margin-top: 12px;">Capitanias <em>Hereditárias</em>.</h2>
+      <p style="margin-top: 14px;">Primeira tentativa de "organização".</p>
+      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">Parecia genial. Era, na verdade, uma confissão de fraqueza.</p>
+    </section>
+
+    <!-- 21 - como funcionava -->
+    <section class="slide">
+      <p>O rei pegou o mapa do Brasil…</p>
+      <div class="illu" style="margin: 16px auto; max-width: 200px;">
+        <svg viewBox="0 0 200 130" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <rect x="30" y="10" width="140" height="110"/>
+          <path d="M30 25 L170 25"/>
+          <path d="M30 40 L170 40"/>
+          <path d="M30 55 L170 55"/>
+          <path d="M30 70 L170 70"/>
+          <path d="M30 85 L170 85"/>
+          <path d="M30 100 L170 100"/>
+        </svg>
+      </div>
+      <p>…cortou em <strong>15 faixas horizontais</strong>.</p>
+      <p style="margin-top: 10px;">Distribuiu pra <strong>12 nobres</strong> de confiança da Coroa. Os <em>donatários</em>.</p>
+    </section>
+
+    <!-- 22 - lógica -->
+    <section class="slide">
+      <p>A lógica:</p>
+      <div class="card-soft" style="margin-top: 14px; border-left: 3px solid var(--accent);">
+        <p style="font-size: 15px; font-style: italic;">"Eu, rei, não tenho dinheiro pra colonizar. Mas tenho a terra.</p>
+        <p style="font-size: 15px; font-style: italic; margin-top: 8px;">Vocês, nobres, gastem o <strong>dinheiro de vocês</strong>. Povoem. Defendam. Façam render.</p>
+        <p style="font-size: 15px; font-style: italic; margin-top: 8px;">Em troca: passam de pai pra filho (por isso <em>hereditárias</em>) e ficam com boa parte do lucro. Eu fico com imposto."</p>
+      </div>
+    </section>
+
+    <!-- 23 - terceirização -->
+    <section class="slide">
+      <p>Você consegue ver o que aconteceu?</p>
+      <p class="big" style="margin-top: 14px;">O rei <em>terceirizou</em> a colonização.</p>
+      <p style="margin-top: 12px;">Privatizou o risco. Manteve uma parte do lucro garantida.</p>
+      <p style="margin-top: 14px;">E o que acontece quando você terceiriza sem fiscalizar?</p>
+      <p class="big" style="margin-top: 12px; color: var(--wrong);">Em geral, dá merda.</p>
+    </section>
+
+    <!-- 24 - resultado -->
+    <section class="slide">
+      <div class="eyebrow">Resultado</div>
+      <p>Das 15 capitanias…</p>
+      <div style="text-align: center; margin: 18px 0;">
+        <div class="number">2</div>
+        <p style="margin-top: 6px; font-size: 14px; color: var(--ink-soft);">só duas prosperaram</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <div class="card-soft" style="flex: 1; text-align: center;">
+          <p style="font-family: var(--serif); font-weight: 600;">São Vicente</p>
+          <p style="font-size: 12px; color: var(--ink-soft);">litoral de SP</p>
+        </div>
+        <div class="card-soft" style="flex: 1; text-align: center;">
+          <p style="font-family: var(--serif); font-weight: 600;">Pernambuco</p>
+          <p style="font-size: 12px; color: var(--ink-soft);">Nordeste</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 25 - motivos -->
+    <section class="slide">
+      <div class="eyebrow">Por que as outras falharam</div>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Distância gigantesca</strong> de Portugal. Comunicação levava meses.</div>
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Donatário sem grana.</strong> Maioria era nobre arruinado.</div>
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Resistência indígena.</strong> Índios não topavam virar escravos.</div>
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Ataques estrangeiros.</strong> Franceses, piratas, etc.</div>
+      </div>
+    </section>
+
+    <!-- 26 - por que as 2 deram certo -->
+    <section class="slide">
+      <p>Por que essas duas deram certo?</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+        <div class="card-soft">
+          <div class="label" style="margin-bottom: 4px;">São Vicente</div>
+          <p style="font-size: 15px;">Donatário competente (<strong>Martim Afonso de Sousa</strong>) e introduziu logo a cana-de-açúcar.</p>
+        </div>
+        <div class="card-soft">
+          <div class="label" style="margin-bottom: 4px;">Pernambuco</div>
+          <p style="font-size: 15px;">Donatário competente (<strong>Duarte Coelho</strong>) e o solo <em>massapê</em> — terra escura e fértil, perfeita pra cana.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 27 - lição estrutura -->
+    <section class="slide">
+      <div class="eyebrow">Lição</div>
+      <p class="quote">Estrutura ruim de incentivos produz resultado ruim, mesmo com gente boa dentro.</p>
+      <p style="margin-top: 14px;">E estrutura boa pode salvar até gestor médio.</p>
+      <p class="big" style="margin-top: 10px;">As duas que deram certo tinham os dois: <em>donatário bom + condição local favorável</em>.</p>
+      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">Sorte e mérito, juntos.</p>
+    </section>
+
+    <!-- 28 - 1549 -->
+    <section class="slide">
+      <div class="number">1549</div>
+      <div class="label" style="margin-top: 8px;">Mudança de estratégia</div>
+      <h2 style="margin-top: 12px;">Governo-Geral.</h2>
+      <p style="margin-top: 14px;">Portugal vê o fracasso. Centraliza.</p>
+      <p style="margin-top: 10px;">Manda <strong>Tomé de Sousa</strong>, primeiro governador-geral, com poder sobre todas as capitanias.</p>
+      <p style="margin-top: 10px;">Funda <strong>Salvador</strong> como capital.</p>
+    </section>
+
+    <!-- 29 - começa a funcionar -->
+    <section class="slide">
+      <p>A partir daí, o Brasil começa a funcionar.</p>
+      <p style="margin-top: 10px;">Não bem. Mas funciona.</p>
+      <p class="big" style="margin-top: 14px;">E o que faz funcionar…</p>
+      <p style="margin-top: 8px; font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--accent);">…é um produto.</p>
+    </section>
+
+    <!-- 30 - açúcar -->
+    <section class="slide">
+      <div class="eyebrow">O primeiro grande negócio brasileiro</div>
+      <h1 style="color: var(--accent);">O açúcar.</h1>
+      <div class="illu" style="margin: 18px auto; max-width: 200px;">
+        <svg viewBox="0 0 200 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <path d="M30 95 L30 20"/>
+          <path d="M50 95 L50 15"/>
+          <path d="M70 95 L70 25"/>
+          <path d="M90 95 L90 18"/>
+          <path d="M110 95 L110 22"/>
+          <path d="M130 95 L130 16"/>
+          <path d="M150 95 L150 24"/>
+          <path d="M170 95 L170 20"/>
+          <path d="M22 35 L38 35 M42 30 L58 30 M62 40 L78 40 M82 33 L98 33 M102 38 L118 38 M122 32 L138 32 M142 40 L158 40 M162 34 L178 34"/>
+        </svg>
+      </div>
+      <p>No século 16, na Europa, açúcar era <strong>artigo de luxo</strong>.</p>
+      <p style="margin-top: 8px;">Quem tinha açúcar na mesa era rico.</p>
+    </section>
+
+    <!-- 31 - Brasil tinha tudo -->
+    <section class="slide">
+      <p>E o Brasil tinha tudo pra produzir:</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">☀ Clima quente</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">☁ Chuva regular</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">⛰ Solo massapê no Nordeste</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">⚓ Costa imensa pra escoar</div>
+      </div>
+    </section>
+
+    <!-- 32 - explosão -->
+    <section class="slide">
+      <p>Em poucas décadas, Pernambuco e Bahia viraram…</p>
+      <p class="big" style="margin-top: 12px; color: var(--accent);">As maiores regiões produtoras de açúcar do mundo.</p>
+      <div style="margin-top: 18px; display: flex; gap: 10px;">
+        <div class="card-soft" style="flex: 1; text-align: center;">
+          <div class="number" style="font-size: 40px;">30</div>
+          <p style="font-size: 12px; color: var(--ink-soft); margin-top: 4px;">engenhos em 1549</p>
+        </div>
+        <div class="card-soft" style="flex: 1; text-align: center;">
+          <div class="number" style="font-size: 40px;">200+</div>
+          <p style="font-size: 12px; color: var(--ink-soft); margin-top: 4px;">no século 17 (só PE)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 33 - vaidade -->
+    <section class="slide">
+      <p>Um padre da época escreveu uma frase famosa:</p>
+      <p class="quote" style="margin-top: 14px;">Em Pernambuco acha-se mais vaidade que em Lisboa.</p>
+      <p style="margin-top: 16px;">Pensa: o <strong>pedaço da colônia</strong> era mais ostentoso que a <strong>metrópole</strong>.</p>
+      <p class="big" style="margin-top: 12px;">O Nordeste, no século 17, era a coisa mais rica do império português.</p>
+    </section>
+
+    <!-- 34 - engenho -->
+    <section class="slide">
+      <div class="eyebrow">Como funcionava</div>
+      <h2>O engenho.</h2>
+      <p style="margin-top: 12px;">Não era só fazenda. Era uma <strong>agroindústria</strong>:</p>
+      <p style="margin-top: 10px; font-family: var(--serif); font-style: italic; color: var(--accent);">fazenda + fábrica + cidade pequena, tudo num lugar só.</p>
+    </section>
+
+    <!-- 35 - partes do engenho -->
+    <section class="slide">
+      <div class="eyebrow">As partes</div>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+        <div class="card-soft" style="padding: 12px;">
+          <p style="font-family: var(--serif); font-weight: 600; font-size: 15px;">Casa-grande</p>
+          <p style="font-size: 13px; color: var(--ink-soft);">Mansão do senhor. Móvel caro, vida de fidalgo.</p>
+        </div>
+        <div class="card-soft" style="padding: 12px;">
+          <p style="font-family: var(--serif); font-weight: 600; font-size: 15px;">Senzala</p>
+          <p style="font-size: 13px; color: var(--ink-soft);">Galpão imundo. Onde os escravos dormiam.</p>
+        </div>
+        <div class="card-soft" style="padding: 12px;">
+          <p style="font-family: var(--serif); font-weight: 600; font-size: 15px;">Capela</p>
+          <p style="font-size: 13px; color: var(--ink-soft);">Igreja particular. Pra Deus abençoar o negócio.</p>
+        </div>
+        <div class="card-soft" style="padding: 12px;">
+          <p style="font-family: var(--serif); font-weight: 600; font-size: 15px;">Canavial, moenda, casa de purgar</p>
+          <p style="font-size: 13px; color: var(--ink-soft);">Plantação, máquina que esmaga a cana, refino do açúcar.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 36 - escravos -->
+    <section class="slide">
+      <p>Tudo isso operado por…</p>
+      <p class="big" style="margin-top: 12px; color: var(--wrong);">escravos.</p>
+      <p style="margin-top: 14px;">Primeiro <strong>indígenas</strong>.</p>
+      <p style="margin-top: 6px;">Depois — em escala industrial — <strong>africanos</strong>.</p>
+    </section>
+
+    <!-- 37 - plantation -->
+    <section class="slide">
+      <div class="eyebrow">Esse modelo tem nome</div>
+      <h2><em>Plantation.</em></h2>
+      <p style="margin-top: 12px;">Três características que andam juntas:</p>
+      <div class="tri-grid">
+        <div class="tri-cell">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
+            <path d="M18 30 L18 8"/>
+            <path d="M12 14 L18 8 L24 14"/>
+            <path d="M10 30 L26 30"/>
+          </svg>
+          <div class="name">Monocultura</div>
+        </div>
+        <div class="tri-cell">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
+            <rect x="5" y="14" width="26" height="16"/>
+            <path d="M5 22 L31 22 M13 14 L13 30 M23 14 L23 30"/>
+          </svg>
+          <div class="name">Latifúndio</div>
+        </div>
+        <div class="tri-cell">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
+            <circle cx="13" cy="13" r="4"/>
+            <circle cx="23" cy="13" r="4"/>
+            <path d="M8 26 L28 26"/>
+            <path d="M13 19 L13 26 M23 19 L23 26"/>
+          </svg>
+          <div class="name">Escravidão</div>
+        </div>
+      </div>
+      <p style="margin-top: 18px; font-size: 14px; color: var(--ink-soft); font-style: italic;">E tudo isso… pra exportar.</p>
+    </section>
+
+    <!-- 38 - pra Europa -->
+    <section class="slide">
+      <p>O açúcar não alimentava quem vivia aqui.</p>
+      <p class="big" style="margin-top: 12px;">Ia <em>inteiro</em> pra Europa.</p>
+      <div class="illu" style="margin: 18px auto; max-width: 240px;">
+        <svg viewBox="0 0 240 80" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <rect x="10" y="40" width="40" height="25"/>
+          <path d="M10 40 L30 25 L50 40"/>
+          <text x="15" y="78" font-family="Georgia" font-size="10" fill="#4A4640">Brasil</text>
+          <path d="M60 50 L180 50" stroke-dasharray="4 3"/>
+          <path d="M173 45 L180 50 L173 55"/>
+          <text x="100" y="42" font-family="Georgia" font-size="10" fill="#B8862F" font-style="italic">açúcar</text>
+          <rect x="190" y="40" width="40" height="25"/>
+          <path d="M190 40 L210 25 L230 40"/>
+          <text x="190" y="78" font-family="Georgia" font-size="10" fill="#4A4640">Europa</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 39 - DNA econômico -->
+    <section class="slide">
+      <p>Esse tripé é o <strong>DNA econômico</strong> do Brasil colonial.</p>
+      <p class="quote" style="margin-top: 14px;">monocultura + latifúndio + escravidão pra exportar</p>
+      <p style="margin-top: 16px;">E presta atenção: mesmo depois que o açúcar perdeu importância…</p>
+      <p class="big" style="margin-top: 10px;">…esse modelo se repetiu.</p>
+    </section>
+
+    <!-- 40 - se repete -->
+    <section class="slide">
+      <p>Ouro depois.</p>
+      <p>Café depois.</p>
+      <p>Borracha depois.</p>
+      <p>Soja depois.</p>
+      <p class="big" style="margin-top: 14px; color: var(--accent);">A estrutura ficou.</p>
+    </section>
+
+    <!-- 41 - lição modelo -->
+    <section class="slide">
+      <div class="eyebrow">Lição</div>
+      <p class="quote">Quando um modelo de negócio dá muito certo num momento, ele cria infraestrutura, hábitos, leis, mentalidade.</p>
+      <p style="margin-top: 14px;">Mesmo quando o produto muda, a estrutura tende a se manter.</p>
+      <p class="big" style="margin-top: 10px;">O Brasil entrou nessa estrutura no século 16 e não saiu mais.</p>
+    </section>
+
+    <!-- 42 - pirâmide social -->
+    <section class="slide">
+      <div class="eyebrow">A sociedade do engenho</div>
+      <h2>Uma pirâmide muito <em>desigual</em>.</h2>
+      <div class="pyramid-grid">
+        <div class="pyramid-row top">Senhor de engenho</div>
+        <div class="pyramid-row mid">Comerciantes, padres, funcionários</div>
+        <div class="pyramid-row base">Escravos (indígenas, depois africanos)</div>
+      </div>
+    </section>
+
+    <!-- 43 - topo -->
+    <section class="slide">
+      <span class="stamp">Topo</span>
+      <h2 style="margin-top: 12px;">Senhor de engenho.</h2>
+      <p style="margin-top: 12px;">Branco, português ou descendente. Católico.</p>
+      <p style="margin-top: 8px;">Dono da terra, da casa-grande, dos escravos.</p>
+      <p class="big" style="margin-top: 12px;">Basicamente um rei no pedaço dele.</p>
+      <p style="margin-top: 10px;">Mandava em tudo. Inclusive na vida e morte dos escravos — <strong>literalmente</strong>. A lei permitia.</p>
+    </section>
+
+    <!-- 44 - meio -->
+    <section class="slide">
+      <span class="stamp">Meio (pequeno)</span>
+      <p style="margin-top: 14px;">Comerciantes. Padres. Funcionários da Coroa. Alguns artesãos.</p>
+      <p style="margin-top: 10px;">Brancos ou mestiços livres.</p>
+      <p class="big" style="margin-top: 12px;">Pequena classe média colonial.</p>
+    </section>
+
+    <!-- 45 - base -->
+    <section class="slide">
+      <span class="stamp dark">Base · a maioria</span>
+      <p style="margin-top: 14px;">Escravos.</p>
+      <p>Indígenas no começo. Africanos depois.</p>
+      <div style="margin-top: 12px; padding: 14px; background: var(--paper); border-radius: 12px; border-left: 3px solid var(--wrong);">
+        <p style="font-size: 15px;">Sem direitos. Sem voz. Sem nada.</p>
+        <p style="font-size: 15px; margin-top: 6px;">Considerados <strong>propriedade</strong>, não pessoas.</p>
+      </div>
+    </section>
+
+    <!-- 46 - contraste EUA -->
+    <section class="slide">
+      <div class="eyebrow">Compara com os EUA</div>
+      <p>Nos EUA, mesmo com escravidão, desde cedo tinha:</p>
+      <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Classe média forte</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Fazendeiros pequenos e médios</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Comerciantes livres</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Gente que sabia ler</div>
+      </div>
+      <p class="big" style="margin-top: 14px;">Aqui? Quase ninguém sabia ler.</p>
+    </section>
+
+    <!-- 47 - importância -->
+    <section class="slide">
+      <p>Sociedade que nasce <strong>sem classe média</strong> tem dificuldade pra desenvolver:</p>
+      <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+        <p style="color: var(--ink-soft); font-style: italic;">· democracia</p>
+        <p style="color: var(--ink-soft); font-style: italic;">· comércio interno</p>
+        <p style="color: var(--ink-soft); font-style: italic;">· mobilidade social</p>
+      </div>
+      <p class="big" style="margin-top: 16px; color: var(--accent);">A desigualdade brasileira de hoje não veio do nada.</p>
+      <p style="margin-top: 8px;">É o eco direto dessa estrutura colonial.</p>
+    </section>
+
+    <!-- 48 - Holandeses -->
+    <section class="slide">
+      <div class="number">1630</div>
+      <div class="label" style="margin-top: 8px;">Pernambuco</div>
+      <h2 style="margin-top: 12px;">Os <em>holandeses</em> invadem.</h2>
+      <p style="margin-top: 14px;">Eram os melhores negociantes da Europa naquele momento.</p>
+      <p>Queriam entrar no jogo do açúcar.</p>
+      <p class="big" style="margin-top: 12px;">E ficaram. Por 24 anos.</p>
+    </section>
+
+    <!-- 49 - Nassau -->
+    <section class="slide">
+      <p>Capítulo fascinante que quase ninguém aprende direito.</p>
+      <p style="margin-top: 12px;">Eles não vieram só saquear — <strong>administraram</strong> o Nordeste.</p>
+      <p style="margin-top: 12px;">Trouxeram um governador competente:</p>
+      <p class="big" style="margin-top: 8px; color: var(--accent);">Maurício de Nassau.</p>
+    </section>
+
+    <!-- 50 - o que Nassau fez -->
+    <section class="slide">
+      <div class="eyebrow">O que ele fez</div>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Modernizou Recife (chamavam de <em>Mauritsstad</em>).</div>
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Trouxe cientistas, pintores, urbanistas.</div>
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;"><strong>Tolerância religiosa</strong> — judeus podiam praticar livremente.</div>
+        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Investiu em infraestrutura urbana.</div>
+      </div>
+      <p style="margin-top: 14px; font-size: 14px; font-style: italic; color: var(--ink-soft);">Experimento de outro modelo colonial. Mais comercial, mais "moderno" pro padrão da época.</p>
+    </section>
+
+    <!-- 51 - fim -->
+    <section class="slide">
+      <p>Acabou em <strong>1654</strong>.</p>
+      <p style="margin-top: 10px;">Portugueses, com ajuda de tropas locais — incluindo negros e indígenas — expulsaram os holandeses.</p>
+      <p style="margin-top: 10px;">Episódio chamado de <em>Insurreição Pernambucana</em>.</p>
+    </section>
+
+    <!-- 52 - importância 1 -->
+    <section class="slide">
+      <div class="eyebrow">Por que isso importa · 1</div>
+      <p>Os holandeses, expulsos, foram pro <strong>Caribe</strong>.</p>
+      <p style="margin-top: 10px;">Levaram a tecnologia do açúcar.</p>
+      <p style="margin-top: 10px;">Plantaram lá com produção <strong>mais eficiente</strong> e <strong>mais perto da Europa</strong>.</p>
+      <p class="big" style="margin-top: 14px;">Resultado: o açúcar brasileiro perdeu mercado.</p>
+      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">O ciclo começa a declinar no final do século 17.</p>
+    </section>
+
+    <!-- 53 - importância 2 -->
+    <section class="slide">
+      <div class="eyebrow">Por que isso importa · 2</div>
+      <p class="big">O Brasil podia ter sido outra coisa.</p>
+      <p style="margin-top: 14px;">Não é destino.</p>
+      <p style="margin-top: 8px;">Foi <strong>escolha</strong> — e <strong>força</strong> — que fez ele ser do jeito que é.</p>
+    </section>
+
+    <!-- 54 - lição vantagem -->
+    <section class="slide">
+      <div class="eyebrow">Lição</div>
+      <p class="quote">Vantagem competitiva não é eterna. Quando você tem monopólio, o relógio começa a contar.</p>
+      <p style="margin-top: 14px;">Ou você inova, ou alguém vai copiar (com melhorias) e tomar seu mercado.</p>
+      <p style="margin-top: 12px;">O Brasil tinha quase monopólio mundial do açúcar.</p>
+      <p class="big" style="margin-top: 10px;">Perdeu por concorrência e preguiça de modernizar.</p>
+    </section>
+
+    <!-- 55 - indígenas e africanos -->
+    <section class="slide">
+      <div class="eyebrow">E os indígenas? E os africanos?</div>
+      <p>A <strong>Aula 17 inteira</strong> vai ser sobre escravidão.</p>
+      <p style="margin-top: 12px;">Aqui só o essencial.</p>
+    </section>
+
+    <!-- 56 - indígenas -->
+    <section class="slide">
+      <span class="stamp">Indígenas</span>
+      <p style="margin-top: 14px;">Eram entre <strong>2 e 5 milhões</strong> de pessoas quando os portugueses chegaram.</p>
+      <p style="margin-top: 12px;">Foram primeiro escravizados.</p>
+      <p>Depois <strong>dizimados</strong> por doenças europeias — gripe, sarampo, varíola. Sem imunidade, morriam.</p>
+      <p style="margin-top: 10px;">Muitos fugiram pro interior.</p>
+      <p style="margin-top: 8px;">Muitos foram convertidos à força pelos jesuítas em <em>aldeamentos</em> — vilas controladas pela Igreja.</p>
+    </section>
+
+    <!-- 57 - africanos -->
+    <section class="slide">
+      <span class="stamp dark">Africanos</span>
+      <p style="margin-top: 14px;">Começam a chegar em escala grande a partir do final do século 16.</p>
+      <p style="margin-top: 10px;">Pra substituir o indígena na lavoura.</p>
+      <p style="margin-top: 14px;">Por quê substituir?</p>
+      <div class="card-soft" style="margin-top: 10px; border-left: 3px solid var(--wrong);">
+        <p style="font-size: 15px;">O índio fugia. Conhecia o terreno. Tinha aliados. Tinha pra onde ir.</p>
+        <p style="font-size: 15px; margin-top: 8px;">O africano, arrancado de outro continente, <strong>não tinha pra onde fugir</strong>.</p>
+        <p style="font-size: 15px; margin-top: 8px; font-style: italic;">E era mais "lucrativo" — do ponto de vista cínico do colono.</p>
+      </div>
+    </section>
+
+    <!-- 58 - números -->
+    <section class="slide">
+      <div class="eyebrow">Os números</div>
+      <p>Entre os séculos 16 e 19, o Brasil recebeu cerca de…</p>
+      <div style="text-align: center; margin: 18px 0;">
+        <div class="number" style="font-size: 64px;">4,8 mi</div>
+        <p style="margin-top: 6px; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.1em; text-transform: uppercase;">de africanos escravizados</p>
+      </div>
+      <p class="big" style="text-align: center; color: var(--accent);">Mais que qualquer outro país nas Américas.</p>
+    </section>
+
+    <!-- 59 - comparação EUA -->
+    <section class="slide">
+      <div class="illu" style="margin: 10px auto; max-width: 260px;">
+        <svg viewBox="0 0 260 100" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <rect x="10" y="20" width="120" height="50" fill="#B8862F" stroke="none"/>
+          <text x="20" y="50" font-family="Georgia" font-size="13" fill="#FBF7EF" font-weight="700">Brasil 4,8 mi</text>
+          <rect x="10" y="80" width="12" height="12" fill="#1A1814" stroke="none"/>
+          <text x="28" y="91" font-family="Georgia" font-size="11" fill="#4A4640">EUA: 400 mil</text>
+        </svg>
+      </div>
+      <p style="margin-top: 14px;">Os EUA receberam cerca de <strong>400 mil</strong>.</p>
+      <p class="big" style="margin-top: 10px;">Dez vezes menos.</p>
+      <p style="margin-top: 12px;">O Brasil foi o <strong>maior país escravista das Américas</strong>. Em volume e em duração.</p>
+      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">Foi o último do Ocidente a abolir, em 1888.</p>
+    </section>
+
+    <!-- 60 - ouro 1693 -->
+    <section class="slide">
+      <div class="number">1693</div>
+      <div class="label" style="margin-top: 8px;">O segundo grande ciclo</div>
+      <h2 style="margin-top: 12px;">Acharam <em>ouro</em> em Minas.</h2>
+      <p style="margin-top: 14px;">Os <strong>bandeirantes</strong> — paulistas que faziam expedições pelo interior caçando índios e metais — encontraram ouro no que hoje é Minas Gerais.</p>
+    </section>
+
+    <!-- 61 - maior produtor -->
+    <section class="slide">
+      <p>O Brasil vira o <strong>maior produtor de ouro do mundo</strong> no século 18.</p>
+      <p style="margin-top: 12px;">Cidades explodem em população e riqueza:</p>
+      <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+        <p style="font-family: var(--serif); font-size: 17px;">Ouro Preto.</p>
+        <p style="font-family: var(--serif); font-size: 17px;">Mariana.</p>
+        <p style="font-family: var(--serif); font-size: 17px;">São João del Rei.</p>
+      </div>
+      <p style="margin-top: 12px;">Igrejas barrocas cobertas de ouro. Aleijadinho esculpe seus santos.</p>
+    </section>
+
+    <!-- 62 - mas vai embora -->
+    <section class="slide">
+      <p class="big">Mas o ouro também foi embora.</p>
+      <p style="margin-top: 14px;">Quase <strong>todo</strong> foi pra Portugal.</p>
+      <p style="margin-top: 10px;">E de Portugal, parte significativa foi pra…</p>
+      <p class="big" style="margin-top: 10px; color: var(--accent);">Inglaterra.</p>
+    </section>
+
+    <!-- 63 - Methuen -->
+    <section class="slide">
+      <div class="eyebrow">Tratado de Methuen · 1703</div>
+      <p>Portugal tinha acordos comerciais <strong>desfavoráveis</strong> com os ingleses.</p>
+      <div class="illu" style="margin: 18px auto; max-width: 260px;">
+        <svg viewBox="0 0 260 80" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <rect x="10" y="30" width="40" height="30"/>
+          <text x="15" y="75" font-family="Georgia" font-size="10" fill="#4A4640">Brasil</text>
+          <path d="M55 45 L100 45"/>
+          <path d="M93 40 L100 45 L93 50"/>
+          <text x="62" y="40" font-family="Georgia" font-size="9" fill="#B8862F" font-style="italic">ouro</text>
+          <rect x="105" y="30" width="40" height="30"/>
+          <text x="105" y="75" font-family="Georgia" font-size="10" fill="#4A4640">Portugal</text>
+          <path d="M150 45 L195 45"/>
+          <path d="M188 40 L195 45 L188 50"/>
+          <text x="155" y="40" font-family="Georgia" font-size="9" fill="#B8862F" font-style="italic">ouro</text>
+          <rect x="200" y="30" width="40" height="30"/>
+          <text x="200" y="75" font-family="Georgia" font-size="10" fill="#4A4640">Inglaterra</text>
+        </svg>
+      </div>
+      <p>Portugal comprava produtos industrializados ingleses.</p>
+      <p style="margin-top: 6px;">Pagava em <strong>ouro</strong>.</p>
+    </section>
+
+    <!-- 64 - reverter -->
+    <section class="slide">
+      <p class="big">Resultado:</p>
+      <p class="quote" style="margin-top: 14px;">O ouro brasileiro ajudou a financiar a Revolução Industrial inglesa.</p>
+      <p style="margin-top: 14px;">Você ouviu direito.</p>
+      <p style="margin-top: 10px;">A grana pra Inglaterra virar a primeira potência industrial do mundo veio, em boa parte, do <strong>nosso subsolo</strong>.</p>
+    </section>
+
+    <!-- 65 - e o Brasil? -->
+    <section class="slide">
+      <p>E o Brasil?</p>
+      <p class="big" style="margin-top: 12px;">Ficou com igrejas bonitas e <em>zero indústria</em>.</p>
+      <p style="margin-top: 14px;">Quando o ouro acabou (final do século 18), Minas mergulhou em decadência.</p>
+      <p style="margin-top: 10px;">Não sobrou estrutura econômica.</p>
+      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">Só ruína.</p>
+    </section>
+
+    <!-- 66 - lição extração -->
+    <section class="slide">
+      <div class="eyebrow">Lição grande</div>
+      <p class="quote">Riqueza extrativa, sozinha, não constrói país.</p>
+      <p style="margin-top: 14px;">Se você só tira da terra e exporta — sem transformar, sem industrializar, sem reinvestir internamente — a riqueza passa e você fica igual ou pior.</p>
+    </section>
+
+    <!-- 67 - hoje -->
+    <section class="slide">
+      <p>O Brasil aprendeu isso da forma mais dolorosa.</p>
+      <p style="margin-top: 8px;">Várias vezes.</p>
+      <p class="big" style="margin-top: 14px;">E em alguma medida <em>ainda não aprendeu</em>.</p>
+      <p style="margin-top: 12px;">Pensa em commodities hoje:</p>
+      <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <span style="padding: 6px 12px; background: var(--paper); border-radius: 100px; font-size: 14px;">soja</span>
+        <span style="padding: 6px 12px; background: var(--paper); border-radius: 100px; font-size: 14px;">minério</span>
+        <span style="padding: 6px 12px; background: var(--paper); border-radius: 100px; font-size: 14px;">petróleo</span>
+      </div>
+      <p style="margin-top: 12px; font-family: var(--serif); font-style: italic; color: var(--accent);">É o mesmo filme, com cenário diferente.</p>
+    </section>
+
+    <!-- 68 - resumão título -->
+    <section class="slide">
+      <div class="eyebrow">Resumindo</div>
+      <h2>Dez pontos pra <em>guardar</em>.</h2>
+    </section>
+
+    <!-- 69 - resumo 1-3 -->
+    <section class="slide">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">01</span>
+          <span style="font-family: var(--serif); font-size: 15px;">Brasil foi criado pra <strong>dar lucro</strong>, não pra ser país.</span>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">02</span>
+          <span style="font-family: var(--serif); font-size: 15px;">Tordesilhas (1494) — dois reinos dividiram o mundo, sem consultar ninguém.</span>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">03</span>
+          <span style="font-family: var(--serif); font-size: 15px;">Primeiras décadas: só pau-brasil. Periferia da periferia.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 70 - resumo 4-6 -->
+    <section class="slide">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">04</span>
+          <span style="font-family: var(--serif); font-size: 15px;">Capitanias (1534) — quase todas falharam. Só São Vicente e Pernambuco prosperaram.</span>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">05</span>
+          <span style="font-family: var(--serif); font-size: 15px;">1549 — Governo-Geral. Salvador vira capital.</span>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">06</span>
+          <span style="font-family: var(--serif); font-size: 15px;">Açúcar = grande negócio. Plantation virou DNA econômico.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 71 - resumo 7-10 -->
+    <section class="slide">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">07</span>
+          <span style="font-family: var(--serif); font-size: 15px;">Sociedade extremamente desigual. Sem classe média.</span>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">08</span>
+          <span style="font-family: var(--serif); font-size: 15px;">Holandeses (1630–1654) — saíram, levaram a tecnologia pro Caribe e quebraram nosso monopólio.</span>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">09</span>
+          <span style="font-family: var(--serif); font-size: 15px;">Ouro de Minas (séc. 18) — escoou pra Portugal, daí pra Inglaterra. Ficamos com igrejas bonitas.</span>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">10</span>
+          <span style="font-family: var(--serif); font-size: 15px;">Modelo extrativo se repetiu — produtos mudam, estrutura fica.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 72 - gancho próxima -->
+    <section class="slide">
+      <div class="eyebrow">Próxima aula</div>
+      <h2>A escravidão é a coisa mais importante pra entender o Brasil.</h2>
+      <p style="margin-top: 14px;">Mais que qualquer rei, presidente ou ditador.</p>
+    </section>
+
+    <!-- 73 - 400 anos -->
+    <section class="slide">
+      <p>Foram…</p>
+      <div style="text-align: center; margin: 16px 0;">
+        <div class="number">~400</div>
+        <p style="margin-top: 6px; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.1em; text-transform: uppercase;">anos de escravidão</p>
+      </div>
+      <p>Quatro séculos.</p>
+      <p style="margin-top: 8px;">Muito mais tempo do que o Brasil é independente.</p>
+      <p class="big" style="margin-top: 12px;">A maior parte da nossa história foi vivida sob escravidão.</p>
+    </section>
+
+    <!-- 74 - 1888 -->
+    <section class="slide">
+      <p>E quando acabou, em <strong>1888</strong>…</p>
+      <p class="big" style="margin-top: 12px; color: var(--wrong);">Não houve nenhuma política de inclusão.</p>
+      <p style="margin-top: 14px;">Os ex-escravos foram simplesmente "libertos".</p>
+      <p style="margin-top: 8px;">Sem terra. Sem trabalho. Sem educação. Sem nada.</p>
+      <p style="margin-top: 12px;">A sociedade brasileira tratou como problema resolvido.</p>
+      <p class="big" style="margin-top: 10px;">Não foi.</p>
+    </section>
+
+    <!-- 75 - até lá -->
+    <section class="slide">
+      <p>Na próxima aula, a gente vai abrir essa ferida.</p>
+      <p style="margin-top: 10px;">Sem moralismo. Sem militância. Com a verdade dos números, das fontes, da estrutura.</p>
+      <p class="big" style="margin-top: 14px; color: var(--accent);">Aula 17 — Escravidão: a ferida que não fechou.</p>
+      <p style="margin-top: 14px; font-style: italic; color: var(--ink-soft);">Até lá.</p>
+    </section>
+
+    <!-- 76 - INTRO QUIZ -->
+    <section class="slide quiz-intro">
+      <div class="quiz-icon">?</div>
+      <div class="eyebrow" style="text-align: center;">Hora do quiz</div>
+      <h2>Bora ver o que ficou.</h2>
+      <p style="margin-top: 14px;">Seis perguntas rápidas.<br>Se errar, eu te explico na hora.</p>
+    </section>
+
+    <!-- 77 - QUIZ 1 -->
+    <section class="slide" data-quiz="1">
+      <div class="question-num">Pergunta 1 de 6</div>
+      <div class="question">Pra que o Brasil foi <em>criado</em> pelos portugueses?</div>
+      <div class="options">
+        <button class="option" data-correct="false" data-explain="Não. Os EUA foram colonizados por gente fugindo de perseguição — não o Brasil. Aqui a lógica era outra.">
+          <span class="letter">A</span><span>Pra abrigar perseguidos religiosos europeus.</span>
+        </button>
+        <button class="option" data-correct="true" data-explain="">
+          <span class="letter">B</span><span>Pra dar lucro pra Portugal. A colônia era ponto de extração, não lar.</span>
+        </button>
+        <button class="option" data-correct="false" data-explain="Não. Civilização não era projeto. O Brasil foi negócio — montado pra mandar riqueza pra Portugal e ponto.">
+          <span class="letter">C</span><span>Pra construir uma nova civilização baseada em valores cristãos.</span>
+        </button>
+      </div>
+      <div class="feedback right" data-fb="right"><span class="head">Mandou bem.</span>Exato. A finalidade era <strong>lucro</strong>. Os que vinham, vinham extrair — não pra ficar. Esse "DNA" molda o Brasil até hoje.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> O Brasil nasceu como negócio — uma fazenda de exportação pra Portugal. Esse é o ponto que organiza toda a aula.</div>
+    </section>
+
+    <!-- 78 - QUIZ 2 -->
+    <section class="slide" data-quiz="2">
+      <div class="question-num">Pergunta 2 de 6</div>
+      <div class="question">As Capitanias Hereditárias (1534) foram, na essência…</div>
+      <div class="options">
+        <button class="option" data-correct="false" data-explain="Não. Foi exatamente o oposto: descentralização. O rei distribuiu o problema entre nobres porque ele mesmo não tinha grana.">
+          <span class="letter">A</span><span>Uma centralização forte do poder do rei sobre a colônia.</span>
+        </button>
+        <button class="option" data-correct="true" data-explain="">
+          <span class="letter">B</span><span>Uma terceirização: o rei privatizou o risco e manteve parte do lucro garantida.</span>
+        </button>
+        <button class="option" data-correct="false" data-explain="Não. Não tinha igualdade nenhuma. Eram nobres escolhidos, recebendo faixas gigantes de terra — modelo concentrador.">
+          <span class="letter">C</span><span>Uma divisão igualitária da terra entre famílias colonos.</span>
+        </button>
+      </div>
+      <div class="feedback right" data-fb="right"><span class="head">Isso.</span>Terceirização clássica. O rei não tinha dinheiro pra colonizar, então passou o problema (e o risco) pros nobres. Resultado: <strong>13 das 15 capitanias falharam</strong>.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> O rei terceirizou. E como toda terceirização sem fiscalização, deu errado — só 2 capitanias prosperaram.</div>
+    </section>
+
+    <!-- 79 - QUIZ 3 -->
+    <section class="slide" data-quiz="3">
+      <div class="question-num">Pergunta 3 de 6</div>
+      <div class="question">O modelo de produção do açúcar (a <em>plantation</em>) era marcado por três coisas. Quais?</div>
+      <div class="options">
+        <button class="option" data-correct="false" data-explain="Não. Era o oposto: produção em massa, em latifúndios, com mão de obra escrava. Nada de cooperativa.">
+          <span class="letter">A</span><span>Pequenas propriedades familiares + cooperativa + mercado interno.</span>
+        </button>
+        <button class="option" data-correct="false" data-explain="Não. Não tinha diversificação (era monocultura) nem trabalho assalariado (era escravo). E não vendia pra cá — era pra Europa.">
+          <span class="letter">B</span><span>Diversificação de culturas + trabalho assalariado + venda interna.</span>
+        </button>
+        <button class="option" data-correct="true" data-explain="">
+          <span class="letter">C</span><span>Monocultura + latifúndio + escravidão, tudo pra exportar.</span>
+        </button>
+      </div>
+      <div class="feedback right" data-fb="right"><span class="head">Mandou bem.</span>Esse é o tripé do Brasil colonial. E o ponto-chave: mesmo depois do açúcar acabar, esse modelo se repetiu — ouro, café, soja… <strong>a estrutura ficou</strong>.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a C.</strong> Monocultura + latifúndio + escravidão + exportação. Esse é o DNA econômico que se repete na nossa história até hoje, com produtos diferentes.</div>
+    </section>
+
+    <!-- 80 - QUIZ 4 -->
+    <section class="slide" data-quiz="4">
+      <div class="question-num">Pergunta 4 de 6</div>
+      <div class="question">O que aconteceu quando os holandeses foram expulsos de Pernambuco, em 1654?</div>
+      <div class="options">
+        <button class="option" data-correct="false" data-explain="Não foi a Inglaterra que dominou direto. Os holandeses foram pro Caribe — Antilhas, Barbados — e plantaram açúcar lá.">
+          <span class="letter">A</span><span>A Inglaterra invadiu Pernambuco em seguida e tomou o açúcar.</span>
+        </button>
+        <button class="option" data-correct="true" data-explain="">
+          <span class="letter">B</span><span>Levaram a tecnologia do açúcar pro Caribe e quebraram o monopólio brasileiro.</span>
+        </button>
+        <button class="option" data-correct="false" data-explain="Não. Pelo contrário: o açúcar brasileiro começa a declinar a partir do final do século 17 justamente por causa da concorrência caribenha.">
+          <span class="letter">C</span><span>O Brasil consolidou monopólio absoluto do açúcar mundial.</span>
+        </button>
+      </div>
+      <div class="feedback right" data-fb="right"><span class="head">Boa.</span>Os holandeses replicaram a operação no Caribe — <strong>mais perto da Europa, mais eficiente</strong>. Lição clássica: vantagem competitiva não dura pra sempre se você não inova.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> Eles levaram o know-how pro Caribe e produziram melhor. O açúcar brasileiro perde mercado a partir daí.</div>
+    </section>
+
+    <!-- 81 - QUIZ 5 -->
+    <section class="slide" data-quiz="5">
+      <div class="question-num">Pergunta 5 de 6</div>
+      <div class="question">Pra onde foi parar boa parte do ouro brasileiro do século 18?</div>
+      <div class="options">
+        <button class="option" data-correct="false" data-explain="Não. Quase nada ficou no Brasil em forma de indústria. Sobraram igrejas barrocas bonitas e, depois, ruína.">
+          <span class="letter">A</span><span>Ficou no Brasil e financiou a primeira indústria nacional.</span>
+        </button>
+        <button class="option" data-correct="false" data-explain="Não foi pra Espanha. Portugal era rival da Espanha — o ouro foi pra Portugal e, dali, escoou pra Inglaterra.">
+          <span class="letter">B</span><span>Foi todo pra Espanha, via Tratado de Tordesilhas.</span>
+        </button>
+        <button class="option" data-correct="true" data-explain="">
+          <span class="letter">C</span><span>Foi pra Portugal e, de lá, pra Inglaterra — ajudando a financiar a Revolução Industrial inglesa.</span>
+        </button>
+      </div>
+      <div class="feedback right" data-fb="right"><span class="head">Exato.</span>Tratado de Methuen (1703). Portugal comprava industrializado inglês e pagava em ouro brasileiro. <strong>Nosso subsolo financiou a indústria deles.</strong> Pensa nisso.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a C.</strong> Portugal tinha acordos comerciais ruins com a Inglaterra (Methuen, 1703). Comprava produto industrializado inglês e pagava em ouro nosso.</div>
+    </section>
+
+    <!-- 82 - QUIZ 6 -->
+    <section class="slide" data-quiz="6">
+      <div class="question-num">Pergunta 6 de 6</div>
+      <div class="question">Comparado aos EUA, quantos africanos escravizados o Brasil recebeu?</div>
+      <div class="options">
+        <button class="option" data-correct="false" data-explain="Não. É o contrário. O Brasil recebeu MUITO mais — cerca de 4,8 milhões. Os EUA, em torno de 400 mil.">
+          <span class="letter">A</span><span>Bem menos que os EUA — escravidão aqui foi marginal.</span>
+        </button>
+        <button class="option" data-correct="false" data-explain="Não. A diferença foi muito maior que isso. Foi cerca de 10× — o Brasil recebeu o equivalente a dez EUAs.">
+          <span class="letter">B</span><span>Mais ou menos o dobro dos EUA.</span>
+        </button>
+        <button class="option" data-correct="true" data-explain="">
+          <span class="letter">C</span><span>Cerca de 10 vezes mais — 4,8 milhões aqui contra 400 mil nos EUA.</span>
+        </button>
+      </div>
+      <div class="feedback right" data-fb="right"><span class="head">Isso.</span>O Brasil foi o <strong>maior país escravista das Américas</strong>, em volume e em duração. Último do Ocidente a abolir — em 1888. Esse é o pano de fundo que a Aula 17 vai destrinchar.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a C.</strong> 4,8 milhões aqui, 400 mil nos EUA. Dez vezes mais. E a escravidão aqui durou mais tempo. Esse é o tamanho da ferida.</div>
+    </section>
+
+    <!-- 83 - FIM -->
+    <section class="slide end">
+      <div class="eyebrow">Fim da aula 16</div>
+      <h2>Mandou bem.</h2>
+      <div class="score" id="score">0/6</div>
+      <p id="end-msg">Você entendeu como o Brasil nasceu — e por que isso ainda explica tanta coisa hoje.</p>
+      <button class="restart" id="restart">voltar ao início</button>
+    </section>
+
+  </div>
+
+  <div class="tap-zone left" id="tapL"></div>
+  <div class="tap-zone right" id="tapR"></div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  const progress = document.getElementById('progress');
+  const counter = document.getElementById('counter');
+  let current = 0;
+  let score = 0;
+  let answered = new Set();
+
+  // Build progress segments
+  for (let i = 0; i < total; i++) {
+    const seg = document.createElement('div');
+    seg.className = 'seg';
+    seg.dataset.idx = i;
+    seg.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goTo(i);
+    });
+    progress.appendChild(seg);
+  }
+  const segs = progress.querySelectorAll('.seg');
+
+  function update() {
+    slides.forEach((s, i) => {
+      s.classList.remove('active', 'prev');
+      if (i === current) s.classList.add('active');
+      else if (i < current) s.classList.add('prev');
+    });
+    segs.forEach((s, i) => {
+      s.classList.remove('done', 'current');
+      if (i < current) s.classList.add('done');
+      else if (i === current) s.classList.add('current');
+    });
+    counter.textContent = `${current + 1} / ${total}`;
+
+    // re-trigger animations on active slide
+    const active = slides[current];
+    if (active) {
+      Array.from(active.children).forEach(child => {
+        child.style.animation = 'none';
+        void child.offsetWidth;
+        child.style.animation = '';
+      });
+    }
+
+    // End slide: update score
+    if (slides[current].classList.contains('end')) {
+      document.getElementById('score').textContent = `${score}/6`;
+      const msg = document.getElementById('end-msg');
+      if (score === 6) msg.textContent = "Acertou tudo. Cabeça afiada — bora pra próxima.";
+      else if (score >= 4) msg.textContent = "Bom resultado. O essencial ficou. Revisa o que escapou.";
+      else if (score >= 2) msg.textContent = "Deu pra captar o miolo. Vale uma segunda volta pra fixar.";
+      else msg.textContent = "Tranquilo. Volta no início e relê — é assunto denso, vai assentar.";
+    }
+  }
+
+  function next() { if (current < total - 1) { current++; update(); } }
+  function prev() { if (current > 0) { current--; update(); } }
+  function goTo(i) { if (i >= 0 && i < total) { current = i; update(); } }
+
+  document.getElementById('tapL').addEventListener('click', prev);
+  document.getElementById('tapR').addEventListener('click', next);
+
+  // Swipe
+  let touchStartX = 0, touchStartY = 0, touchStartT = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartT = Date.now();
+  }, { passive: true });
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    const dt = Date.now() - touchStartT;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 600) {
+      if (dx < 0) next(); else prev();
+    }
+  }, { passive: true });
+
+  // Progress bar drag
+  let dragging = false;
+  progress.addEventListener('touchstart', (e) => {
+    dragging = true;
+    handleDrag(e.touches[0].clientX);
+  });
+  progress.addEventListener('touchmove', (e) => {
+    if (dragging) handleDrag(e.touches[0].clientX);
+  });
+  progress.addEventListener('touchend', () => { dragging = false; });
+  function handleDrag(x) {
+    const rect = progress.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+    const idx = Math.floor(pct * total);
+    goTo(Math.min(idx, total - 1));
+  }
+
+  // Keyboard (extra)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  // Quiz logic
+  document.querySelectorAll('[data-quiz]').forEach(quiz => {
+    const qId = quiz.dataset.quiz;
+    const options = quiz.querySelectorAll('.option');
+    const fbRight = quiz.querySelector('[data-fb="right"]');
+    const fbMiss = quiz.querySelector('[data-fb="miss"]');
+    options.forEach(opt => {
+      opt.addEventListener('click', () => {
+        if (answered.has(qId)) return;
+        answered.add(qId);
+        const correct = opt.dataset.correct === 'true';
+        options.forEach(o => {
+          o.classList.add('disabled');
+          if (o.dataset.correct === 'true') o.classList.add('correct');
+        });
+        if (correct) {
+          score++;
+          fbRight.classList.add('show');
+        } else {
+          opt.classList.add('wrong');
+          const explainText = opt.dataset.explain || '';
+          const target = fbMiss.querySelector('[data-explain-text]');
+          if (target) target.textContent = explainText;
+          fbMiss.classList.add('show');
+        }
+      });
+    });
+  });
+
+  // Restart
+  document.getElementById('restart').addEventListener('click', () => {
+    current = 0;
+    score = 0;
+    answered.clear();
+    document.querySelectorAll('.option').forEach(o => {
+      o.classList.remove('correct', 'wrong', 'disabled');
+    });
+    document.querySelectorAll('.feedback').forEach(f => {
+      f.classList.remove('show');
+    });
+    update();
+  });
+
+  update();
+</script>
+
+</body>
+</html>
 
