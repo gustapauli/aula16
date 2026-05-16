@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Aula 16 — Brasil Colônia: o país nasceu torto</title>
+<title>Aula 16 — Imperialismo</title>
 <style>
   :root {
     --bg: #F4EFE6;
@@ -46,7 +46,7 @@
     top: 10px; left: 12px; right: 12px;
     height: 18px;
     display: flex;
-    gap: 3px;
+    gap: 2px;
     z-index: 50;
     align-items: center;
     cursor: pointer;
@@ -457,43 +457,46 @@
     color: var(--accent-soft);
   }
 
-  .pyramid-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-top: 14px;
-    align-items: center;
-  }
-  .pyramid-row {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    text-align: center;
-    padding: 10px;
-    font-family: var(--serif);
-    font-size: 14px;
-  }
-  .pyramid-row.top { width: 40%; background: var(--accent); color: var(--paper); border-color: var(--accent); border-radius: 8px 8px 0 0; }
-  .pyramid-row.mid { width: 70%; }
-  .pyramid-row.base { width: 100%; background: var(--bg-deep); color: var(--paper); border-color: var(--bg-deep); border-radius: 0 0 8px 8px; }
-
-  .tri-grid {
+  .pillar-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 8px;
     margin-top: 18px;
   }
-  .tri-cell {
+  .pillar {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: 10px;
     padding: 12px 8px;
     text-align: center;
   }
-  .tri-cell svg { width: 36px; height: 36px; margin: 0 auto 6px; display: block; }
-  .tri-cell .name {
+  .pillar svg { width: 36px; height: 36px; margin: 0 auto 6px; display: block; }
+  .pillar .name {
     font-family: var(--serif);
     font-size: 13px;
     font-weight: 600;
+    color: var(--ink);
+  }
+  .stat-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px;
+    background: var(--paper);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+  }
+  .stat-row .big-num {
+    font-family: var(--serif);
+    font-weight: 800;
+    color: var(--accent);
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-row .stat-text {
+    font-family: var(--serif);
+    font-size: 15px;
     color: var(--ink);
   }
 </style>
@@ -503,1188 +506,1522 @@
 <div class="app">
   <div class="progress" id="progress"></div>
   <div class="header">
-    <span>Aula 16</span>
+    <span>Aula 15</span>
     <span id="counter">1 / 1</span>
   </div>
 
   <div class="slides" id="slides">
 
-    <!-- 1 - CAPA -->
+    <!-- ============== 1 — CAPA ============== -->
     <section class="slide cover active">
       <div class="eyebrow">História · Aula 16</div>
-      <h1>Brasil Colônia: o país nasceu <em>torto</em>.</h1>
-      <p style="margin-top: 16px;">E isso explica quase tudo do que você vê por aí hoje.</p>
+      <h1>Imperialismo. Como a Europa <em>pegou o mundo</em> pra ela.</h1>
+      <p style="margin-top: 16px;">E por que o estrago ainda tá aí, em 2026.</p>
       <div class="illu" style="margin-top: 36px;">
         <svg viewBox="0 0 240 140" class="draw" fill="none" stroke="#E8C77A" stroke-width="1.5">
-          <!-- navio chegando -->
-          <path d="M30 90 L80 90 L70 105 L40 105 Z"/>
-          <path d="M55 90 L55 55"/>
-          <path d="M55 55 L80 80 L55 80 Z"/>
-          <path d="M55 55 L30 80 L55 80 Z"/>
-          <!-- onda -->
-          <path d="M10 115 Q30 110 50 115 T90 115" stroke-dasharray="3 3"/>
-          <!-- terra -->
-          <path d="M110 115 Q160 95 220 115"/>
-          <!-- engenho na terra -->
-          <path d="M140 100 L150 85 L160 100 Z"/>
-          <rect x="142" y="100" width="16" height="14"/>
-          <path d="M175 100 L185 90 L195 100 Z"/>
-          <rect x="177" y="100" width="16" height="14"/>
-          <!-- seta extrair -->
-          <path d="M100 75 L75 90" stroke-dasharray="2 2"/>
-          <path d="M80 86 L75 90 L80 95"/>
+          <!-- globo terrestre -->
+          <circle cx="120" cy="70" r="50"/>
+          <ellipse cx="120" cy="70" rx="50" ry="20"/>
+          <ellipse cx="120" cy="70" rx="20" ry="50"/>
+          <path d="M75 55 Q120 45 165 55"/>
+          <path d="M75 85 Q120 95 165 85"/>
+          <!-- bandeiras espetadas -->
+          <path d="M95 35 L95 15"/>
+          <path d="M95 15 L108 18 L95 22"/>
+          <path d="M140 30 L140 10"/>
+          <path d="M140 10 L153 13 L140 17"/>
+          <path d="M170 50 L170 30"/>
+          <path d="M170 30 L183 33 L170 37"/>
         </svg>
       </div>
       <div class="footer-hint">toque na lateral pra avançar <span class="arrow">→</span></div>
     </section>
 
-    <!-- 2 - epígrafe -->
+    <!-- ============== 2 ============== -->
     <section class="slide">
-      <div class="eyebrow">Antes de começar</div>
-      <p class="quote">Todo país carrega o DNA de como nasceu. O Brasil nasceu como negócio. E negócio mal-feito, ainda por cima.</p>
+      <p class="big">Oi, Lorena.</p>
+      <p style="margin-top: 18px;">Quero começar essa aula com um <strong>mapa mental</strong>.</p>
+      <p>Pega o globo terrestre.</p>
     </section>
 
-    <!-- 3 - o salto -->
+    <!-- ============== 3 — 1880 ============== -->
     <section class="slide">
-      <p>Nas últimas aulas, a gente passeou pelo mundo.</p>
-      <p style="margin-top: 10px;">Iluminismo. Revoluções. Industrialização. Imperialismo.</p>
-      <p style="margin-top: 14px;">Agora vira a câmera.</p>
-      <p class="big" style="margin-top: 12px; color: var(--accent);">Aponta pra cá.</p>
+      <div class="eyebrow">Em 1880</div>
+      <p>Cerca de <strong>90% da África</strong> ainda era governada por africanos.</p>
+      <p style="margin-top: 12px;">Reinos, sultanatos, tribos, impérios próprios. Alguns com séculos de história.</p>
+      <p>Europeu? Só aqui e ali. Na costa. Em pontos de comércio antigos.</p>
+      <div class="illu" style="margin: 18px auto; max-width: 200px;">
+        <svg viewBox="0 0 200 140" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- silhueta África -->
+          <path d="M90 15 Q130 18 140 40 Q150 65 145 85 Q140 105 120 125 Q105 135 95 130 Q80 125 75 110 Q60 100 55 80 Q50 60 60 40 Q70 18 90 15 Z"/>
+          <!-- pontinhos só na costa -->
+          <circle cx="80" cy="22" r="2" fill="#B8862F"/>
+          <circle cx="135" cy="50" r="2" fill="#B8862F"/>
+          <circle cx="60" cy="75" r="2" fill="#B8862F"/>
+        </svg>
+      </div>
     </section>
 
-    <!-- 4 - contraste -->
+    <!-- ============== 4 — 1914 ============== -->
     <section class="slide">
-      <p>Enquanto <strong>Locke</strong> escrevia na Inglaterra…</p>
-      <p>Enquanto <strong>Jefferson</strong> redigia a Independência americana…</p>
-      <p class="big" style="margin-top: 14px;">O que rolava aqui?</p>
-      <p style="margin-top: 12px; font-family: var(--serif); font-style: italic; color: var(--accent);">Spoiler: coisa muito diferente.</p>
+      <div class="eyebrow">Em 1914 · véspera da 1ª Guerra</div>
+      <p class="big"><strong>90%</strong> da África era <em>propriedade europeia</em>.</p>
+      <div class="illu" style="margin: 18px auto; max-width: 200px;">
+        <svg viewBox="0 0 200 140" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <path d="M90 15 Q130 18 140 40 Q150 65 145 85 Q140 105 120 125 Q105 135 95 130 Q80 125 75 110 Q60 100 55 80 Q50 60 60 40 Q70 18 90 15 Z"/>
+          <!-- linhas retas dividindo -->
+          <path d="M55 50 L145 50" stroke-dasharray="2 2"/>
+          <path d="M60 75 L145 75" stroke-dasharray="2 2"/>
+          <path d="M70 100 L140 100" stroke-dasharray="2 2"/>
+          <path d="M100 18 L100 130" stroke-dasharray="2 2"/>
+          <!-- bandeiras -->
+          <path d="M75 35 L80 32 L75 38" fill="#B8862F"/>
+          <path d="M120 35 L125 32 L120 38" fill="#B8862F"/>
+          <path d="M85 60 L90 57 L85 63" fill="#B8862F"/>
+          <path d="M125 90 L130 87 L125 93" fill="#B8862F"/>
+          <path d="M90 115 L95 112 L90 118" fill="#B8862F"/>
+        </svg>
+      </div>
+      <p style="margin-top: 14px;">Inglaterra do Cairo ao Cabo. França do Mediterrâneo ao Congo.</p>
+      <p>Alemanha, Itália, Portugal, Bélgica, Espanha pegam o resto.</p>
     </section>
 
-    <!-- 5 - bloco 3 -->
+    <!-- ============== 5 ============== -->
     <section class="slide">
-      <span class="stamp">Bloco 3 · Brasil</span>
-      <p style="margin-top: 18px;">Esta é a <strong>primeira aula</strong> do bloco sobre o Brasil.</p>
-      <p>As próximas oito vão dissecar o DNA do nosso país.</p>
-      <p class="big" style="margin-top: 14px;">Não pra você decorar.</p>
-      <p style="margin-top: 10px;">Pra você <strong>entender</strong> por que as coisas aqui funcionam (ou não funcionam) do jeito que funcionam.</p>
-    </section>
-
-    <!-- 6 - pergunta-chave -->
-    <section class="slide">
-      <div class="eyebrow">A pergunta que organiza tudo</div>
-      <h2>Pra que o Brasil foi <em>criado</em>?</h2>
-      <p style="margin-top: 18px;">Antes de qualquer data, segura essa pergunta.</p>
-    </section>
-
-    <!-- 7 - resposta -->
-    <section class="slide">
-      <p>Não foi pra ser um país.</p>
-      <p>Não foi pra abrigar gente livre.</p>
-      <p>Não foi pra construir civilização.</p>
-      <p class="big" style="margin-top: 16px; color: var(--accent);">Foi pra dar lucro pra Portugal.</p>
-      <p style="margin-top: 10px;">Ponto.</p>
-    </section>
-
-    <!-- 8 - contraste EUA -->
-    <section class="slide">
-      <div class="eyebrow">Compara aí</div>
-      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
-        <div class="card-soft" style="border-left: 3px solid var(--accent);">
-          <div class="label" style="margin-bottom: 6px;">EUA</div>
-          <p style="font-size: 15px;">Colonizado por gente <strong>fugindo</strong>. Perseguidos religiosos, famílias, gente buscando terra. Vinham pra <em>ficar</em>.</p>
+      <p>Sobraram livres, oficialmente, <strong>dois pedacinhos</strong>:</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+        <div class="card-soft" style="padding: 14px; text-align: center;">
+          <p style="font-family: var(--serif); font-size: 20px; font-style: italic; color: var(--accent);">Etiópia</p>
         </div>
-        <div class="card-soft" style="border-left: 3px solid var(--accent);">
-          <div class="label" style="margin-bottom: 6px;">Brasil</div>
-          <p style="font-size: 15px;">Colonizado por gente vindo <strong>extrair</strong>. Tirar riqueza, mandar pra Portugal, voltar rico. A colônia era <em>mina</em>, não lar.</p>
+        <div class="card-soft" style="padding: 14px; text-align: center;">
+          <p style="font-family: var(--serif); font-size: 20px; font-style: italic; color: var(--accent);">Libéria</p>
         </div>
       </div>
+      <p class="big" style="margin-top: 18px;">Em <em>30 anos</em>. Um continente inteiro engolido.</p>
     </section>
 
-    <!-- 9 - lição -->
+    <!-- ============== 6 ============== -->
     <section class="slide">
-      <div class="eyebrow">Guarda essa</div>
-      <p class="quote">Entenda a finalidade original de uma estrutura, e você entende boa parte do comportamento dela depois.</p>
-      <p style="margin-top: 14px;">Empresa que nasce pra vender rápido se comporta diferente de empresa que nasce pra durar 100 anos.</p>
-      <p class="big" style="margin-top: 10px;">País é igual.</p>
+      <p class="big">Como isso aconteceu?</p>
+      <p style="margin-top: 14px;">Por que <em>exatamente</em> nesse momento?</p>
+      <p style="margin-top: 14px;">E o mais importante pra você:</p>
+      <p class="big" style="margin-top: 10px; color: var(--accent);">por que isso ainda importa em 2026?</p>
     </section>
 
-    <!-- 10 - 1500 -->
+    <!-- ============== 7 ============== -->
     <section class="slide">
-      <div class="number">1500</div>
-      <div class="label" style="margin-top: 8px;">22 de abril</div>
-      <h2 style="margin-top: 12px;">Cabral chega.</h2>
-      <p style="margin-top: 14px;">Versão oficial: descobriu por acaso, indo pra Índia.</p>
-      <p style="margin-top: 10px;">Versão sóbria: já <strong>desconfiavam</strong> que tinha terra ali.</p>
-    </section>
-
-    <!-- 11 - Tordesilhas -->
-    <section class="slide">
-      <div class="eyebrow">Tratado de Tordesilhas · 1494</div>
-      <p>Seis anos <strong>antes</strong> do "descobrimento", Portugal e Espanha já tinham dividido o mundo.</p>
-      <div class="illu" style="margin: 18px auto; max-width: 220px;">
-        <svg viewBox="0 0 220 130" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
-          <circle cx="110" cy="65" r="55"/>
-          <path d="M110 10 L110 120" stroke-dasharray="4 3" stroke="#B5342B" stroke-width="2"/>
-          <text x="55" y="70" font-family="Georgia" font-size="13" fill="#B8862F" font-style="italic">Espanha</text>
-          <text x="125" y="70" font-family="Georgia" font-size="13" fill="#B8862F" font-style="italic">Portugal</text>
-          <path d="M70 30 Q90 35 95 50"/>
-          <path d="M130 80 Q145 90 140 105"/>
-        </svg>
-      </div>
-      <p>Linha imaginária no meio do Atlântico. Tudo a leste, de Portugal. A oeste, da Espanha.</p>
-    </section>
-
-    <!-- 12 - pausa -->
-    <section class="slide">
-      <p class="big">Pausa. Pensa nisso.</p>
-      <p style="margin-top: 14px;">Dois reinos europeus, com bênção do Papa, sentaram numa mesa…</p>
-      <p>…e dividiram o <strong>mundo inteiro</strong> entre eles.</p>
-      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 6px;">
-        <p style="color: var(--ink-soft); font-style: italic;">Sem perguntar pra ninguém.</p>
-        <p style="color: var(--ink-soft); font-style: italic;">Sem consultar os povos das terras.</p>
-        <p style="color: var(--ink-soft); font-style: italic;">Sem nem saber o que essas terras eram.</p>
-      </div>
-    </section>
-
-    <!-- 13 - mentalidade -->
-    <section class="slide">
-      <p>Pra Europa de 1494, terra fora da Europa <strong>não era de ninguém</strong>.</p>
-      <p style="margin-top: 10px;">Exceto, claro, de quem chegasse primeiro <em>com canhão</em>.</p>
-      <p class="big" style="margin-top: 16px;">Guarda: essa mentalidade nunca morreu.</p>
-      <p style="margin-top: 10px;">Hoje você vê isso em disputa pelo Ártico. Em rotas marítimas. Em chips. Em IA.</p>
-      <p style="margin-top: 10px; font-family: var(--serif); font-style: italic; color: var(--accent);">Nome muda, lógica é a mesma — poder define quem fica com o quê.</p>
-    </section>
-
-    <!-- 14 - 30 anos esquecido -->
-    <section class="slide">
-      <p>Cabral chega em 1500.</p>
-      <p>Manda carta pro rei. Segue viagem pra Índia.</p>
-      <p class="big" style="margin-top: 14px;">E o Brasil fica esquecido por <em>30 anos</em>.</p>
-    </section>
-
-    <!-- 15 - por quê esquecido -->
-    <section class="slide">
-      <div class="eyebrow">Por quê?</div>
-      <p>Porque Portugal ganhava <strong>rios de dinheiro</strong> com especiarias na Ásia.</p>
-      <div class="illu sm" style="margin: 18px auto;">
-        <svg viewBox="0 0 160 60" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
-          <rect x="15" y="25" width="20" height="25" rx="2"/>
-          <path d="M25 25 L25 18"/>
-          <rect x="50" y="25" width="20" height="25" rx="2"/>
-          <path d="M60 25 L60 18"/>
-          <rect x="85" y="25" width="20" height="25" rx="2"/>
-          <path d="M95 25 L95 18"/>
-          <rect x="120" y="25" width="20" height="25" rx="2"/>
-          <path d="M130 25 L130 18"/>
-        </svg>
-      </div>
-      <p>Pimenta, cravo, canela — na Europa do século 16, valiam <strong>ouro</strong>. Literalmente.</p>
-    </section>
-
-    <!-- 16 - pau-brasil -->
-    <section class="slide">
-      <p>O Brasil, comparado a isso, parecia pobre.</p>
-      <p>Sem cidades cheias de ouro (como os astecas, no México).</p>
-      <p>Tinha mato, índio e uma árvore vermelha:</p>
-      <p class="big" style="margin-top: 12px; color: var(--accent);">O pau-brasil.</p>
-      <div class="illu sm" style="margin: 14px auto;">
-        <svg viewBox="0 0 120 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
-          <path d="M60 90 L60 30"/>
-          <path d="M60 30 Q40 25 35 15"/>
-          <path d="M60 30 Q80 25 85 15"/>
-          <path d="M60 45 Q45 42 40 32"/>
-          <path d="M60 45 Q75 42 80 32"/>
-          <path d="M60 60 Q48 58 44 50"/>
-          <path d="M60 60 Q72 58 76 50"/>
-        </svg>
-      </div>
-      <p style="font-size: 14px; color: var(--ink-soft);">Dava um corante caro pra tingir tecidos na Europa.</p>
-    </section>
-
-    <!-- 17 - escambo -->
-    <section class="slide">
-      <div class="eyebrow">Os primeiros 30 anos</div>
-      <p>Foi basicamente isso:</p>
+      <p>Por que tantos conflitos no mundo de hoje…</p>
       <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Navio português encosta no litoral.</div>
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Troca bugiganga — espelho, faca, machado — com índio.</div>
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Índio corta o pau-brasil. Carrega pro navio.</div>
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Navio volta pra Europa.</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Gaza</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Síria</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Sudão</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Índia × Paquistão</div>
       </div>
-      <p class="big" style="margin-top: 14px;">Extração pura. Nem morar queriam.</p>
+      <p style="margin-top: 14px;">…são, no fundo, <strong>ranço da era imperialista</strong>?</p>
     </section>
 
-    <!-- 18 - franceses -->
+    <!-- ============== 8 — aviso ============== -->
     <section class="slide">
-      <p>Aí os <strong>franceses</strong> começaram a fazer a mesma coisa por aqui.</p>
-      <p style="margin-top: 12px;">E o Tratado de Tordesilhas, na prática, valia o quê?</p>
-      <p class="big" style="margin-top: 12px;">Valia o tamanho do canhão de quem o defendia.</p>
-      <p style="margin-top: 10px;">França nunca aceitou. Inglaterra também não. Holanda também não.</p>
-      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">"Tratado entre Portugal e Espanha não é problema meu", diziam.</p>
+      <div class="eyebrow">Aviso</div>
+      <p>Essa é uma aula <strong>desconfortável</strong>.</p>
+      <p style="margin-top: 12px;">O imperialismo é uma das páginas mais violentas, mais cínicas e mais decisivas da história humana.</p>
+      <p style="margin-top: 12px;">E é a página que monta o palco pras duas <strong>Guerras Mundiais</strong> e pra ordem global que existe até hoje.</p>
+      <p class="big" style="margin-top: 14px;">Vamos.</p>
     </section>
 
-    <!-- 19 - lição contrato -->
+    <!-- ============== 9 — colonialismo vs imperialismo ============== -->
     <section class="slide">
-      <div class="eyebrow">Lição</div>
-      <p class="quote">Acordo só vale enquanto houver força pra fazer cumprir. Contrato sem fiscalização é decoração.</p>
-      <p style="margin-top: 14px;">Vale pra país. Vale pra negócio.</p>
-      <p class="big" style="margin-top: 8px;">Vale pra sua vida.</p>
+      <div class="eyebrow">Espera. Conceito básico</div>
+      <h2>Imperialismo é a mesma coisa que <em>colonialismo</em>?</h2>
+      <p style="margin-top: 14px;">Não.</p>
     </section>
 
-    <!-- 20 - 1534 -->
+    <!-- ============== 10 ============== -->
     <section class="slide">
-      <div class="number">1534</div>
-      <div class="label" style="margin-top: 8px;">Dom João III</div>
-      <h2 style="margin-top: 12px;">Capitanias <em>Hereditárias</em>.</h2>
-      <p style="margin-top: 14px;">Primeira tentativa de "organização".</p>
-      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">Parecia genial. Era, na verdade, uma confissão de fraqueza.</p>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div class="card-soft">
+          <div class="label" style="margin-bottom: 6px;">Colonialismo</div>
+          <p style="font-family: var(--serif); font-size: 16px;">Prática <em>antiga</em>. Espanhóis e portugueses na América desde 1500. Ingleses na Índia. Holandeses na Indonésia. <strong>Existe há séculos.</strong></p>
+        </div>
+        <div class="card-soft" style="border-color: var(--accent);">
+          <div class="label" style="margin-bottom: 6px; color: var(--accent);">Imperialismo</div>
+          <p style="font-family: var(--serif); font-size: 16px;">Fenômeno <em>concentrado</em> entre 1870 e 1914. Corrida frenética, sistemática, industrial. Versão <strong>turbinada</strong> da colonização.</p>
+        </div>
+      </div>
     </section>
 
-    <!-- 21 - como funcionava -->
+    <!-- ============== 11 — analogia ============== -->
     <section class="slide">
-      <p>O rei pegou o mapa do Brasil…</p>
-      <div class="illu" style="margin: 16px auto; max-width: 200px;">
-        <svg viewBox="0 0 200 130" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
-          <rect x="30" y="10" width="140" height="110"/>
-          <path d="M30 25 L170 25"/>
-          <path d="M30 40 L170 40"/>
-          <path d="M30 55 L170 55"/>
-          <path d="M30 70 L170 70"/>
-          <path d="M30 85 L170 85"/>
-          <path d="M30 100 L170 100"/>
+      <p>Pensa assim.</p>
+      <div class="illu" style="margin: 18px auto; max-width: 260px;">
+        <svg viewBox="0 0 260 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- pesca artesanal -->
+          <path d="M20 60 L60 30"/>
+          <path d="M60 30 L62 32"/>
+          <path d="M62 32 L62 60" stroke-dasharray="2 2"/>
+          <circle cx="62" cy="65" r="3"/>
+          <path d="M10 75 Q30 78 50 75"/>
+          <text x="20" y="95" font-family="Georgia" font-size="9" fill="#4A4640" font-style="italic">vara</text>
+          <!-- barco arrastão -->
+          <path d="M140 60 L240 60 L230 80 L150 80 Z"/>
+          <path d="M180 60 L180 30 L210 40 L180 45"/>
+          <path d="M130 70 Q160 60 200 70 Q230 80 250 75" stroke-dasharray="3 3"/>
+          <text x="170" y="95" font-family="Georgia" font-size="9" fill="#4A4640" font-style="italic">arrastão</text>
         </svg>
       </div>
-      <p>…cortou em <strong>15 faixas horizontais</strong>.</p>
-      <p style="margin-top: 10px;">Distribuiu pra <strong>12 nobres</strong> de confiança da Coroa. Os <em>donatários</em>.</p>
+      <p>Os dois são pesca. Mas a escala e o estrago são <strong>incomparáveis</strong>.</p>
     </section>
 
-    <!-- 22 - lógica -->
+    <!-- ============== 12 — bloco causas ============== -->
     <section class="slide">
-      <p>A lógica:</p>
-      <div class="card-soft" style="margin-top: 14px; border-left: 3px solid var(--accent);">
-        <p style="font-size: 15px; font-style: italic;">"Eu, rei, não tenho dinheiro pra colonizar. Mas tenho a terra.</p>
-        <p style="font-size: 15px; font-style: italic; margin-top: 8px;">Vocês, nobres, gastem o <strong>dinheiro de vocês</strong>. Povoem. Defendam. Façam render.</p>
-        <p style="font-size: 15px; font-style: italic; margin-top: 8px;">Em troca: passam de pai pra filho (por isso <em>hereditárias</em>) e ficam com boa parte do lucro. Eu fico com imposto."</p>
+      <div class="eyebrow">Por que justo agora?</div>
+      <h2>Três pressões enormes empurraram a Europa <em>pra fora dela mesma</em>.</h2>
+    </section>
+
+    <!-- ============== 13 — contexto industrial ============== -->
+    <section class="slide">
+      <p>Século 19 fervendo. Revolução Industrial em <strong>segunda fase</strong>.</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 6px;">
+        <div style="padding: 8px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Aço</div>
+        <div style="padding: 8px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Eletricidade</div>
+        <div style="padding: 8px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Química</div>
+        <div style="padding: 8px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Motor a combustão</div>
+        <div style="padding: 8px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Navio a vapor, telégrafo</div>
       </div>
+      <p style="margin-top: 14px;">As fábricas europeias produziam em escala <strong>absurda</strong>.</p>
     </section>
 
-    <!-- 23 - terceirização -->
+    <!-- ============== 14 — PRESSÃO 1 ============== -->
     <section class="slide">
-      <p>Você consegue ver o que aconteceu?</p>
-      <p class="big" style="margin-top: 14px;">O rei <em>terceirizou</em> a colonização.</p>
-      <p style="margin-top: 12px;">Privatizou o risco. Manteve uma parte do lucro garantida.</p>
-      <p style="margin-top: 14px;">E o que acontece quando você terceiriza sem fiscalizar?</p>
-      <p class="big" style="margin-top: 12px; color: var(--wrong);">Em geral, dá merda.</p>
+      <div class="number">01</div>
+      <div class="label" style="margin-top: 8px;">Primeira pressão</div>
+      <h2 style="margin-top: 12px;">Econômica.</h2>
+      <p style="margin-top: 14px;">A indústria produzia mais do que conseguia vender em casa.</p>
+      <p class="big" style="margin-top: 10px;">Mercado europeu saturado.</p>
     </section>
 
-    <!-- 24 - resultado -->
+    <!-- ============== 15 ============== -->
     <section class="slide">
-      <div class="eyebrow">Resultado</div>
-      <p>Das 15 capitanias…</p>
-      <div style="text-align: center; margin: 18px 0;">
-        <div class="number">2</div>
-        <p style="margin-top: 6px; font-size: 14px; color: var(--ink-soft);">só duas prosperaram</p>
-      </div>
-      <div style="display: flex; gap: 10px;">
-        <div class="card-soft" style="flex: 1; text-align: center;">
-          <p style="font-family: var(--serif); font-weight: 600;">São Vicente</p>
-          <p style="font-size: 12px; color: var(--ink-soft);">litoral de SP</p>
-        </div>
-        <div class="card-soft" style="flex: 1; text-align: center;">
-          <p style="font-family: var(--serif); font-weight: 600;">Pernambuco</p>
-          <p style="font-size: 12px; color: var(--ink-soft);">Nordeste</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 25 - motivos -->
-    <section class="slide">
-      <div class="eyebrow">Por que as outras falharam</div>
-      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Distância gigantesca</strong> de Portugal. Comunicação levava meses.</div>
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Donatário sem grana.</strong> Maioria era nobre arruinado.</div>
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Resistência indígena.</strong> Índios não topavam virar escravos.</div>
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Ataques estrangeiros.</strong> Franceses, piratas, etc.</div>
-      </div>
-    </section>
-
-    <!-- 26 - por que as 2 deram certo -->
-    <section class="slide">
-      <p>Por que essas duas deram certo?</p>
+      <p>Precisava de duas coisas:</p>
       <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
         <div class="card-soft">
-          <div class="label" style="margin-bottom: 4px;">São Vicente</div>
-          <p style="font-size: 15px;">Donatário competente (<strong>Martim Afonso de Sousa</strong>) e introduziu logo a cana-de-açúcar.</p>
+          <p style="font-family: var(--serif); font-size: 17px;"><strong>Consumidores novos.</strong></p>
         </div>
         <div class="card-soft">
-          <div class="label" style="margin-bottom: 4px;">Pernambuco</div>
-          <p style="font-size: 15px;">Donatário competente (<strong>Duarte Coelho</strong>) e o solo <em>massapê</em> — terra escura e fértil, perfeita pra cana.</p>
+          <p style="font-family: var(--serif); font-size: 17px;"><strong>Matéria-prima barata.</strong></p>
+        </div>
+      </div>
+      <p style="margin-top: 14px;">Borracha pra pneu. Cobre pra fio elétrico. Algodão pra têxtil. Petróleo pra motor.</p>
+      <p>Ouro. Diamante. Marfim. Especiarias.</p>
+    </section>
+
+    <!-- ============== 16 ============== -->
+    <section class="slide">
+      <p class="big">Onde tinha tudo isso?</p>
+      <p style="margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--accent);">África e Ásia.</p>
+      <p style="margin-top: 16px;">Em quantidade gigantesca. Sem que ninguém precisasse pagar preço de mercado.</p>
+    </section>
+
+    <!-- ============== 17 — PRESSÃO 2 ============== -->
+    <section class="slide">
+      <div class="number">02</div>
+      <div class="label" style="margin-top: 8px;">Segunda pressão</div>
+      <h2 style="margin-top: 12px;">Política e <em>nacionalista</em>.</h2>
+      <p style="margin-top: 14px;">Na Europa do fim do século 19, <strong>prestígio nacional se media em colônia</strong>.</p>
+      <p>Quem tinha mais colônia, era mais poderoso. Era status.</p>
+    </section>
+
+    <!-- ============== 18 — analogia futebol ============== -->
+    <section class="slide">
+      <p class="quote">Era ter equipe de ponta no Campeonato Brasileiro. Você precisa de jogador caro pra mostrar que é grande.</p>
+      <p style="margin-top: 18px;">A Inglaterra liderava de longe.</p>
+      <p class="big" style="margin-top: 10px; color: var(--accent); font-style: italic;">"O sol nunca se põe no Império Britânico."</p>
+    </section>
+
+    <!-- ============== 19 ============== -->
+    <section class="slide">
+      <div class="eyebrow">Os outros, com inveja</div>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+        <div class="card-soft" style="padding: 12px 14px;">
+          <p style="font-size: 15px;"><strong>Alemanha e Itália</strong> — recém-unificadas, chegaram atrasadas. Queriam recuperar.</p>
+        </div>
+        <div class="card-soft" style="padding: 12px 14px;">
+          <p style="font-size: 15px;"><strong>França</strong> — derrotada pela Alemanha em 1870, queria reconquistar prestígio.</p>
+        </div>
+        <div class="card-soft" style="padding: 12px 14px;">
+          <p style="font-size: 15px;"><strong>Bélgica</strong> — paisinho minúsculo, queria provar que era gente grande.</p>
         </div>
       </div>
     </section>
 
-    <!-- 27 - lição estrutura -->
+    <!-- ============== 20 — Conferência de Berlim ============== -->
     <section class="slide">
-      <div class="eyebrow">Lição</div>
-      <p class="quote">Estrutura ruim de incentivos produz resultado ruim, mesmo com gente boa dentro.</p>
-      <p style="margin-top: 14px;">E estrutura boa pode salvar até gestor médio.</p>
-      <p class="big" style="margin-top: 10px;">As duas que deram certo tinham os dois: <em>donatário bom + condição local favorável</em>.</p>
-      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">Sorte e mérito, juntos.</p>
+      <div class="eyebrow">1884 · Berlim</div>
+      <h2>O evento mais <em>cínico</em> da história moderna.</h2>
+      <p style="margin-top: 14px;">14 países sentaram numa mesa com um mapa da África aberto.</p>
+      <p style="margin-top: 8px;"><strong>Sem nenhum africano presente.</strong></p>
     </section>
 
-    <!-- 28 - 1549 -->
+    <!-- ============== 21 — ilustração mesa ============== -->
     <section class="slide">
-      <div class="number">1549</div>
-      <div class="label" style="margin-top: 8px;">Mudança de estratégia</div>
-      <h2 style="margin-top: 12px;">Governo-Geral.</h2>
-      <p style="margin-top: 14px;">Portugal vê o fracasso. Centraliza.</p>
-      <p style="margin-top: 10px;">Manda <strong>Tomé de Sousa</strong>, primeiro governador-geral, com poder sobre todas as capitanias.</p>
-      <p style="margin-top: 10px;">Funda <strong>Salvador</strong> como capital.</p>
-    </section>
-
-    <!-- 29 - começa a funcionar -->
-    <section class="slide">
-      <p>A partir daí, o Brasil começa a funcionar.</p>
-      <p style="margin-top: 10px;">Não bem. Mas funciona.</p>
-      <p class="big" style="margin-top: 14px;">E o que faz funcionar…</p>
-      <p style="margin-top: 8px; font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--accent);">…é um produto.</p>
-    </section>
-
-    <!-- 30 - açúcar -->
-    <section class="slide">
-      <div class="eyebrow">O primeiro grande negócio brasileiro</div>
-      <h1 style="color: var(--accent);">O açúcar.</h1>
-      <div class="illu" style="margin: 18px auto; max-width: 200px;">
-        <svg viewBox="0 0 200 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
-          <path d="M30 95 L30 20"/>
-          <path d="M50 95 L50 15"/>
-          <path d="M70 95 L70 25"/>
-          <path d="M90 95 L90 18"/>
-          <path d="M110 95 L110 22"/>
-          <path d="M130 95 L130 16"/>
-          <path d="M150 95 L150 24"/>
-          <path d="M170 95 L170 20"/>
-          <path d="M22 35 L38 35 M42 30 L58 30 M62 40 L78 40 M82 33 L98 33 M102 38 L118 38 M122 32 L138 32 M142 40 L158 40 M162 34 L178 34"/>
+      <div class="illu" style="margin: 8px auto 18px; max-width: 280px;">
+        <svg viewBox="0 0 280 160" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- mesa -->
+          <ellipse cx="140" cy="100" rx="100" ry="30"/>
+          <!-- mapa em cima -->
+          <rect x="100" y="80" width="80" height="40" rx="2"/>
+          <path d="M100 95 L180 95" stroke-dasharray="2 2"/>
+          <path d="M140 80 L140 120" stroke-dasharray="2 2"/>
+          <path d="M120 80 L120 95" stroke-dasharray="2 2"/>
+          <!-- cabeças ao redor -->
+          <circle cx="50" cy="60" r="10"/>
+          <circle cx="90" cy="40" r="10"/>
+          <circle cx="140" cy="35" r="10"/>
+          <circle cx="190" cy="40" r="10"/>
+          <circle cx="230" cy="60" r="10"/>
+          <circle cx="70" cy="130" r="10"/>
+          <circle cx="210" cy="130" r="10"/>
+          <!-- fumaça de charuto -->
+          <path d="M55 50 Q60 40 55 30" stroke-dasharray="1 2"/>
+          <path d="M195 30 Q200 20 195 10" stroke-dasharray="1 2"/>
         </svg>
       </div>
-      <p>No século 16, na Europa, açúcar era <strong>artigo de luxo</strong>.</p>
-      <p style="margin-top: 8px;">Quem tinha açúcar na mesa era rico.</p>
+      <p>Começaram a riscar linhas em cima do mapa.</p>
+      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">"Esse pedaço é meu. Esse é seu. Esse a gente divide."</p>
+      <p style="margin-top: 8px;">Na <strong>régua</strong>. Sem ligar pra rio, pra etnia, pra língua, pra reino existente.</p>
     </section>
 
-    <!-- 31 - Brasil tinha tudo -->
+    <!-- ============== 22 ============== -->
     <section class="slide">
-      <p>E o Brasil tinha tudo pra produzir:</p>
+      <p class="big">Em dois anos…</p>
+      <p style="margin-top: 14px;">…os europeus dividiram a África inteira <strong>no papel</strong>.</p>
+      <p style="margin-top: 12px;">Depois mandaram exército pra ocupar o que tinham desenhado.</p>
+    </section>
+
+    <!-- ============== 23 — fronteiras retas ============== -->
+    <section class="slide">
+      <div class="eyebrow">Por isso</div>
+      <p>A África tem fronteiras <strong>retas</strong> em vários lugares.</p>
+      <div class="illu" style="margin: 16px auto; max-width: 200px;">
+        <svg viewBox="0 0 200 140" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <path d="M90 15 Q130 18 140 40 Q150 65 145 85 Q140 105 120 125 Q105 135 95 130 Q80 125 75 110 Q60 100 55 80 Q50 60 60 40 Q70 18 90 15 Z"/>
+          <!-- linhas retas (régua) -->
+          <line x1="70" y1="40" x2="140" y2="40"/>
+          <line x1="60" y1="60" x2="145" y2="60"/>
+          <line x1="55" y1="80" x2="145" y2="80"/>
+          <line x1="100" y1="20" x2="100" y2="130"/>
+          <line x1="120" y1="20" x2="120" y2="130"/>
+        </svg>
+      </div>
+      <p>Régua de europeu cortando o continente em cima de um mapa.</p>
+      <p style="margin-top: 8px;">Sem nem saber direito o que tinha embaixo.</p>
+    </section>
+
+    <!-- ============== 24 — PRESSÃO 3 ============== -->
+    <section class="slide">
+      <div class="number">03</div>
+      <div class="label" style="margin-top: 8px;">Terceira pressão</div>
+      <h2 style="margin-top: 12px;">Ideológica e <em>"moral"</em>.</h2>
+      <p style="margin-top: 14px;">Aqui mora um dos auto-enganos mais sinistros da história europeia.</p>
+    </section>
+
+    <!-- ============== 25 ============== -->
+    <section class="slide">
+      <p>Os europeus não se viam como bandidos pilhando o planeta.</p>
+      <p class="big" style="margin-top: 14px;">Eles se viam como <em>benfeitores da humanidade</em>.</p>
+    </section>
+
+    <!-- ============== 26 — fardo do homem branco ============== -->
+    <section class="slide">
+      <div class="eyebrow">A ideia tinha nome</div>
+      <h2>"O fardo do <em>homem branco</em>".</h2>
+      <p style="margin-top: 14px;">Poema de Rudyard Kipling, 1899. A lógica:</p>
+      <div style="margin-top: 14px; padding: 16px; background: var(--paper); border-radius: 12px; border-left: 3px solid var(--accent);">
+        <p style="font-size: 15px;">O homem branco é o <strong>ápice</strong> da civilização.</p>
+        <p style="font-size: 15px; margin-top: 8px;">Tem ciência, cristianismo, técnica, moral.</p>
+        <p style="font-size: 15px; margin-top: 8px;">Os outros povos são <strong>atrasados</strong>, primitivos. Quase crianças.</p>
+        <p style="font-size: 15px; margin-top: 8px;">Logo, é <strong>dever moral</strong> ir lá e civilizar.</p>
+      </div>
+    </section>
+
+    <!-- ============== 27 ============== -->
+    <section class="slide">
+      <p class="quote">Tô te explorando pro seu bem. Fica quieto que eu sei o que é melhor pra você.</p>
+      <p style="margin-top: 18px;">É um <strong>sacrifício</strong>, viu? Um fardo. Mas alguém tem que fazer.</p>
+    </section>
+
+    <!-- ============== 28 — racismo científico ============== -->
+    <section class="slide">
+      <div class="eyebrow">E pra piorar</div>
+      <h2>Racismo <em>"científico"</em>.</h2>
+      <p style="margin-top: 14px;">Cientistas europeus, com cara séria, "provavam" que existiam raças hierarquicamente diferentes.</p>
+      <div class="illu" style="margin: 16px auto; max-width: 200px;">
+        <svg viewBox="0 0 200 120" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- pirâmide hierárquica -->
+          <path d="M100 20 L160 100 L40 100 Z"/>
+          <path d="M70 60 L130 60"/>
+          <path d="M85 80 L115 80"/>
+          <!-- régua/compasso lateral -->
+          <line x1="170" y1="20" x2="170" y2="100" stroke-dasharray="3 3"/>
+          <line x1="165" y1="30" x2="175" y2="30"/>
+          <line x1="165" y1="50" x2="175" y2="50"/>
+          <line x1="165" y1="70" x2="175" y2="70"/>
+          <line x1="165" y1="90" x2="175" y2="90"/>
+        </svg>
+      </div>
+      <p>Mediam crânio. Comparavam corpos. Inventavam tabelinha.</p>
+      <p style="margin-top: 8px;"><strong>Lixo científico.</strong> Mas ensinado em universidade como verdade.</p>
+    </section>
+
+    <!-- ============== 29 ============== -->
+    <section class="slide">
+      <p>Esse racismo deu <strong>cobertura intelectual</strong> pra brutalidade.</p>
+      <p style="margin-top: 14px;">Se os africanos eram "biologicamente inferiores", dominar não era crime.</p>
+      <p style="margin-top: 8px;">Era <em>ordem natural</em>.</p>
+      <p style="margin-top: 16px; font-size: 14px; color: var(--ink-soft); font-style: italic;">E esse mesmo racismo "científico" ia voltar pra dentro da Europa 50 anos depois, e dar origem ao nazismo. Mas isso é aula 25.</p>
+    </section>
+
+    <!-- ============== 30 — pausa estratégica ============== -->
+    <section class="slide">
+      <div class="eyebrow">Pausa estratégica</div>
+      <p>Repara nessa combinação:</p>
       <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
-        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">☀ Clima quente</div>
-        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">☁ Chuva regular</div>
-        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">⛰ Solo massapê no Nordeste</div>
-        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">⚓ Costa imensa pra escoar</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Excesso de produto industrial</div>
+        <div style="padding: 4px 14px; text-align: center; color: var(--accent); font-family: var(--serif); font-style: italic;">+</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Nacionalismo competitivo</div>
+        <div style="padding: 4px 14px; text-align: center; color: var(--accent); font-family: var(--serif); font-style: italic;">+</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Ideologia que justifica moralmente o saque</div>
       </div>
+      <p class="big" style="margin-top: 16px;">= desastre.</p>
     </section>
 
-    <!-- 32 - explosão -->
+    <!-- ============== 31 ============== -->
     <section class="slide">
-      <p>Em poucas décadas, Pernambuco e Bahia viraram…</p>
-      <p class="big" style="margin-top: 12px; color: var(--accent);">As maiores regiões produtoras de açúcar do mundo.</p>
-      <div style="margin-top: 18px; display: flex; gap: 10px;">
-        <div class="card-soft" style="flex: 1; text-align: center;">
-          <div class="number" style="font-size: 40px;">30</div>
-          <p style="font-size: 12px; color: var(--ink-soft); margin-top: 4px;">engenhos em 1549</p>
-        </div>
-        <div class="card-soft" style="flex: 1; text-align: center;">
-          <div class="number" style="font-size: 40px;">200+</div>
-          <p style="font-size: 12px; color: var(--ink-soft); margin-top: 4px;">no século 17 (só PE)</p>
-        </div>
-      </div>
+      <p class="quote">Quem se convence de que tá fazendo o bem é mais perigoso que quem assume que tá fazendo o mal.</p>
+      <p style="margin-top: 18px; font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--accent);">Guarda essa.</p>
     </section>
 
-    <!-- 33 - vaidade -->
+    <!-- ============== 32 — tecnologia ============== -->
     <section class="slide">
-      <p>Um padre da época escreveu uma frase famosa:</p>
-      <p class="quote" style="margin-top: 14px;">Em Pernambuco acha-se mais vaidade que em Lisboa.</p>
-      <p style="margin-top: 16px;">Pensa: o <strong>pedaço da colônia</strong> era mais ostentoso que a <strong>metrópole</strong>.</p>
-      <p class="big" style="margin-top: 12px;">O Nordeste, no século 17, era a coisa mais rica do império português.</p>
+      <div class="eyebrow">A tecnologia que tornou possível</div>
+      <h2>Por que <em>agora</em> e não antes?</h2>
+      <p style="margin-top: 14px;">Os europeus tentaram colonizar o interior da África <strong>por séculos</strong>.</p>
+      <p style="margin-top: 8px;">Sem sucesso. Três motivos.</p>
     </section>
 
-    <!-- 34 - engenho -->
+    <!-- ============== 33 — 3 barreiras ============== -->
     <section class="slide">
-      <div class="eyebrow">Como funcionava</div>
-      <h2>O engenho.</h2>
-      <p style="margin-top: 12px;">Não era só fazenda. Era uma <strong>agroindústria</strong>:</p>
-      <p style="margin-top: 10px; font-family: var(--serif); font-style: italic; color: var(--accent);">fazenda + fábrica + cidade pequena, tudo num lugar só.</p>
-    </section>
-
-    <!-- 35 - partes do engenho -->
-    <section class="slide">
-      <div class="eyebrow">As partes</div>
-      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-        <div class="card-soft" style="padding: 12px;">
-          <p style="font-family: var(--serif); font-weight: 600; font-size: 15px;">Casa-grande</p>
-          <p style="font-size: 13px; color: var(--ink-soft);">Mansão do senhor. Móvel caro, vida de fidalgo.</p>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="card-soft">
+          <div class="label" style="margin-bottom: 4px;">1. Doenças tropicais</div>
+          <p style="font-size: 15px;">Malária, principalmente. Europeu que entrava morria em meses. A África era "o túmulo do homem branco".</p>
         </div>
-        <div class="card-soft" style="padding: 12px;">
-          <p style="font-family: var(--serif); font-weight: 600; font-size: 15px;">Senzala</p>
-          <p style="font-size: 13px; color: var(--ink-soft);">Galpão imundo. Onde os escravos dormiam.</p>
+        <div class="card-soft">
+          <div class="label" style="margin-bottom: 4px;">2. Resistência militar</div>
+          <p style="font-size: 15px;">Vários reinos africanos tinham exércitos organizados. Europeu não tinha vantagem absoluta.</p>
         </div>
-        <div class="card-soft" style="padding: 12px;">
-          <p style="font-family: var(--serif); font-weight: 600; font-size: 15px;">Capela</p>
-          <p style="font-size: 13px; color: var(--ink-soft);">Igreja particular. Pra Deus abençoar o negócio.</p>
-        </div>
-        <div class="card-soft" style="padding: 12px;">
-          <p style="font-family: var(--serif); font-weight: 600; font-size: 15px;">Canavial, moenda, casa de purgar</p>
-          <p style="font-size: 13px; color: var(--ink-soft);">Plantação, máquina que esmaga a cana, refino do açúcar.</p>
+        <div class="card-soft">
+          <div class="label" style="margin-bottom: 4px;">3. Logística</div>
+          <p style="font-size: 15px;">Sem estrada, sem mapa, sem rio navegável. Interior inacessível.</p>
         </div>
       </div>
     </section>
 
-    <!-- 36 - escravos -->
+    <!-- ============== 34 — virada ============== -->
     <section class="slide">
-      <p>Tudo isso operado por…</p>
-      <p class="big" style="margin-top: 12px; color: var(--wrong);">escravos.</p>
-      <p style="margin-top: 14px;">Primeiro <strong>indígenas</strong>.</p>
-      <p style="margin-top: 6px;">Depois — em escala industrial — <strong>africanos</strong>.</p>
+      <p class="big">O que mudou entre 1850 e 1880?</p>
+      <p style="margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--accent);">Quatro tecnologias chegaram juntas.</p>
     </section>
 
-    <!-- 37 - plantation -->
+    <!-- ============== 35 — Quinino ============== -->
     <section class="slide">
-      <div class="eyebrow">Esse modelo tem nome</div>
-      <h2><em>Plantation.</em></h2>
-      <p style="margin-top: 12px;">Três características que andam juntas:</p>
-      <div class="tri-grid">
-        <div class="tri-cell">
-          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
-            <path d="M18 30 L18 8"/>
-            <path d="M12 14 L18 8 L24 14"/>
-            <path d="M10 30 L26 30"/>
-          </svg>
-          <div class="name">Monocultura</div>
-        </div>
-        <div class="tri-cell">
-          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
-            <rect x="5" y="14" width="26" height="16"/>
-            <path d="M5 22 L31 22 M13 14 L13 30 M23 14 L23 30"/>
-          </svg>
-          <div class="name">Latifúndio</div>
-        </div>
-        <div class="tri-cell">
-          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
-            <circle cx="13" cy="13" r="4"/>
-            <circle cx="23" cy="13" r="4"/>
-            <path d="M8 26 L28 26"/>
-            <path d="M13 19 L13 26 M23 19 L23 26"/>
-          </svg>
-          <div class="name">Escravidão</div>
-        </div>
+      <span class="stamp">Tecnologia 1</span>
+      <h2 style="margin-top: 14px;">Quinino.</h2>
+      <div class="illu sm" style="margin: 16px auto;">
+        <svg viewBox="0 0 120 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- frasco -->
+          <rect x="45" y="30" width="30" height="50" rx="3"/>
+          <rect x="50" y="20" width="20" height="14"/>
+          <path d="M52 50 L68 50"/>
+          <path d="M52 60 L68 60"/>
+          <!-- planta cinchona -->
+          <path d="M20 80 Q25 60 22 40"/>
+          <path d="M22 55 Q15 50 12 45"/>
+          <path d="M22 45 Q30 42 33 38"/>
+        </svg>
       </div>
-      <p style="margin-top: 18px; font-size: 14px; color: var(--ink-soft); font-style: italic;">E tudo isso… pra exportar.</p>
+      <p>Remédio da casca da cinchona. Tratamento eficaz contra malária.</p>
+      <p class="big" style="margin-top: 12px;">Divisor de águas.</p>
+      <p style="margin-top: 8px;">Europeu podia entrar no interior sem morrer.</p>
     </section>
 
-    <!-- 38 - pra Europa -->
+    <!-- ============== 36 — Metralhadora ============== -->
     <section class="slide">
-      <p>O açúcar não alimentava quem vivia aqui.</p>
-      <p class="big" style="margin-top: 12px;">Ia <em>inteiro</em> pra Europa.</p>
-      <div class="illu" style="margin: 18px auto; max-width: 240px;">
+      <span class="stamp">Tecnologia 2</span>
+      <h2 style="margin-top: 14px;">Metralhadora <em>Maxim</em>.</h2>
+      <p style="margin-top: 10px;">Inventada em 1884. Portátil. Centenas de tiros por minuto.</p>
+      <div class="illu" style="margin: 14px auto; max-width: 240px;">
         <svg viewBox="0 0 240 80" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
-          <rect x="10" y="40" width="40" height="25"/>
-          <path d="M10 40 L30 25 L50 40"/>
-          <text x="15" y="78" font-family="Georgia" font-size="10" fill="#4A4640">Brasil</text>
-          <path d="M60 50 L180 50" stroke-dasharray="4 3"/>
-          <path d="M173 45 L180 50 L173 55"/>
-          <text x="100" y="42" font-family="Georgia" font-size="10" fill="#B8862F" font-style="italic">açúcar</text>
-          <rect x="190" y="40" width="40" height="25"/>
-          <path d="M190 40 L210 25 L230 40"/>
-          <text x="190" y="78" font-family="Georgia" font-size="10" fill="#4A4640">Europa</text>
+          <!-- tripé -->
+          <path d="M40 70 L60 40 L80 70"/>
+          <path d="M60 40 L60 30"/>
+          <!-- metralhadora -->
+          <rect x="60" y="25" width="80" height="14" rx="2"/>
+          <line x1="140" y1="32" x2="200" y2="32"/>
+          <!-- tiros -->
+          <circle cx="210" cy="32" r="2" fill="#B8862F"/>
+          <circle cx="220" cy="32" r="2" fill="#B8862F"/>
+          <circle cx="230" cy="32" r="2" fill="#B8862F"/>
         </svg>
       </div>
+      <p>Contra exército armado com lança, espada e fuzil antiquado, era <strong>massacre</strong>.</p>
+      <p class="quote" style="margin-top: 14px; font-size: 18px;">Aconteça o que acontecer, nós temos a Maxim. E eles não.</p>
+      <p style="font-size: 13px; color: var(--ink-soft); margin-top: 4px; font-style: italic;">— Hilaire Belloc, poeta inglês</p>
     </section>
 
-    <!-- 39 - DNA econômico -->
+    <!-- ============== 37 — vapor + telégrafo ============== -->
     <section class="slide">
-      <p>Esse tripé é o <strong>DNA econômico</strong> do Brasil colonial.</p>
-      <p class="quote" style="margin-top: 14px;">monocultura + latifúndio + escravidão pra exportar</p>
-      <p style="margin-top: 16px;">E presta atenção: mesmo depois que o açúcar perdeu importância…</p>
-      <p class="big" style="margin-top: 10px;">…esse modelo se repetiu.</p>
+      <span class="stamp">Tecnologia 3</span>
+      <h2 style="margin-top: 14px;">Navio a vapor + <em>telégrafo</em>.</h2>
+      <div class="illu" style="margin: 14px auto; max-width: 240px;">
+        <svg viewBox="0 0 240 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- navio -->
+          <path d="M30 70 L100 70 L90 85 L40 85 Z"/>
+          <rect x="55" y="50" width="20" height="20"/>
+          <path d="M62 50 L62 30"/>
+          <path d="M62 30 Q67 25 72 30 Q67 35 62 30" fill="#B8862F"/>
+          <!-- ondas -->
+          <path d="M20 90 Q40 88 60 90 Q80 92 100 90"/>
+          <!-- telégrafo -->
+          <line x1="130" y1="80" x2="130" y2="40"/>
+          <line x1="125" y1="50" x2="135" y2="50"/>
+          <line x1="125" y1="60" x2="135" y2="60"/>
+          <!-- fios -->
+          <path d="M135 50 L180 50 L220 50" stroke-dasharray="3 3"/>
+          <path d="M135 60 L180 60 L220 60" stroke-dasharray="3 3"/>
+          <line x1="220" y1="40" x2="220" y2="80"/>
+        </svg>
+      </div>
+      <p>Londres mandava ordem pra Nairóbi em <strong>horas</strong>. Não em meses.</p>
     </section>
 
-    <!-- 40 - se repete -->
+    <!-- ============== 38 — Ferrovia ============== -->
     <section class="slide">
-      <p>Ouro depois.</p>
-      <p>Café depois.</p>
-      <p>Borracha depois.</p>
-      <p>Soja depois.</p>
-      <p class="big" style="margin-top: 14px; color: var(--accent);">A estrutura ficou.</p>
+      <span class="stamp">Tecnologia 4</span>
+      <h2 style="margin-top: 14px;">Estrada de ferro.</h2>
+      <div class="illu" style="margin: 14px auto; max-width: 240px;">
+        <svg viewBox="0 0 240 60" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <line x1="10" y1="35" x2="230" y2="35"/>
+          <line x1="10" y1="45" x2="230" y2="45"/>
+          <line x1="20" y1="32" x2="20" y2="48"/>
+          <line x1="50" y1="32" x2="50" y2="48"/>
+          <line x1="80" y1="32" x2="80" y2="48"/>
+          <line x1="110" y1="32" x2="110" y2="48"/>
+          <line x1="140" y1="32" x2="140" y2="48"/>
+          <line x1="170" y1="32" x2="170" y2="48"/>
+          <line x1="200" y1="32" x2="200" y2="48"/>
+          <!-- locomotiva -->
+          <rect x="150" y="10" width="40" height="22"/>
+          <rect x="190" y="15" width="14" height="17"/>
+          <circle cx="160" cy="38" r="4"/>
+          <circle cx="180" cy="38" r="4"/>
+        </svg>
+      </div>
+      <p>Cortou o interior do continente. Escoou minério, algodão, gente.</p>
     </section>
 
-    <!-- 41 - lição modelo -->
+    <!-- ============== 39 — lição estratégica ============== -->
     <section class="slide">
-      <div class="eyebrow">Lição</div>
-      <p class="quote">Quando um modelo de negócio dá muito certo num momento, ele cria infraestrutura, hábitos, leis, mentalidade.</p>
-      <p style="margin-top: 14px;">Mesmo quando o produto muda, a estrutura tende a se manter.</p>
-      <p class="big" style="margin-top: 10px;">O Brasil entrou nessa estrutura no século 16 e não saiu mais.</p>
+      <div class="eyebrow">Lição estratégica · pra você</div>
+      <p class="quote">Mudança tecnológica não é só sobre conforto. É, com frequência, mudança na distribuição de poder.</p>
+      <p style="margin-top: 16px;">Quem domina a nova tecnologia primeiro, <strong>captura</strong>.</p>
+      <p>Quem fica de fora, <strong>é capturado</strong>.</p>
     </section>
 
-    <!-- 42 - pirâmide social -->
+    <!-- ============== 40 — IA ============== -->
     <section class="slide">
-      <div class="eyebrow">A sociedade do engenho</div>
-      <h2>Uma pirâmide muito <em>desigual</em>.</h2>
-      <div class="pyramid-grid">
-        <div class="pyramid-row top">Senhor de engenho</div>
-        <div class="pyramid-row mid">Comerciantes, padres, funcionários</div>
-        <div class="pyramid-row base">Escravos (indígenas, depois africanos)</div>
+      <p>Vale pra império colonial em 1880.</p>
+      <p class="big" style="margin-top: 14px; color: var(--accent);">Vale pra inteligência artificial em 2026.</p>
+      <p style="margin-top: 14px;">A tecnologia construída agora vai redesenhar o mapa de quem manda no mundo nos próximos 50 anos.</p>
+      <p style="margin-top: 10px;">Você quer estar do <strong>lado certo</strong> dessa equação.</p>
+    </section>
+
+    <!-- ============== 41 — Os 4 palcos ============== -->
+    <section class="slide">
+      <div class="eyebrow">Os principais palcos</div>
+      <h2>Quatro grandes <em>palcos</em> da pilhagem.</h2>
+      <div class="pillar-grid" style="grid-template-columns: 1fr 1fr; margin-top: 18px;">
+        <div class="pillar">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
+            <path d="M18 4 Q26 6 27 14 Q28 22 26 28 Q22 33 18 32 Q14 32 12 28 Q10 22 11 14 Q12 6 18 4 Z"/>
+          </svg>
+          <div class="name">África</div>
+        </div>
+        <div class="pillar">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
+            <circle cx="18" cy="18" r="13"/>
+            <path d="M5 18 L31 18"/>
+            <path d="M18 5 Q26 18 18 31"/>
+          </svg>
+          <div class="name">Ásia</div>
+        </div>
+        <div class="pillar">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
+            <path d="M6 10 L30 10 L28 28 L8 28 Z"/>
+            <path d="M12 10 L14 28"/>
+            <path d="M22 10 L24 28"/>
+          </svg>
+          <div class="name">China</div>
+        </div>
+        <div class="pillar">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#B8862F" stroke-width="1.5">
+            <path d="M6 26 L30 26"/>
+            <path d="M10 26 L10 14 Q10 8 18 8 Q26 8 26 14 L26 26"/>
+            <circle cx="18" cy="4" r="2"/>
+          </svg>
+          <div class="name">Oriente Médio</div>
+        </div>
       </div>
     </section>
 
-    <!-- 43 - topo -->
+    <!-- ============== 42 — ÁFRICA palco ============== -->
     <section class="slide">
-      <span class="stamp">Topo</span>
-      <h2 style="margin-top: 12px;">Senhor de engenho.</h2>
-      <p style="margin-top: 12px;">Branco, português ou descendente. Católico.</p>
-      <p style="margin-top: 8px;">Dono da terra, da casa-grande, dos escravos.</p>
-      <p class="big" style="margin-top: 12px;">Basicamente um rei no pedaço dele.</p>
-      <p style="margin-top: 10px;">Mandava em tudo. Inclusive na vida e morte dos escravos — <strong>literalmente</strong>. A lei permitia.</p>
+      <span class="stamp">Palco 1</span>
+      <h2 style="margin-top: 14px;">África. O continente <em>fatiado</em>.</h2>
+      <p style="margin-top: 14px;">Conferência de Berlim. Régua. Fronteiras artificiais.</p>
+      <p style="margin-top: 8px;">Vamos parar em dois casos pra você sentir o estrago.</p>
     </section>
 
-    <!-- 44 - meio -->
+    <!-- ============== 43 — Congo Belga ============== -->
     <section class="slide">
-      <span class="stamp">Meio (pequeno)</span>
-      <p style="margin-top: 14px;">Comerciantes. Padres. Funcionários da Coroa. Alguns artesãos.</p>
-      <p style="margin-top: 10px;">Brancos ou mestiços livres.</p>
-      <p class="big" style="margin-top: 12px;">Pequena classe média colonial.</p>
+      <div class="eyebrow">Caso 1 · Congo Belga</div>
+      <h2>O <em>caso mais brutal</em> do imperialismo africano.</h2>
+      <p style="margin-top: 14px;">O rei da Bélgica, <strong>Leopoldo II</strong>, conseguiu transformar uma área enorme da África Central em <strong>propriedade pessoal dele</strong>.</p>
+      <p style="margin-top: 8px;">Não da Bélgica. <em>Dele.</em></p>
     </section>
 
-    <!-- 45 - base -->
+    <!-- ============== 44 ============== -->
     <section class="slide">
-      <span class="stamp dark">Base · a maioria</span>
-      <p style="margin-top: 14px;">Escravos.</p>
-      <p>Indígenas no começo. Africanos depois.</p>
-      <div style="margin-top: 12px; padding: 14px; background: var(--paper); border-radius: 12px; border-left: 3px solid var(--wrong);">
-        <p style="font-size: 15px;">Sem direitos. Sem voz. Sem nada.</p>
-        <p style="font-size: 15px; margin-top: 6px;">Considerados <strong>propriedade</strong>, não pessoas.</p>
+      <p>Chamou de "Estado Livre do Congo".</p>
+      <p class="big" style="margin-top: 12px;">De livre não tinha nada.</p>
+      <p style="margin-top: 14px;">Leopoldo precisava de borracha. A indústria automobilística e de bicicletas explodia.</p>
+      <p>Botou os congoleses pra coletar borracha em <strong>quotas absurdas</strong>.</p>
+    </section>
+
+    <!-- ============== 45 — quem não cumpria ============== -->
+    <section class="slide">
+      <p>Quem não cumpria…</p>
+      <p class="big" style="margin-top: 14px; color: var(--wrong);">…tinha a mão cortada.</p>
+      <div class="illu sm" style="margin: 16px auto;">
+        <svg viewBox="0 0 120 80" class="draw" fill="none" stroke="#B5342B" stroke-width="1.5">
+          <!-- mão -->
+          <path d="M40 60 L40 35 Q40 30 45 30 L45 50"/>
+          <path d="M50 55 L50 25 Q50 20 55 20 L55 50"/>
+          <path d="M60 55 L60 22 Q60 17 65 17 L65 50"/>
+          <path d="M70 55 L70 25 Q70 20 75 20 L75 50"/>
+          <path d="M40 60 Q55 65 75 60"/>
+          <!-- corte -->
+          <line x1="30" y1="70" x2="85" y2="70" stroke-dasharray="3 3"/>
+        </svg>
       </div>
+      <p style="margin-top: 8px; font-size: 14px; color: var(--ink-soft); font-style: italic;">Existe fotografia da época, dá pra procurar. Criança congolesa de 5 anos com a mão amputada porque o pai não cumpriu a quota.</p>
     </section>
 
-    <!-- 46 - contraste EUA -->
+    <!-- ============== 46 — números Congo ============== -->
     <section class="slide">
-      <div class="eyebrow">Compara com os EUA</div>
-      <p>Nos EUA, mesmo com escravidão, desde cedo tinha:</p>
-      <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
-        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Classe média forte</div>
-        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Fazendeiros pequenos e médios</div>
-        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Comerciantes livres</div>
-        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Gente que sabia ler</div>
+      <div class="eyebrow">Entre 1885 e 1908</div>
+      <div style="text-align: center; margin: 22px 0;">
+        <div class="number" style="font-size: 64px;">8 a 10</div>
+        <p class="label" style="margin-top: 6px;">milhões de mortos</p>
       </div>
-      <p class="big" style="margin-top: 14px;">Aqui? Quase ninguém sabia ler.</p>
+      <p>Mais ou menos a <strong>metade da população</strong> do Congo na época.</p>
+      <p class="big" style="margin-top: 14px;">Genocídio em escala industrial.</p>
+      <p style="margin-top: 10px;">Conduzido por um rei europeu que, na Europa, era considerado homem culto e respeitável.</p>
     </section>
 
-    <!-- 47 - importância -->
+    <!-- ============== 47 — África do Sul ============== -->
     <section class="slide">
-      <p>Sociedade que nasce <strong>sem classe média</strong> tem dificuldade pra desenvolver:</p>
-      <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px;">
-        <p style="color: var(--ink-soft); font-style: italic;">· democracia</p>
-        <p style="color: var(--ink-soft); font-style: italic;">· comércio interno</p>
-        <p style="color: var(--ink-soft); font-style: italic;">· mobilidade social</p>
+      <div class="eyebrow">Caso 2 · África do Sul</div>
+      <h2>Guerra dos <em>Bôeres</em> (1899-1902).</h2>
+      <p style="margin-top: 14px;">Ingleses contra colonos holandeses (afrikaners) que já estavam no sul há gerações.</p>
+      <p style="margin-top: 12px;">Durante essa guerra, os ingleses <strong>inventaram</strong> uma coisa com futuro sombrio:</p>
+    </section>
+
+    <!-- ============== 48 — campos de concentração ============== -->
+    <section class="slide">
+      <p class="big" style="color: var(--wrong);">Campos de concentração.</p>
+      <p style="margin-top: 14px;">Sim. <strong>Antes dos nazistas</strong>, foram os ingleses que criaram o conceito.</p>
+      <div class="illu sm" style="margin: 18px auto;">
+        <svg viewBox="0 0 160 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- cerca de arame -->
+          <line x1="10" y1="30" x2="150" y2="30"/>
+          <line x1="10" y1="50" x2="150" y2="50"/>
+          <line x1="10" y1="70" x2="150" y2="70"/>
+          <line x1="20" y1="20" x2="20" y2="90"/>
+          <line x1="50" y1="20" x2="50" y2="90"/>
+          <line x1="80" y1="20" x2="80" y2="90"/>
+          <line x1="110" y1="20" x2="110" y2="90"/>
+          <line x1="140" y1="20" x2="140" y2="90"/>
+          <!-- arame farpado -->
+          <path d="M15 25 L20 30 L25 25 M45 25 L50 30 L55 25"/>
+        </svg>
       </div>
-      <p class="big" style="margin-top: 16px; color: var(--accent);">A desigualdade brasileira de hoje não veio do nada.</p>
-      <p style="margin-top: 8px;">É o eco direto dessa estrutura colonial.</p>
+      <p>Estima-se <strong>25 mil bôeres mortos</strong> nos campos. Mais negros morreram, mas a Inglaterra não se preocupou em contar direito.</p>
     </section>
 
-    <!-- 48 - Holandeses -->
+    <!-- ============== 49 — Apartheid ============== -->
     <section class="slide">
-      <div class="number">1630</div>
-      <div class="label" style="margin-top: 8px;">Pernambuco</div>
-      <h2 style="margin-top: 12px;">Os <em>holandeses</em> invadem.</h2>
-      <p style="margin-top: 14px;">Eram os melhores negociantes da Europa naquele momento.</p>
-      <p>Queriam entrar no jogo do açúcar.</p>
-      <p class="big" style="margin-top: 12px;">E ficaram. Por 24 anos.</p>
-    </section>
-
-    <!-- 49 - Nassau -->
-    <section class="slide">
-      <p>Capítulo fascinante que quase ninguém aprende direito.</p>
-      <p style="margin-top: 12px;">Eles não vieram só saquear — <strong>administraram</strong> o Nordeste.</p>
-      <p style="margin-top: 12px;">Trouxeram um governador competente:</p>
-      <p class="big" style="margin-top: 8px; color: var(--accent);">Maurício de Nassau.</p>
-    </section>
-
-    <!-- 50 - o que Nassau fez -->
-    <section class="slide">
-      <div class="eyebrow">O que ele fez</div>
-      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Modernizou Recife (chamavam de <em>Mauritsstad</em>).</div>
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Trouxe cientistas, pintores, urbanistas.</div>
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;"><strong>Tolerância religiosa</strong> — judeus podiam praticar livremente.</div>
-        <div style="padding: 12px; background: var(--paper); border-radius: 10px; font-size: 15px;">Investiu em infraestrutura urbana.</div>
-      </div>
-      <p style="margin-top: 14px; font-size: 14px; font-style: italic; color: var(--ink-soft);">Experimento de outro modelo colonial. Mais comercial, mais "moderno" pro padrão da época.</p>
-    </section>
-
-    <!-- 51 - fim -->
-    <section class="slide">
-      <p>Acabou em <strong>1654</strong>.</p>
-      <p style="margin-top: 10px;">Portugueses, com ajuda de tropas locais — incluindo negros e indígenas — expulsaram os holandeses.</p>
-      <p style="margin-top: 10px;">Episódio chamado de <em>Insurreição Pernambucana</em>.</p>
-    </section>
-
-    <!-- 52 - importância 1 -->
-    <section class="slide">
-      <div class="eyebrow">Por que isso importa · 1</div>
-      <p>Os holandeses, expulsos, foram pro <strong>Caribe</strong>.</p>
-      <p style="margin-top: 10px;">Levaram a tecnologia do açúcar.</p>
-      <p style="margin-top: 10px;">Plantaram lá com produção <strong>mais eficiente</strong> e <strong>mais perto da Europa</strong>.</p>
-      <p class="big" style="margin-top: 14px;">Resultado: o açúcar brasileiro perdeu mercado.</p>
-      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">O ciclo começa a declinar no final do século 17.</p>
-    </section>
-
-    <!-- 53 - importância 2 -->
-    <section class="slide">
-      <div class="eyebrow">Por que isso importa · 2</div>
-      <p class="big">O Brasil podia ter sido outra coisa.</p>
-      <p style="margin-top: 14px;">Não é destino.</p>
-      <p style="margin-top: 8px;">Foi <strong>escolha</strong> — e <strong>força</strong> — que fez ele ser do jeito que é.</p>
-    </section>
-
-    <!-- 54 - lição vantagem -->
-    <section class="slide">
-      <div class="eyebrow">Lição</div>
-      <p class="quote">Vantagem competitiva não é eterna. Quando você tem monopólio, o relógio começa a contar.</p>
-      <p style="margin-top: 14px;">Ou você inova, ou alguém vai copiar (com melhorias) e tomar seu mercado.</p>
-      <p style="margin-top: 12px;">O Brasil tinha quase monopólio mundial do açúcar.</p>
-      <p class="big" style="margin-top: 10px;">Perdeu por concorrência e preguiça de modernizar.</p>
-    </section>
-
-    <!-- 55 - indígenas e africanos -->
-    <section class="slide">
-      <div class="eyebrow">E os indígenas? E os africanos?</div>
-      <p>A <strong>Aula 17 inteira</strong> vai ser sobre escravidão.</p>
-      <p style="margin-top: 12px;">Aqui só o essencial.</p>
-    </section>
-
-    <!-- 56 - indígenas -->
-    <section class="slide">
-      <span class="stamp">Indígenas</span>
-      <p style="margin-top: 14px;">Eram entre <strong>2 e 5 milhões</strong> de pessoas quando os portugueses chegaram.</p>
-      <p style="margin-top: 12px;">Foram primeiro escravizados.</p>
-      <p>Depois <strong>dizimados</strong> por doenças europeias — gripe, sarampo, varíola. Sem imunidade, morriam.</p>
-      <p style="margin-top: 10px;">Muitos fugiram pro interior.</p>
-      <p style="margin-top: 8px;">Muitos foram convertidos à força pelos jesuítas em <em>aldeamentos</em> — vilas controladas pela Igreja.</p>
-    </section>
-
-    <!-- 57 - africanos -->
-    <section class="slide">
-      <span class="stamp dark">Africanos</span>
-      <p style="margin-top: 14px;">Começam a chegar em escala grande a partir do final do século 16.</p>
-      <p style="margin-top: 10px;">Pra substituir o indígena na lavoura.</p>
-      <p style="margin-top: 14px;">Por quê substituir?</p>
-      <div class="card-soft" style="margin-top: 10px; border-left: 3px solid var(--wrong);">
-        <p style="font-size: 15px;">O índio fugia. Conhecia o terreno. Tinha aliados. Tinha pra onde ir.</p>
-        <p style="font-size: 15px; margin-top: 8px;">O africano, arrancado de outro continente, <strong>não tinha pra onde fugir</strong>.</p>
-        <p style="font-size: 15px; margin-top: 8px; font-style: italic;">E era mais "lucrativo" — do ponto de vista cínico do colono.</p>
-      </div>
-    </section>
-
-    <!-- 58 - números -->
-    <section class="slide">
-      <div class="eyebrow">Os números</div>
-      <p>Entre os séculos 16 e 19, o Brasil recebeu cerca de…</p>
+      <p>A vitória inglesa montou o palco do <strong>apartheid</strong>.</p>
+      <p style="margin-top: 12px;">Regime de segregação racial brutal que vigorou até…</p>
       <div style="text-align: center; margin: 18px 0;">
-        <div class="number" style="font-size: 64px;">4,8 mi</div>
-        <p style="margin-top: 6px; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.1em; text-transform: uppercase;">de africanos escravizados</p>
+        <div class="number">1994</div>
       </div>
-      <p class="big" style="text-align: center; color: var(--accent);">Mais que qualquer outro país nas Américas.</p>
+      <p class="big">Quando você nasceu, Gustavo, o apartheid ainda existia.</p>
     </section>
 
-    <!-- 59 - comparação EUA -->
+    <!-- ============== 50 — ÁSIA / Índia ============== -->
     <section class="slide">
-      <div class="illu" style="margin: 10px auto; max-width: 260px;">
-        <svg viewBox="0 0 260 100" fill="none" stroke="#B8862F" stroke-width="1.5">
-          <rect x="10" y="20" width="120" height="50" fill="#B8862F" stroke="none"/>
-          <text x="20" y="50" font-family="Georgia" font-size="13" fill="#FBF7EF" font-weight="700">Brasil 4,8 mi</text>
-          <rect x="10" y="80" width="12" height="12" fill="#1A1814" stroke="none"/>
-          <text x="28" y="91" font-family="Georgia" font-size="11" fill="#4A4640">EUA: 400 mil</text>
+      <span class="stamp">Palco 2</span>
+      <h2 style="margin-top: 14px;">Índia. A <em>joia da coroa</em>.</h2>
+      <p style="margin-top: 14px;">Caso mais sofisticado e mais lucrativo do imperialismo.</p>
+      <p style="margin-top: 8px;">Primeiro dominada por uma <strong>empresa privada</strong> — a Companhia das Índias Orientais. Depois, a partir de 1858, pelo governo britânico direto.</p>
+    </section>
+
+    <!-- ============== 51 — analogia Amazon ============== -->
+    <section class="slide">
+      <p>A Companhia das Índias era, mais ou menos…</p>
+      <p class="big" style="margin-top: 14px;">…uma Amazon do século 18.</p>
+      <p style="margin-top: 10px;">Mas <strong>com exército próprio</strong>.</p>
+      <div class="illu sm" style="margin: 20px auto;">
+        <svg viewBox="0 0 120 80" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <rect x="30" y="20" width="60" height="40" rx="3"/>
+          <path d="M40 35 L80 35"/>
+          <path d="M40 45 L70 45"/>
+          <!-- soldadinho do lado -->
+          <circle cx="100" cy="45" r="5"/>
+          <path d="M100 50 L100 65"/>
+          <path d="M105 45 L105 30"/>
         </svg>
       </div>
-      <p style="margin-top: 14px;">Os EUA receberam cerca de <strong>400 mil</strong>.</p>
-      <p class="big" style="margin-top: 10px;">Dez vezes menos.</p>
-      <p style="margin-top: 12px;">O Brasil foi o <strong>maior país escravista das Américas</strong>. Em volume e em duração.</p>
-      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">Foi o último do Ocidente a abolir, em 1888.</p>
     </section>
 
-    <!-- 60 - ouro 1693 -->
+    <!-- ============== 52 — números Índia ============== -->
     <section class="slide">
-      <div class="number">1693</div>
-      <div class="label" style="margin-top: 8px;">O segundo grande ciclo</div>
-      <h2 style="margin-top: 12px;">Acharam <em>ouro</em> em Minas.</h2>
-      <p style="margin-top: 14px;">Os <strong>bandeirantes</strong> — paulistas que faziam expedições pelo interior caçando índios e metais — encontraram ouro no que hoje é Minas Gerais.</p>
-    </section>
-
-    <!-- 61 - maior produtor -->
-    <section class="slide">
-      <p>O Brasil vira o <strong>maior produtor de ouro do mundo</strong> no século 18.</p>
-      <p style="margin-top: 12px;">Cidades explodem em população e riqueza:</p>
-      <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px;">
-        <p style="font-family: var(--serif); font-size: 17px;">Ouro Preto.</p>
-        <p style="font-family: var(--serif); font-size: 17px;">Mariana.</p>
-        <p style="font-family: var(--serif); font-size: 17px;">São João del Rei.</p>
+      <div class="eyebrow">A conta da pilhagem</div>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+        <div class="stat-row">
+          <div class="big-num">25%</div>
+          <div class="stat-text"><strong>1700.</strong> Fatia da Índia no PIB mundial. Uma das economias mais ricas do planeta.</div>
+        </div>
+        <div class="stat-row" style="border-left-color: var(--wrong);">
+          <div class="big-num" style="color: var(--wrong);">&lt;5%</div>
+          <div class="stat-text"><strong>1947.</strong> Quando conseguiram independência. Um dos países mais pobres do mundo.</div>
+        </div>
       </div>
-      <p style="margin-top: 12px;">Igrejas barrocas cobertas de ouro. Aleijadinho esculpe seus santos.</p>
     </section>
 
-    <!-- 62 - mas vai embora -->
+    <!-- ============== 53 — como destruíram ============== -->
     <section class="slide">
-      <p class="big">Mas o ouro também foi embora.</p>
-      <p style="margin-top: 14px;">Quase <strong>todo</strong> foi pra Portugal.</p>
-      <p style="margin-top: 10px;">E de Portugal, parte significativa foi pra…</p>
-      <p class="big" style="margin-top: 10px; color: var(--accent);">Inglaterra.</p>
+      <p>Como a Inglaterra fez isso?</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+        <div class="card-soft" style="padding: 14px;">
+          <p style="font-size: 15px;">Destruiu a <strong>indústria têxtil local</strong> (a melhor do mundo) pra forçar a comprar tecido inglês.</p>
+        </div>
+        <div class="card-soft" style="padding: 14px;">
+          <p style="font-size: 15px;">Forçou cultivo de <strong>exportação</strong>: algodão, ópio, chá. Gerou fomes catastróficas.</p>
+        </div>
+      </div>
     </section>
 
-    <!-- 63 - Methuen -->
+    <!-- ============== 54 — fome ============== -->
     <section class="slide">
-      <div class="eyebrow">Tratado de Methuen · 1703</div>
-      <p>Portugal tinha acordos comerciais <strong>desfavoráveis</strong> com os ingleses.</p>
-      <div class="illu" style="margin: 18px auto; max-width: 260px;">
-        <svg viewBox="0 0 260 80" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
-          <rect x="10" y="30" width="40" height="30"/>
-          <text x="15" y="75" font-family="Georgia" font-size="10" fill="#4A4640">Brasil</text>
-          <path d="M55 45 L100 45"/>
-          <path d="M93 40 L100 45 L93 50"/>
-          <text x="62" y="40" font-family="Georgia" font-size="9" fill="#B8862F" font-style="italic">ouro</text>
-          <rect x="105" y="30" width="40" height="30"/>
-          <text x="105" y="75" font-family="Georgia" font-size="10" fill="#4A4640">Portugal</text>
-          <path d="M150 45 L195 45"/>
-          <path d="M188 40 L195 45 L188 50"/>
-          <text x="155" y="40" font-family="Georgia" font-size="9" fill="#B8862F" font-style="italic">ouro</text>
-          <rect x="200" y="30" width="40" height="30"/>
-          <text x="200" y="75" font-family="Georgia" font-size="10" fill="#4A4640">Inglaterra</text>
+      <div class="eyebrow">Entre 1870 e 1900</div>
+      <div style="text-align: center; margin: 22px 0;">
+        <div class="number" style="font-size: 64px;">+15</div>
+        <p class="label" style="margin-top: 6px;">milhões de mortos por fome</p>
+      </div>
+      <p>A Inglaterra <strong>exportava comida</strong> enquanto a população local passava fome.</p>
+    </section>
+
+    <!-- ============== 55 — Gandhi ============== -->
+    <section class="slide">
+      <div class="eyebrow">Tem um cara importante aqui</div>
+      <h2><em>Mahatma</em> Gandhi.</h2>
+      <div class="illu sm" style="margin: 16px auto;">
+        <svg viewBox="0 0 100 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- cabeça careca + óculos -->
+          <circle cx="50" cy="40" r="18"/>
+          <circle cx="44" cy="40" r="4"/>
+          <circle cx="56" cy="40" r="4"/>
+          <line x1="48" y1="40" x2="52" y2="40"/>
+          <!-- bigode -->
+          <path d="M45 50 Q50 52 55 50"/>
+          <!-- toga -->
+          <path d="M30 60 Q50 65 70 60 L72 92 L28 92 Z"/>
         </svg>
       </div>
-      <p>Portugal comprava produtos industrializados ingleses.</p>
-      <p style="margin-top: 6px;">Pagava em <strong>ouro</strong>.</p>
+      <p>Advogado indiano, formado em Londres. Liderou resistência <strong>não violenta</strong> contra o domínio britânico.</p>
     </section>
 
-    <!-- 64 - reverter -->
+    <!-- ============== 56 — estratégia ============== -->
     <section class="slide">
-      <p class="big">Resultado:</p>
-      <p class="quote" style="margin-top: 14px;">O ouro brasileiro ajudou a financiar a Revolução Industrial inglesa.</p>
-      <p style="margin-top: 14px;">Você ouviu direito.</p>
-      <p style="margin-top: 10px;">A grana pra Inglaterra virar a primeira potência industrial do mundo veio, em boa parte, do <strong>nosso subsolo</strong>.</p>
-    </section>
-
-    <!-- 65 - e o Brasil? -->
-    <section class="slide">
-      <p>E o Brasil?</p>
-      <p class="big" style="margin-top: 12px;">Ficou com igrejas bonitas e <em>zero indústria</em>.</p>
-      <p style="margin-top: 14px;">Quando o ouro acabou (final do século 18), Minas mergulhou em decadência.</p>
-      <p style="margin-top: 10px;">Não sobrou estrutura econômica.</p>
-      <p style="margin-top: 8px; font-style: italic; color: var(--ink-soft);">Só ruína.</p>
-    </section>
-
-    <!-- 66 - lição extração -->
-    <section class="slide">
-      <div class="eyebrow">Lição grande</div>
-      <p class="quote">Riqueza extrativa, sozinha, não constrói país.</p>
-      <p style="margin-top: 14px;">Se você só tira da terra e exporta — sem transformar, sem industrializar, sem reinvestir internamente — a riqueza passa e você fica igual ou pior.</p>
-    </section>
-
-    <!-- 67 - hoje -->
-    <section class="slide">
-      <p>O Brasil aprendeu isso da forma mais dolorosa.</p>
-      <p style="margin-top: 8px;">Várias vezes.</p>
-      <p class="big" style="margin-top: 14px;">E em alguma medida <em>ainda não aprendeu</em>.</p>
-      <p style="margin-top: 12px;">Pensa em commodities hoje:</p>
-      <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
-        <span style="padding: 6px 12px; background: var(--paper); border-radius: 100px; font-size: 14px;">soja</span>
-        <span style="padding: 6px 12px; background: var(--paper); border-radius: 100px; font-size: 14px;">minério</span>
-        <span style="padding: 6px 12px; background: var(--paper); border-radius: 100px; font-size: 14px;">petróleo</span>
+      <p>Estratégia genial.</p>
+      <p style="margin-top: 12px;">Em vez de pegar em armas (dar desculpa pros ingleses massacrarem)…</p>
+      <p class="big" style="margin-top: 12px;">…desobediência civil em massa.</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Não pagar imposto.</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Não comprar produto inglês.</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 15px;">Marchar pacificamente. Apanhar sem reagir.</div>
       </div>
-      <p style="margin-top: 12px; font-family: var(--serif); font-style: italic; color: var(--accent);">É o mesmo filme, com cenário diferente.</p>
+      <p style="margin-top: 12px;">Deixar o mundo ver a violência britânica.</p>
     </section>
 
-    <!-- 68 - resumão título -->
+    <!-- ============== 57 ============== -->
+    <section class="slide">
+      <p class="big">Funcionou.</p>
+      <p style="margin-top: 14px;">Independência da Índia em…</p>
+      <div style="text-align: center; margin: 16px 0;">
+        <div class="number">1947</div>
+      </div>
+      <p>Serviu de inspiração pra Martin Luther King 20 anos depois nos EUA.</p>
+    </section>
+
+    <!-- ============== 58 — tragédia da partição ============== -->
+    <section class="slide">
+      <p>Mas a independência veio com tragédia.</p>
+      <p style="margin-top: 12px;">Os ingleses, ao sair, dividiram a colônia em <strong>dois países</strong>:</p>
+      <div class="illu" style="margin: 14px auto; max-width: 220px;">
+        <svg viewBox="0 0 220 100" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- Índia -->
+          <path d="M120 20 Q160 25 170 50 Q175 75 150 90 Q120 92 105 75 Q95 50 110 30 Z"/>
+          <text x="125" y="60" font-family="Georgia" font-size="11" fill="#4A4640" font-style="italic">Índia</text>
+          <!-- Paquistão -->
+          <path d="M40 20 Q70 22 85 35 Q95 50 85 65 Q60 70 45 60 Q30 40 40 20 Z"/>
+          <text x="50" y="48" font-family="Georgia" font-size="9" fill="#4A4640" font-style="italic">Paquistão</text>
+        </svg>
+      </div>
+      <p style="font-size: 14px; color: var(--ink-soft);"><strong>Índia</strong>: maioria hindu. <strong>Paquistão</strong>: maioria muçulmana.</p>
+    </section>
+
+    <!-- ============== 59 ============== -->
+    <section class="slide">
+      <p>A divisão, decidida às pressas, gerou:</p>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 14px;">
+        <div class="stat-row">
+          <div class="big-num">15M</div>
+          <div class="stat-text">de pessoas <strong>deslocadas</strong>.</div>
+        </div>
+        <div class="stat-row" style="border-left-color: var(--wrong);">
+          <div class="big-num" style="color: var(--wrong);">1-2M</div>
+          <div class="stat-text">de <strong>mortos</strong> em massacres entre hindus e muçulmanos.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== 60 — risco nuclear ============== -->
+    <section class="slide">
+      <p>A inimizade Índia × Paquistão <strong>dura até hoje</strong>.</p>
+      <p style="margin-top: 12px;">As duas potências têm <strong>armas nucleares</strong>.</p>
+      <p class="big" style="margin-top: 12px; color: var(--wrong);">Toda crise carrega o risco real de guerra nuclear.</p>
+      <p style="margin-top: 14px;">Tudo isso é herança direta de como os ingleses saíram da Índia.</p>
+    </section>
+
+    <!-- ============== 61 — CHINA ============== -->
+    <section class="slide">
+      <span class="stamp">Palco 3</span>
+      <h2 style="margin-top: 14px;">China. A humilhação que <em>ainda arde</em>.</h2>
+      <p style="margin-top: 14px;">A China não foi colonizada inteira. Foi <strong>semicolonizada</strong>.</p>
+      <p style="margin-top: 8px;">Os europeus (depois também americanos e japoneses) pegaram pedaços, impuseram tratados, controlaram portos. Sem tomar o país todo.</p>
+    </section>
+
+    <!-- ============== 62 — Guerras do Ópio ============== -->
+    <section class="slide">
+      <div class="eyebrow">O episódio fundador</div>
+      <h2>Guerras do <em>Ópio</em>.</h2>
+      <p style="margin-top: 8px; color: var(--ink-soft); font-size: 14px;">1839-1842 · 1856-1860</p>
+      <p style="margin-top: 14px;">A história é <strong>de embrulhar o estômago</strong>.</p>
+    </section>
+
+    <!-- ============== 63 — equação comercial ============== -->
+    <section class="slide">
+      <p>Os ingleses queriam <strong>chá</strong> chinês.</p>
+      <p style="margin-top: 10px;">A China não queria nada que os ingleses tivessem pra oferecer.</p>
+      <div class="illu" style="margin: 14px auto; max-width: 240px;">
+        <svg viewBox="0 0 240 80" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- xícara chá -->
+          <path d="M40 40 L70 40 L65 65 L45 65 Z"/>
+          <path d="M70 45 Q80 50 70 60"/>
+          <path d="M50 38 Q52 30 50 22" stroke-dasharray="2 2"/>
+          <path d="M58 38 Q60 30 58 22" stroke-dasharray="2 2"/>
+          <!-- seta -->
+          <path d="M95 50 L145 50" stroke-dasharray="3 3"/>
+          <path d="M138 45 L145 50 L138 55"/>
+          <!-- moedas -->
+          <circle cx="180" cy="40" r="10"/>
+          <circle cx="200" cy="55" r="10"/>
+          <text x="176" y="44" font-family="Georgia" font-size="10" fill="#B8862F">£</text>
+          <text x="196" y="59" font-family="Georgia" font-size="10" fill="#B8862F">£</text>
+        </svg>
+      </div>
+      <p>Resultado: a Inglaterra perdia <strong>muito dinheiro</strong>.</p>
+    </section>
+
+    <!-- ============== 64 — solução horrível ============== -->
+    <section class="slide">
+      <p>Pra resolver o problema, os ingleses começaram a…</p>
+      <p class="big" style="margin-top: 12px; color: var(--wrong);">…vender ópio na China.</p>
+      <p style="margin-top: 12px;">Em escala industrial.</p>
+      <p style="margin-top: 8px;">Produziam ópio na <strong>Índia</strong>, vendiam na <strong>China</strong>, usavam o dinheiro pra comprar chá.</p>
+    </section>
+
+    <!-- ============== 65 ============== -->
+    <section class="slide">
+      <p class="quote">Equilibravam a balança comercial viciando milhões de chineses em droga.</p>
+      <p style="margin-top: 18px;">Quando o governo chinês tentou proibir, os ingleses <strong>declararam guerra</strong>.</p>
+      <p style="margin-top: 10px;">Em nome do <em>livre comércio</em>, repara.</p>
+      <p style="margin-top: 10px;">Defenderam, com canhão, o direito de continuar drogando uma população inteira.</p>
+    </section>
+
+    <!-- ============== 66 — Hong Kong ============== -->
+    <section class="slide">
+      <p>Venceram fácil. China militar atrasadíssima.</p>
+      <p style="margin-top: 12px;">Impuseram "<strong>tratados desiguais</strong>".</p>
+      <p style="margin-top: 14px;">Hong Kong, por exemplo, foi entregue à Inglaterra em 1842.</p>
+      <p>Só voltou pra China em…</p>
+      <div style="text-align: center; margin: 18px 0;">
+        <div class="number">1997</div>
+      </div>
+      <p class="big">Quando você era criança, Gustavo, Hong Kong ainda era britânica.</p>
+    </section>
+
+    <!-- ============== 67 — Século da Humilhação ============== -->
+    <section class="slide">
+      <div class="eyebrow">Como a China chama essa fase</div>
+      <h2>O <em>"Século da Humilhação"</em>.</h2>
+      <p style="margin-top: 8px; color: var(--ink-soft); font-size: 14px;">~1839 a 1949</p>
+      <p style="margin-top: 14px;">100 anos em que a China, antes orgulhosa de ser o "Império do Meio", o <strong>centro do mundo</strong>, foi pisoteada por estrangeiros.</p>
+    </section>
+
+    <!-- ============== 68 — China hoje ============== -->
+    <section class="slide">
+      <div class="eyebrow">Ponto crucial pra entender hoje</div>
+      <p>A China contemporânea, sob Xi Jinping, tem como <strong>narrativa fundadora</strong> a superação dessa humilhação.</p>
+      <p style="margin-top: 14px;">Toda agressividade chinesa atual (Taiwan, Mar do Sul, EUA) é apresentada internamente como:</p>
+      <p class="quote" style="margin-top: 12px;">Nunca mais vamos ser humilhados como fomos no século 19.</p>
+    </section>
+
+    <!-- ============== 69 ============== -->
+    <section class="slide">
+      <p>Quando o ocidental pergunta "por que esses caras são tão agressivos?", a resposta tá aqui.</p>
+      <p style="margin-top: 14px;">Eles têm <strong>100 anos de humilhação</strong> muito vivos na memória coletiva.</p>
+      <p class="big" style="margin-top: 12px; color: var(--accent); font-style: italic;">E têm certeza: nunca mais.</p>
+      <p style="margin-top: 14px; font-size: 13px; color: var(--ink-soft); font-style: italic;">Vamos destrinchar isso na aula 29.</p>
+    </section>
+
+    <!-- ============== 70 — ORIENTE MÉDIO ============== -->
+    <section class="slide">
+      <span class="stamp">Palco 4</span>
+      <h2 style="margin-top: 14px;">Oriente Médio. A <em>bomba-relógio armada</em>.</h2>
+      <p style="margin-top: 14px;">Último pedaço a entrar na festa. Talvez o que gerou mais problemas duradouros.</p>
+    </section>
+
+    <!-- ============== 71 — contexto Otomano ============== -->
+    <section class="slide">
+      <p>No século 19, a região era governada pelo <strong>Império Otomano</strong>.</p>
+      <p style="margin-top: 10px;">Império muçulmano com sede em Istambul. Existia desde 1453. Estava em <strong>decadência avançada</strong>.</p>
+      <p style="margin-top: 12px;">Quando se aliou à Alemanha na 1ª Guerra Mundial e perdeu…</p>
+      <p style="margin-top: 8px;">…Inglaterra e França <strong>repartiram entre si</strong> os pedaços árabes.</p>
+    </section>
+
+    <!-- ============== 72 — Sykes-Picot ============== -->
+    <section class="slide">
+      <div class="eyebrow">1916 · acordo secreto</div>
+      <h2>Acordo <em>Sykes-Picot</em>.</h2>
+      <p style="margin-top: 14px;">Remake da Conferência de Berlim, em escala menor.</p>
+      <div class="illu" style="margin: 14px auto; max-width: 240px;">
+        <svg viewBox="0 0 240 120" class="draw" fill="none" stroke="#B8862F" stroke-width="1.5">
+          <!-- mapa OM com linhas retas -->
+          <rect x="30" y="20" width="180" height="80"/>
+          <line x1="100" y1="20" x2="100" y2="100"/>
+          <line x1="150" y1="20" x2="150" y2="100"/>
+          <line x1="30" y1="60" x2="210" y2="60"/>
+          <!-- régua atravessando -->
+          <rect x="20" y="48" width="200" height="6" fill="rgba(184,134,47,0.2)"/>
+        </svg>
+      </div>
+      <p style="margin-top: 8px;">Mapa aberto. Régua. Linha pra cá, linha pra lá.</p>
+    </section>
+
+    <!-- ============== 73 — países criados ============== -->
+    <section class="slide">
+      <p>Criados <strong>artificialmente</strong>:</p>
+      <div style="margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="padding: 10px; background: var(--paper); border-radius: 8px; text-align: center; font-family: var(--serif); font-size: 16px;">Iraque</div>
+        <div style="padding: 10px; background: var(--paper); border-radius: 8px; text-align: center; font-family: var(--serif); font-size: 16px;">Síria</div>
+        <div style="padding: 10px; background: var(--paper); border-radius: 8px; text-align: center; font-family: var(--serif); font-size: 16px;">Líbano</div>
+        <div style="padding: 10px; background: var(--paper); border-radius: 8px; text-align: center; font-family: var(--serif); font-size: 16px;">Jordânia</div>
+        <div style="padding: 10px; background: var(--paper); border-radius: 8px; text-align: center; font-family: var(--serif); font-size: 16px; grid-column: span 2;">Palestina</div>
+      </div>
+      <p style="margin-top: 14px;">Sem ligar pra realidade étnica, religiosa, tribal do terreno.</p>
+    </section>
+
+    <!-- ============== 74 — Iraque ============== -->
+    <section class="slide">
+      <div class="eyebrow">Exemplo · Iraque</div>
+      <p>Os ingleses juntaram, na marra, <strong>3 grupos</strong> que não queriam viver juntos:</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Curdos</strong> no norte</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Sunitas</strong> no centro</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; border-left: 3px solid var(--accent); font-size: 15px;"><strong>Xiitas</strong> no sul</div>
+      </div>
+      <p style="margin-top: 14px;">Quando a tampa da panela de pressão ditatorial saiu em 2003 (americanos derrubaram Saddam)…</p>
+      <p class="big" style="margin-top: 8px;">…o país desmoronou.</p>
+      <p style="margin-top: 8px; font-size: 14px; color: var(--ink-soft);">Guerra civil. Surgimento do Estado Islâmico. Raiz aqui.</p>
+    </section>
+
+    <!-- ============== 75 — Palestina ============== -->
+    <section class="slide">
+      <div class="eyebrow">O caso mais explosivo</div>
+      <h2><em>Palestina</em>.</h2>
+      <p style="margin-top: 14px;">Em 1917, ainda na 1ª Guerra, os ingleses fizeram a <strong>Declaração Balfour</strong>.</p>
+      <p style="margin-top: 10px;">Apoiariam a criação de um "lar nacional judeu" na Palestina.</p>
+    </section>
+
+    <!-- ============== 76 ============== -->
+    <section class="slide">
+      <p>Só que, <strong>ao mesmo tempo</strong>…</p>
+      <p style="margin-top: 12px;">…tinham prometido aos árabes locais que apoiariam a independência árabe na mesma região.</p>
+      <p class="big" style="margin-top: 14px;">Prometeram a mesma terra pra <em>dois povos diferentes</em>.</p>
+      <div class="illu sm" style="margin: 16px auto;">
+        <svg viewBox="0 0 160 100" class="draw" fill="none" stroke="#B5342B" stroke-width="1.5">
+          <!-- terra disputada -->
+          <rect x="60" y="35" width="40" height="30"/>
+          <!-- mão 1 -->
+          <path d="M20 50 Q40 50 60 50"/>
+          <path d="M55 45 L60 50 L55 55"/>
+          <!-- mão 2 -->
+          <path d="M140 50 Q120 50 100 50"/>
+          <path d="M105 45 L100 50 L105 55"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============== 77 ============== -->
+    <section class="slide">
+      <p>O conflito Israel-Palestina — em 2026, com guerra em Gaza, dezenas de milhares de mortos — tem origem direta nessa <strong>promessa dupla</strong>.</p>
+      <p style="margin-top: 14px;">Ingleses prometendo, com a leveza de quem desenha mapa em sala de Londres, o que <strong>não era deles pra prometer</strong>.</p>
+      <p style="margin-top: 14px; font-size: 13px; color: var(--ink-soft); font-style: italic;">Vamos destrinchar Oriente Médio na aula 28.</p>
+    </section>
+
+    <!-- ============== 78 — E o Brasil? ============== -->
+    <section class="slide">
+      <div class="eyebrow">E a gente?</div>
+      <h2>E o <em>Brasil</em>? E a América Latina?</h2>
+      <p style="margin-top: 14px;">Você pode tá pensando: "mas a gente foi colonizado também, né?"</p>
+      <p class="big" style="margin-top: 10px;">Sim e não.</p>
+    </section>
+
+    <!-- ============== 79 — sim ============== -->
+    <section class="slide">
+      <p><strong>Sim</strong>, a América Latina foi colonizada por espanhóis e portugueses entre 1500 e 1800.</p>
+      <p style="margin-top: 12px;">Marcas estruturais até hoje — vamos destrinchar no bloco do Brasil, da aula 16 em diante.</p>
+    </section>
+
+    <!-- ============== 80 — não ============== -->
+    <section class="slide">
+      <p><strong>Não</strong>, porque essa colonização foi <strong>anterior</strong> ao imperialismo de que estamos falando hoje.</p>
+      <p style="margin-top: 12px;">Quando começou a corrida de 1870, a América Latina já era independente.</p>
+      <p style="margin-top: 8px;">Brasil se separou de Portugal em <strong>1822</strong>.</p>
+    </section>
+
+    <!-- ============== 81 — neocolonialismo ============== -->
+    <section class="slide">
+      <p>Mas a gente <strong>não ficou de fora</strong>. Ficou. De um jeito mais sutil:</p>
+      <p class="big" style="margin-top: 14px; color: var(--accent);">Neocolonialismo. Imperialismo informal.</p>
+      <p style="margin-top: 14px;">As potências (Inglaterra, depois EUA) dominaram a economia latino-americana <strong>sem precisar ocupar militarmente</strong>.</p>
+    </section>
+
+    <!-- ============== 82 — como ============== -->
+    <section class="slide">
+      <p>Como?</p>
+      <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Emprestando dinheiro pros governos.</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Controlando os portos.</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Comprando matéria-prima barata (café, borracha, açúcar, carne).</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Vendendo manufatura cara.</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Financiando <strong>golpes</strong> quando algum presidente tentava ser independente demais.</div>
+      </div>
+    </section>
+
+    <!-- ============== 83 ============== -->
+    <section class="slide">
+      <p class="quote">Quem mandava no Brasil republicano, do ponto de vista econômico, em boa parte do século 20, era a Inglaterra e depois os Estados Unidos. Mesmo com presidente brasileiro no Palácio.</p>
+      <p style="margin-top: 18px;">A gente não foi pintado no mapa em Berlim em 1885. Mas foi capturado por outras correntes do <strong>mesmo fenômeno</strong>.</p>
+    </section>
+
+    <!-- ============== 84 — Fim do imperialismo ============== -->
+    <section class="slide">
+      <div class="eyebrow">O fim (mas não dos efeitos)</div>
+      <h2>O imperialismo "duro" começou a desmoronar depois da <em>2ª Guerra</em>.</h2>
+      <p style="margin-top: 14px;">Três motivos.</p>
+    </section>
+
+    <!-- ============== 85 — motivo 1 ============== -->
+    <section class="slide">
+      <div class="number">01</div>
+      <p style="margin-top: 14px;">As potências imperialistas saíram da guerra…</p>
+      <p class="big" style="margin-top: 10px;">…arrasadas, falidas, exaustas.</p>
+      <p style="margin-top: 14px;">Inglaterra, França, Bélgica, Holanda. Sem grana, sem força pra manter colônia.</p>
+    </section>
+
+    <!-- ============== 86 — motivo 2 ============== -->
+    <section class="slide">
+      <div class="number">02</div>
+      <p style="margin-top: 14px;">Os novos donos do mundo eram, oficialmente, <strong>anti-imperialistas</strong>.</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+        <div class="card-soft" style="padding: 12px;">
+          <p style="font-size: 15px;"><strong>EUA</strong> — por ideologia liberal.</p>
+        </div>
+        <div class="card-soft" style="padding: 12px;">
+          <p style="font-size: 15px;"><strong>URSS</strong> — por ideologia marxista.</p>
+        </div>
+      </div>
+      <p style="margin-top: 12px;">Os dois pressionavam a Europa a soltar as colônias.</p>
+    </section>
+
+    <!-- ============== 87 — motivo 3 ============== -->
+    <section class="slide">
+      <div class="number">03</div>
+      <p style="margin-top: 14px;">Os <strong>movimentos de independência</strong> ficaram fortes demais.</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: var(--paper); border-radius: 8px;">
+          <span style="font-family: var(--serif); font-size: 15px;">Gandhi</span>
+          <span style="font-size: 13px; color: var(--ink-soft);">Índia</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: var(--paper); border-radius: 8px;">
+          <span style="font-family: var(--serif); font-size: 15px;">Ho Chi Minh</span>
+          <span style="font-size: 13px; color: var(--ink-soft);">Vietnã</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: var(--paper); border-radius: 8px;">
+          <span style="font-family: var(--serif); font-size: 15px;">Nasser</span>
+          <span style="font-size: 13px; color: var(--ink-soft);">Egito</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: var(--paper); border-radius: 8px;">
+          <span style="font-family: var(--serif); font-size: 15px;">Lumumba</span>
+          <span style="font-size: 13px; color: var(--ink-soft);">Congo</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: var(--paper); border-radius: 8px;">
+          <span style="font-family: var(--serif); font-size: 15px;">Mandela</span>
+          <span style="font-size: 13px; color: var(--ink-soft);">África do Sul</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== 88 — resultado ============== -->
+    <section class="slide">
+      <p>Resultado.</p>
+      <p style="margin-top: 12px;">Entre <strong>1945 e 1975</strong>, praticamente todas as colônias conseguiram independência.</p>
+      <p class="big" style="margin-top: 14px;">Pelo menos no papel.</p>
+    </section>
+
+    <!-- ============== 89 — heranças intro ============== -->
+    <section class="slide">
+      <div class="eyebrow">Mas as heranças continuam</div>
+      <h2>Quatro <em>heranças</em> que moldam o mundo de hoje.</h2>
+    </section>
+
+    <!-- ============== 90 — herança 1 ============== -->
+    <section class="slide">
+      <div class="number">01</div>
+      <h3 style="margin-top: 8px;">Fronteiras absurdas.</h3>
+      <p>Países africanos e do Oriente Médio vivem com fronteiras desenhadas por europeus.</p>
+      <p style="margin-top: 10px;">Juntando povos que não se gostam. Separando povos que se gostariam.</p>
+      <p class="big" style="margin-top: 14px;">Conflito étnico permanente.</p>
+      <p style="margin-top: 8px; font-size: 14px; color: var(--ink-soft);">Ruanda, Sudão, Congo, Síria, Iraque, Líbano — todos pagam a conta do desenho colonial.</p>
+    </section>
+
+    <!-- ============== 91 — herança 2 ============== -->
+    <section class="slide">
+      <div class="number">02</div>
+      <h3 style="margin-top: 8px;">Economias desequilibradas.</h3>
+      <p>As colônias foram organizadas pra exportar <strong>um ou dois produtos primários</strong> pra Europa.</p>
+      <p style="margin-top: 10px;">Quando viraram países, herdaram essa estrutura.</p>
+      <p class="big" style="margin-top: 14px;">Armadilha do desenvolvimento.</p>
+      <p style="margin-top: 8px;">Dependentes de exportar commodity barata e importar produto caro.</p>
+    </section>
+
+    <!-- ============== 92 — herança 3 ============== -->
+    <section class="slide">
+      <div class="number">03</div>
+      <h3 style="margin-top: 8px;">Elites desconectadas.</h3>
+      <p>O modo de governar criou elites locais <strong>educadas à europeia</strong>.</p>
+      <p style="margin-top: 10px;">Falando língua europeia. Vivendo em capital ao estilo europeu.</p>
+      <p style="margin-top: 10px;">Completamente desconectadas da maioria da população.</p>
+      <p class="big" style="margin-top: 14px;">Essa fratura ainda explica muita instabilidade.</p>
+    </section>
+
+    <!-- ============== 93 — herança 4 ============== -->
+    <section class="slide">
+      <div class="number">04</div>
+      <h3 style="margin-top: 8px;">Ressentimento estrutural.</h3>
+      <p>A memória do imperialismo é viva em boa parte do mundo.</p>
+      <p class="quote" style="margin-top: 12px; font-size: 18px;">Vocês falam de democracia agora, mas há 70 anos vocês estavam aqui nos massacrando.</p>
+    </section>
+
+    <!-- ============== 94 ============== -->
+    <section class="slide">
+      <p>Esse ressentimento molda a geopolítica atual.</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Influencia votação na ONU.</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Influencia alinhamento com China e Rússia.</div>
+        <div style="padding: 10px 14px; background: var(--paper); border-radius: 8px; font-size: 14px;">Influencia o BRICS.</div>
+      </div>
+      <p class="big" style="margin-top: 16px;">Não dá pra entender o mundo atual sem entender que <em>metade dele tem trauma fundador com a outra metade</em>.</p>
+    </section>
+
+    <!-- ============== 95 — RESUMÃO ============== -->
     <section class="slide">
       <div class="eyebrow">Resumindo</div>
-      <h2>Dez pontos pra <em>guardar</em>.</h2>
-    </section>
-
-    <!-- 69 - resumo 1-3 -->
-    <section class="slide">
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">01</span>
-          <span style="font-family: var(--serif); font-size: 15px;">Brasil foi criado pra <strong>dar lucro</strong>, não pra ser país.</span>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 20px;">01</span>
+          <span style="font-family: var(--serif); font-size: 14px;">Imperialismo = corrida acelerada (1870-1914)</span>
         </div>
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">02</span>
-          <span style="font-family: var(--serif); font-size: 15px;">Tordesilhas (1494) — dois reinos dividiram o mundo, sem consultar ninguém.</span>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 20px;">02</span>
+          <span style="font-family: var(--serif); font-size: 14px;">Causas: indústria + nacionalismo + racismo</span>
         </div>
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">03</span>
-          <span style="font-family: var(--serif); font-size: 15px;">Primeiras décadas: só pau-brasil. Periferia da periferia.</span>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 20px;">03</span>
+          <span style="font-family: var(--serif); font-size: 14px;">Tecnologia: quinino, Maxim, vapor, ferrovia</span>
         </div>
-      </div>
-    </section>
-
-    <!-- 70 - resumo 4-6 -->
-    <section class="slide">
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">04</span>
-          <span style="font-family: var(--serif); font-size: 15px;">Capitanias (1534) — quase todas falharam. Só São Vicente e Pernambuco prosperaram.</span>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 20px;">04</span>
+          <span style="font-family: var(--serif); font-size: 14px;">Berlim (1884) dividiu a África no papel</span>
         </div>
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">05</span>
-          <span style="font-family: var(--serif); font-size: 15px;">1549 — Governo-Geral. Salvador vira capital.</span>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 20px;">05</span>
+          <span style="font-family: var(--serif); font-size: 14px;">Brutalidades: Congo, Índia, China, Palestina</span>
         </div>
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">06</span>
-          <span style="font-family: var(--serif); font-size: 15px;">Açúcar = grande negócio. Plantation virou DNA econômico.</span>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--paper); border-radius: 10px;">
+          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 20px;">06</span>
+          <span style="font-family: var(--serif); font-size: 14px;">Heranças moldam o mundo até hoje</span>
         </div>
       </div>
     </section>
 
-    <!-- 71 - resumo 7-10 -->
+    <!-- ============== 96 — fechamento bloco ============== -->
     <section class="slide">
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">07</span>
-          <span style="font-family: var(--serif); font-size: 15px;">Sociedade extremamente desigual. Sem classe média.</span>
-        </div>
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">08</span>
-          <span style="font-family: var(--serif); font-size: 15px;">Holandeses (1630–1654) — saíram, levaram a tecnologia pro Caribe e quebraram nosso monopólio.</span>
-        </div>
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">09</span>
-          <span style="font-family: var(--serif); font-size: 15px;">Ouro de Minas (séc. 18) — escoou pra Portugal, daí pra Inglaterra. Ficamos com igrejas bonitas.</span>
-        </div>
-        <div style="display: flex; gap: 12px; padding: 12px; background: var(--paper); border-radius: 10px;">
-          <span style="font-family: var(--serif); font-weight: 800; color: var(--accent); font-size: 22px;">10</span>
-          <span style="font-family: var(--serif); font-size: 15px;">Modelo extrativo se repetiu — produtos mudam, estrutura fica.</span>
-        </div>
+      <p>Fechamos o <strong>Bloco 2</strong>: o mundo no século 19.</p>
+      <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 6px;">
+        <p style="font-family: var(--serif); font-size: 16px;">Revolução Industrial → criou a <em>máquina</em>.</p>
+        <p style="font-family: var(--serif); font-size: 16px;">Era das Ideologias → deu o <em>software</em>.</p>
+        <p style="font-family: var(--serif); font-size: 16px;">Imperialismo → distribuiu o <em>produto</em>.</p>
       </div>
+      <p class="quote" style="margin-top: 18px; font-size: 18px;">A modernidade nasceu mestiça de progresso e brutalidade. Quem só conhece uma é manipulado pela outra.</p>
     </section>
 
-    <!-- 72 - gancho próxima -->
+    <!-- ============== 97 — próxima aula ============== -->
     <section class="slide">
       <div class="eyebrow">Próxima aula</div>
-      <h2>A escravidão é a coisa mais importante pra entender o Brasil.</h2>
-      <p style="margin-top: 14px;">Mais que qualquer rei, presidente ou ditador.</p>
+      <p class="big">Agora, o <em>Brasil</em>.</p>
+      <p style="margin-top: 14px;">Você agora tem a régua pra medir qualquer país do mundo.</p>
+      <p style="margin-top: 10px;">A gente vai usar essa régua <strong>no nosso país</strong>.</p>
+      <p style="margin-top: 10px;">Da chegada de Cabral ao Brasil de hoje. <strong>8 aulas.</strong></p>
     </section>
 
-    <!-- 73 - 400 anos -->
+    <!-- ============== 98 ============== -->
     <section class="slide">
-      <p>Foram…</p>
-      <div style="text-align: center; margin: 16px 0;">
-        <div class="number">~400</div>
-        <p style="margin-top: 6px; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.1em; text-transform: uppercase;">anos de escravidão</p>
-      </div>
-      <p>Quatro séculos.</p>
-      <p style="margin-top: 8px;">Muito mais tempo do que o Brasil é independente.</p>
-      <p class="big" style="margin-top: 12px;">A maior parte da nossa história foi vivida sob escravidão.</p>
+      <p>Por que a gente — que tinha tudo pra ser um dos países mais ricos do mundo — terminou o século 20 como uma das nações mais <strong>desiguais</strong> do planeta?</p>
+      <p style="margin-top: 14px;">A resposta tá numa sequência de <strong>escolhas estruturais</strong> feitas ao longo de 5 séculos.</p>
+      <p style="margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--accent);">Começa pelo DNA do país. Brasil Colônia.</p>
+      <p style="margin-top: 14px; font-size: 14px; color: var(--ink-soft);">Até lá.</p>
     </section>
 
-    <!-- 74 - 1888 -->
-    <section class="slide">
-      <p>E quando acabou, em <strong>1888</strong>…</p>
-      <p class="big" style="margin-top: 12px; color: var(--wrong);">Não houve nenhuma política de inclusão.</p>
-      <p style="margin-top: 14px;">Os ex-escravos foram simplesmente "libertos".</p>
-      <p style="margin-top: 8px;">Sem terra. Sem trabalho. Sem educação. Sem nada.</p>
-      <p style="margin-top: 12px;">A sociedade brasileira tratou como problema resolvido.</p>
-      <p class="big" style="margin-top: 10px;">Não foi.</p>
-    </section>
-
-    <!-- 75 - até lá -->
-    <section class="slide">
-      <p>Na próxima aula, a gente vai abrir essa ferida.</p>
-      <p style="margin-top: 10px;">Sem moralismo. Sem militância. Com a verdade dos números, das fontes, da estrutura.</p>
-      <p class="big" style="margin-top: 14px; color: var(--accent);">Aula 17 — Escravidão: a ferida que não fechou.</p>
-      <p style="margin-top: 14px; font-style: italic; color: var(--ink-soft);">Até lá.</p>
-    </section>
-
-    <!-- 76 - INTRO QUIZ -->
+    <!-- ============== 99 — INTRO QUIZ ============== -->
     <section class="slide quiz-intro">
       <div class="quiz-icon">?</div>
       <div class="eyebrow" style="text-align: center;">Hora do quiz</div>
       <h2>Bora ver o que ficou.</h2>
-      <p style="margin-top: 14px;">Seis perguntas rápidas.<br>Se errar, eu te explico na hora.</p>
+      <p style="margin-top: 14px;">Seis perguntas.<br>Se errar, eu te explico na hora.</p>
     </section>
 
-    <!-- 77 - QUIZ 1 -->
+    <!-- ============== 100 — QUIZ 1 ============== -->
     <section class="slide" data-quiz="1">
       <div class="question-num">Pergunta 1 de 6</div>
-      <div class="question">Pra que o Brasil foi <em>criado</em> pelos portugueses?</div>
+      <div class="question">Qual a diferença entre <em>colonialismo</em> e <em>imperialismo</em>, do jeito que a gente usou na aula?</div>
       <div class="options">
-        <button class="option" data-correct="false" data-explain="Não. Os EUA foram colonizados por gente fugindo de perseguição — não o Brasil. Aqui a lógica era outra.">
-          <span class="letter">A</span><span>Pra abrigar perseguidos religiosos europeus.</span>
+        <button class="option" data-correct="false" data-explain="Não. As duas coisas envolvem dominação. A diferença é outra: escala, velocidade e momento histórico.">
+          <span class="letter">A</span><span>Colonialismo é violento, imperialismo é pacífico.</span>
         </button>
         <button class="option" data-correct="true" data-explain="">
-          <span class="letter">B</span><span>Pra dar lucro pra Portugal. A colônia era ponto de extração, não lar.</span>
+          <span class="letter">B</span><span>Colonialismo é prática antiga, secular. Imperialismo é a versão turbinada, concentrada entre 1870-1914.</span>
         </button>
-        <button class="option" data-correct="false" data-explain="Não. Civilização não era projeto. O Brasil foi negócio — montado pra mandar riqueza pra Portugal e ponto.">
-          <span class="letter">C</span><span>Pra construir uma nova civilização baseada em valores cristãos.</span>
+        <button class="option" data-correct="false" data-explain="Não. Os dois são fenômenos europeus, basicamente. A diferença está na escala e no momento histórico, não na origem.">
+          <span class="letter">C</span><span>Colonialismo é europeu, imperialismo é americano.</span>
         </button>
       </div>
-      <div class="feedback right" data-fb="right"><span class="head">Mandou bem.</span>Exato. A finalidade era <strong>lucro</strong>. Os que vinham, vinham extrair — não pra ficar. Esse "DNA" molda o Brasil até hoje.</div>
-      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> O Brasil nasceu como negócio — uma fazenda de exportação pra Portugal. Esse é o ponto que organiza toda a aula.</div>
+      <div class="feedback right" data-fb="right"><span class="head">Isso.</span>Colonialismo existe há séculos (Portugal, Espanha, Holanda em 1500). Imperialismo, no sentido da aula, é a corrida frenética e industrial de 1870-1914. Pesca com vara vs. pesca de arrastão.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> Imperialismo é colonialismo turbinado, na era industrial.</div>
     </section>
 
-    <!-- 78 - QUIZ 2 -->
+    <!-- ============== 101 — QUIZ 2 ============== -->
     <section class="slide" data-quiz="2">
       <div class="question-num">Pergunta 2 de 6</div>
-      <div class="question">As Capitanias Hereditárias (1534) foram, na essência…</div>
+      <div class="question">Por que a Conferência de Berlim (1884-85) é considerada um dos eventos mais <em>cínicos</em> da história moderna?</div>
       <div class="options">
-        <button class="option" data-correct="false" data-explain="Não. Foi exatamente o oposto: descentralização. O rei distribuiu o problema entre nobres porque ele mesmo não tinha grana.">
-          <span class="letter">A</span><span>Uma centralização forte do poder do rei sobre a colônia.</span>
+        <button class="option" data-correct="false" data-explain="A Conferência aconteceu, sim. Mas o que a torna cínica é outra coisa.">
+          <span class="letter">A</span><span>Porque os países brigaram fisicamente na reunião.</span>
         </button>
         <button class="option" data-correct="true" data-explain="">
-          <span class="letter">B</span><span>Uma terceirização: o rei privatizou o risco e manteve parte do lucro garantida.</span>
+          <span class="letter">B</span><span>Porque 14 países europeus dividiram a África inteira na régua, sem nenhum africano presente, sem ligar pra etnia, língua ou reino existente.</span>
         </button>
-        <button class="option" data-correct="false" data-explain="Não. Não tinha igualdade nenhuma. Eram nobres escolhidos, recebendo faixas gigantes de terra — modelo concentrador.">
-          <span class="letter">C</span><span>Uma divisão igualitária da terra entre famílias colonos.</span>
+        <button class="option" data-correct="false" data-explain="Não. A Conferência foi DA divisão da África. As guerras mundiais vieram depois, e por outros motivos (mas com causas ligadas ao imperialismo, sim).">
+          <span class="letter">C</span><span>Porque iniciou diretamente a Primeira Guerra Mundial.</span>
         </button>
       </div>
-      <div class="feedback right" data-fb="right"><span class="head">Isso.</span>Terceirização clássica. O rei não tinha dinheiro pra colonizar, então passou o problema (e o risco) pros nobres. Resultado: <strong>13 das 15 capitanias falharam</strong>.</div>
-      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> O rei terceirizou. E como toda terceirização sem fiscalização, deu errado — só 2 capitanias prosperaram.</div>
+      <div class="feedback right" data-fb="right"><span class="head">Exato.</span>Mapa aberto, régua, charuto, e nenhum africano na sala. Por isso a África tem tantas fronteiras retas hoje — foram desenhadas em cima de um mapa em Berlim.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Não foi isso.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> 14 países, mapa, régua, nenhum africano. É isso que torna o evento absurdo.</div>
     </section>
 
-    <!-- 79 - QUIZ 3 -->
+    <!-- ============== 102 — QUIZ 3 ============== -->
     <section class="slide" data-quiz="3">
       <div class="question-num">Pergunta 3 de 6</div>
-      <div class="question">O modelo de produção do açúcar (a <em>plantation</em>) era marcado por três coisas. Quais?</div>
+      <div class="question">Qual o pacote de tecnologias que tornou o imperialismo <em>possível</em> exatamente entre 1850 e 1880?</div>
       <div class="options">
-        <button class="option" data-correct="false" data-explain="Não. Era o oposto: produção em massa, em latifúndios, com mão de obra escrava. Nada de cooperativa.">
-          <span class="letter">A</span><span>Pequenas propriedades familiares + cooperativa + mercado interno.</span>
-        </button>
-        <button class="option" data-correct="false" data-explain="Não. Não tinha diversificação (era monocultura) nem trabalho assalariado (era escravo). E não vendia pra cá — era pra Europa.">
-          <span class="letter">B</span><span>Diversificação de culturas + trabalho assalariado + venda interna.</span>
+        <button class="option" data-correct="false" data-explain="Pólvora existia desde a Idade Média. Não foi ela que destravou o imperialismo do fim do século 19.">
+          <span class="letter">A</span><span>Pólvora, espada, cavalaria e veleiro.</span>
         </button>
         <button class="option" data-correct="true" data-explain="">
-          <span class="letter">C</span><span>Monocultura + latifúndio + escravidão, tudo pra exportar.</span>
+          <span class="letter">B</span><span>Quinino (contra malária), metralhadora Maxim, navio a vapor + telégrafo, e estrada de ferro.</span>
+        </button>
+        <button class="option" data-correct="false" data-explain="Avião e rádio são tecnologias do século 20. O imperialismo de 1870-1914 foi feito com tecnologia anterior.">
+          <span class="letter">C</span><span>Avião, rádio, fuzil automático e tanque.</span>
         </button>
       </div>
-      <div class="feedback right" data-fb="right"><span class="head">Mandou bem.</span>Esse é o tripé do Brasil colonial. E o ponto-chave: mesmo depois do açúcar acabar, esse modelo se repetiu — ouro, café, soja… <strong>a estrutura ficou</strong>.</div>
-      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a C.</strong> Monocultura + latifúndio + escravidão + exportação. Esse é o DNA econômico que se repete na nossa história até hoje, com produtos diferentes.</div>
+      <div class="feedback right" data-fb="right"><span class="head">Mandou bem.</span>Esse pacote chegou junto entre 1850 e 1880, e destravou tudo. Quinino impediu europeu de morrer no interior da África. Maxim virou massacre tecnológico. Vapor + telégrafo coordenaram a logística. Ferrovia escoou o que era roubado.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Errou.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> Quinino, Maxim, vapor + telégrafo, e ferrovia. Esse foi o pacote.</div>
     </section>
 
-    <!-- 80 - QUIZ 4 -->
+    <!-- ============== 103 — QUIZ 4 ============== -->
     <section class="slide" data-quiz="4">
       <div class="question-num">Pergunta 4 de 6</div>
-      <div class="question">O que aconteceu quando os holandeses foram expulsos de Pernambuco, em 1654?</div>
+      <div class="question">O caso do <em>Congo Belga</em> foi brutal. Sob quem ficou e quantos morreram, mais ou menos?</div>
       <div class="options">
-        <button class="option" data-correct="false" data-explain="Não foi a Inglaterra que dominou direto. Os holandeses foram pro Caribe — Antilhas, Barbados — e plantaram açúcar lá.">
-          <span class="letter">A</span><span>A Inglaterra invadiu Pernambuco em seguida e tomou o açúcar.</span>
+        <button class="option" data-correct="false" data-explain="Não. O Congo, no início, nem era da Bélgica como nação. Era propriedade PESSOAL do rei. Bem mais escandaloso.">
+          <span class="letter">A</span><span>Era colônia oficial do governo belga desde o início, e morreram cerca de 100 mil pessoas.</span>
         </button>
         <button class="option" data-correct="true" data-explain="">
-          <span class="letter">B</span><span>Levaram a tecnologia do açúcar pro Caribe e quebraram o monopólio brasileiro.</span>
+          <span class="letter">B</span><span>Era propriedade pessoal do rei Leopoldo II, e estima-se 8 a 10 milhões de mortos entre 1885 e 1908.</span>
         </button>
-        <button class="option" data-correct="false" data-explain="Não. Pelo contrário: o açúcar brasileiro começa a declinar a partir do final do século 17 justamente por causa da concorrência caribenha.">
-          <span class="letter">C</span><span>O Brasil consolidou monopólio absoluto do açúcar mundial.</span>
+        <button class="option" data-correct="false" data-explain="Não. O Congo nunca foi colônia francesa. Era de Leopoldo II, rei da Bélgica, em caráter pessoal.">
+          <span class="letter">C</span><span>Era colônia francesa, e morreram cerca de 1 milhão.</span>
         </button>
       </div>
-      <div class="feedback right" data-fb="right"><span class="head">Boa.</span>Os holandeses replicaram a operação no Caribe — <strong>mais perto da Europa, mais eficiente</strong>. Lição clássica: vantagem competitiva não dura pra sempre se você não inova.</div>
-      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> Eles levaram o know-how pro Caribe e produziram melhor. O açúcar brasileiro perde mercado a partir daí.</div>
+      <div class="feedback right" data-fb="right"><span class="head">Isso.</span>Leopoldo II transformou o Congo em propriedade pessoal. Quotas absurdas de borracha. Quem não cumpria, tinha a mão cortada. Metade da população do Congo morreu nesse período. Genocídio em escala industrial.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Não.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> Era do rei pessoalmente. 8 a 10 milhões de mortos. A Bélgica só pegou pra si oficialmente em 1908, depois do escândalo.</div>
     </section>
 
-    <!-- 81 - QUIZ 5 -->
+    <!-- ============== 104 — QUIZ 5 ============== -->
     <section class="slide" data-quiz="5">
       <div class="question-num">Pergunta 5 de 6</div>
-      <div class="question">Pra onde foi parar boa parte do ouro brasileiro do século 18?</div>
+      <div class="question">Por que a China chama o período de 1839-1949 de <em>"Século da Humilhação"</em> e por que isso importa <em>hoje</em>?</div>
       <div class="options">
-        <button class="option" data-correct="false" data-explain="Não. Quase nada ficou no Brasil em forma de indústria. Sobraram igrejas barrocas bonitas e, depois, ruína.">
-          <span class="letter">A</span><span>Ficou no Brasil e financiou a primeira indústria nacional.</span>
-        </button>
-        <button class="option" data-correct="false" data-explain="Não foi pra Espanha. Portugal era rival da Espanha — o ouro foi pra Portugal e, dali, escoou pra Inglaterra.">
-          <span class="letter">B</span><span>Foi todo pra Espanha, via Tratado de Tordesilhas.</span>
+        <button class="option" data-correct="false" data-explain="Não. A China não foi colonizada inteira — foi semicolonizada. E o motivo do nome não é esse.">
+          <span class="letter">A</span><span>Porque a China foi totalmente colonizada pela Inglaterra, e hoje quer vingança militar direta.</span>
         </button>
         <button class="option" data-correct="true" data-explain="">
-          <span class="letter">C</span><span>Foi pra Portugal e, de lá, pra Inglaterra — ajudando a financiar a Revolução Industrial inglesa.</span>
+          <span class="letter">B</span><span>Porque foi pisoteada por estrangeiros (Guerras do Ópio, tratados desiguais, perda de Hong Kong) — e hoje a narrativa do "nunca mais" molda toda a postura geopolítica chinesa.</span>
+        </button>
+        <button class="option" data-correct="false" data-explain="Não. O Século da Humilhação não tem relação direta com Mao ou comunismo. É anterior — começa em 1839 com as Guerras do Ópio.">
+          <span class="letter">C</span><span>Porque o comunismo de Mao humilhou a elite chinesa, e hoje há nostalgia disso.</span>
         </button>
       </div>
-      <div class="feedback right" data-fb="right"><span class="head">Exato.</span>Tratado de Methuen (1703). Portugal comprava industrializado inglês e pagava em ouro brasileiro. <strong>Nosso subsolo financiou a indústria deles.</strong> Pensa nisso.</div>
-      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a C.</strong> Portugal tinha acordos comerciais ruins com a Inglaterra (Methuen, 1703). Comprava produto industrializado inglês e pagava em ouro nosso.</div>
+      <div class="feedback right" data-fb="right"><span class="head">Perfeito.</span>Guerras do Ópio, tratados desiguais, Hong Kong tomada até 1997. Quando o ocidente pergunta "por que a China é agressiva hoje?", a resposta tá aqui. 100 anos de humilhação vivos na memória. E a promessa interna: nunca mais.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Não foi isso.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> A China foi semicolonizada e humilhada (Ópio, Hong Kong, tratados desiguais). Essa memória explica a postura chinesa hoje.</div>
     </section>
 
-    <!-- 82 - QUIZ 6 -->
+    <!-- ============== 105 — QUIZ 6 ============== -->
     <section class="slide" data-quiz="6">
       <div class="question-num">Pergunta 6 de 6</div>
-      <div class="question">Comparado aos EUA, quantos africanos escravizados o Brasil recebeu?</div>
+      <div class="question">Por que o conflito Israel-Palestina, ainda quente em 2026, tem origem direta na <em>era imperialista</em>?</div>
       <div class="options">
-        <button class="option" data-correct="false" data-explain="Não. É o contrário. O Brasil recebeu MUITO mais — cerca de 4,8 milhões. Os EUA, em torno de 400 mil.">
-          <span class="letter">A</span><span>Bem menos que os EUA — escravidão aqui foi marginal.</span>
-        </button>
-        <button class="option" data-correct="false" data-explain="Não. A diferença foi muito maior que isso. Foi cerca de 10× — o Brasil recebeu o equivalente a dez EUAs.">
-          <span class="letter">B</span><span>Mais ou menos o dobro dos EUA.</span>
+        <button class="option" data-correct="false" data-explain="Não. O conflito é bem mais recente — surge no século 20, com origem na ação inglesa durante a Primeira Guerra.">
+          <span class="letter">A</span><span>Porque ingleses e árabes brigam pela região desde a Idade Média.</span>
         </button>
         <button class="option" data-correct="true" data-explain="">
-          <span class="letter">C</span><span>Cerca de 10 vezes mais — 4,8 milhões aqui contra 400 mil nos EUA.</span>
+          <span class="letter">B</span><span>Porque em 1917 os ingleses (Declaração Balfour) prometeram a mesma terra pra dois povos diferentes: judeus e árabes. E desenharam o Oriente Médio na régua (Sykes-Picot).</span>
+        </button>
+        <button class="option" data-correct="false" data-explain="Não. Embora a 2ª Guerra tenha acelerado a criação de Israel, a origem do conflito está antes — na promessa britânica dupla de 1917, na era imperialista.">
+          <span class="letter">C</span><span>Porque os Estados Unidos criaram Israel depois da Segunda Guerra, sem aviso prévio.</span>
         </button>
       </div>
-      <div class="feedback right" data-fb="right"><span class="head">Isso.</span>O Brasil foi o <strong>maior país escravista das Américas</strong>, em volume e em duração. Último do Ocidente a abolir — em 1888. Esse é o pano de fundo que a Aula 17 vai destrinchar.</div>
-      <div class="feedback miss" data-fb="miss"><span class="head">Quase.</span><span data-explain-text></span><br><br><strong>A certa é a C.</strong> 4,8 milhões aqui, 400 mil nos EUA. Dez vezes mais. E a escravidão aqui durou mais tempo. Esse é o tamanho da ferida.</div>
+      <div class="feedback right" data-fb="right"><span class="head">Mandou.</span>A Declaração Balfour (1917) prometeu um "lar judeu" na Palestina. Ao mesmo tempo, os ingleses prometeram aos árabes a independência da mesma região. Promessa dupla, terra única. A guerra em Gaza hoje tem raiz aqui.</div>
+      <div class="feedback miss" data-fb="miss"><span class="head">Não exatamente.</span><span data-explain-text></span><br><br><strong>A certa é a B.</strong> Promessa britânica dupla (1917) + divisão na régua (Sykes-Picot, 1916). É essa a origem direta.</div>
     </section>
 
-    <!-- 83 - FIM -->
+    <!-- ============== END ============== -->
     <section class="slide end">
-      <div class="eyebrow">Fim da aula 16</div>
-      <h2>Mandou bem.</h2>
-      <div class="score" id="score">0/6</div>
-      <p id="end-msg">Você entendeu como o Brasil nasceu — e por que isso ainda explica tanta coisa hoje.</p>
-      <button class="restart" id="restart">voltar ao início</button>
+      <div class="eyebrow" style="color: var(--accent-soft);">Fim da aula 15</div>
+      <h2>Você fechou o <em>Bloco do Mundo</em>.</h2>
+      <div class="score" id="score">0 / 6</div>
+      <p id="endMsg">Boa.</p>
+      <button class="restart" id="restart">Voltar ao início</button>
     </section>
 
   </div>
 
-  <div class="tap-zone left" id="tapL"></div>
-  <div class="tap-zone right" id="tapR"></div>
+  <div class="tap-zone left" id="tapLeft"></div>
+  <div class="tap-zone right" id="tapRight"></div>
 </div>
 
 <script>
-  const slides = document.querySelectorAll('.slide');
-  const total = slides.length;
-  const progress = document.getElementById('progress');
+  const slidesEl = document.getElementById('slides');
+  const slides = Array.from(slidesEl.querySelectorAll('.slide'));
+  const progressEl = document.getElementById('progress');
   const counter = document.getElementById('counter');
+  const tapLeft = document.getElementById('tapLeft');
+  const tapRight = document.getElementById('tapRight');
+  const total = slides.length;
+
   let current = 0;
   let score = 0;
-  let answered = new Set();
+  let answered = {};
 
-  // Build progress segments
+  // build segments
   for (let i = 0; i < total; i++) {
     const seg = document.createElement('div');
     seg.className = 'seg';
-    seg.dataset.idx = i;
-    seg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      goTo(i);
-    });
-    progress.appendChild(seg);
+    seg.dataset.index = i;
+    progressEl.appendChild(seg);
   }
-  const segs = progress.querySelectorAll('.seg');
+  const segs = Array.from(progressEl.querySelectorAll('.seg'));
 
-  function update() {
-    slides.forEach((s, i) => {
-      s.classList.remove('active', 'prev');
-      if (i === current) s.classList.add('active');
-      else if (i < current) s.classList.add('prev');
+  function go(i) {
+    if (i < 0 || i >= total) return;
+    slides[current].classList.remove('active');
+    if (i < current) slides[current].classList.add('prev');
+    else slides[current].classList.remove('prev');
+    current = i;
+    slides.forEach((s, idx) => {
+      s.classList.remove('active');
+      if (idx === i) s.classList.add('active');
+      if (idx < i) s.classList.add('prev'); else s.classList.remove('prev');
     });
-    segs.forEach((s, i) => {
+    updateProgress();
+  }
+
+  function updateProgress() {
+    segs.forEach((s, idx) => {
       s.classList.remove('done', 'current');
-      if (i < current) s.classList.add('done');
-      else if (i === current) s.classList.add('current');
+      if (idx < current) s.classList.add('done');
+      if (idx === current) s.classList.add('current');
     });
-    counter.textContent = `${current + 1} / ${total}`;
-
-    // re-trigger animations on active slide
-    const active = slides[current];
-    if (active) {
-      Array.from(active.children).forEach(child => {
-        child.style.animation = 'none';
-        void child.offsetWidth;
-        child.style.animation = '';
-      });
-    }
-
-    // End slide: update score
-    if (slides[current].classList.contains('end')) {
-      document.getElementById('score').textContent = `${score}/6`;
-      const msg = document.getElementById('end-msg');
-      if (score === 6) msg.textContent = "Acertou tudo. Cabeça afiada — bora pra próxima.";
-      else if (score >= 4) msg.textContent = "Bom resultado. O essencial ficou. Revisa o que escapou.";
-      else if (score >= 2) msg.textContent = "Deu pra captar o miolo. Vale uma segunda volta pra fixar.";
-      else msg.textContent = "Tranquilo. Volta no início e relê — é assunto denso, vai assentar.";
-    }
+    counter.textContent = (current + 1) + ' / ' + total;
   }
 
-  function next() { if (current < total - 1) { current++; update(); } }
-  function prev() { if (current > 0) { current--; update(); } }
-  function goTo(i) { if (i >= 0 && i < total) { current = i; update(); } }
+  function next() { if (current < total - 1) go(current + 1); }
+  function prev() { if (current > 0) go(current - 1); }
 
-  document.getElementById('tapL').addEventListener('click', prev);
-  document.getElementById('tapR').addEventListener('click', next);
+  tapRight.addEventListener('click', next);
+  tapLeft.addEventListener('click', prev);
 
-  // Swipe
-  let touchStartX = 0, touchStartY = 0, touchStartT = 0;
-  document.addEventListener('touchstart', (e) => {
+  // progress bar interaction (tap + drag)
+  let dragging = false;
+  function handleProgressTouch(e) {
+    const rect = progressEl.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    const pct = Math.max(0, Math.min(1, x / rect.width));
+    const idx = Math.min(total - 1, Math.floor(pct * total));
+    if (idx !== current) go(idx);
+  }
+  progressEl.addEventListener('click', handleProgressTouch);
+  progressEl.addEventListener('touchstart', (e) => { dragging = true; handleProgressTouch(e); });
+  progressEl.addEventListener('touchmove', (e) => { if (dragging) handleProgressTouch(e); e.preventDefault(); }, { passive: false });
+  progressEl.addEventListener('touchend', () => { dragging = false; });
+
+  // swipe
+  let touchStartX = 0, touchStartY = 0;
+  slidesEl.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
-    touchStartT = Date.now();
-  }, { passive: true });
-  document.addEventListener('touchend', (e) => {
+  });
+  slidesEl.addEventListener('touchend', (e) => {
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
-    const dt = Date.now() - touchStartT;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 600) {
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
       if (dx < 0) next(); else prev();
     }
-  }, { passive: true });
-
-  // Progress bar drag
-  let dragging = false;
-  progress.addEventListener('touchstart', (e) => {
-    dragging = true;
-    handleDrag(e.touches[0].clientX);
   });
-  progress.addEventListener('touchmove', (e) => {
-    if (dragging) handleDrag(e.touches[0].clientX);
-  });
-  progress.addEventListener('touchend', () => { dragging = false; });
-  function handleDrag(x) {
-    const rect = progress.getBoundingClientRect();
-    const pct = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
-    const idx = Math.floor(pct * total);
-    goTo(Math.min(idx, total - 1));
-  }
 
-  // Keyboard (extra)
+  // keyboard (desenvolvimento)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') next();
     if (e.key === 'ArrowLeft') prev();
   });
 
-  // Quiz logic
-  document.querySelectorAll('[data-quiz]').forEach(quiz => {
-    const qId = quiz.dataset.quiz;
-    const options = quiz.querySelectorAll('.option');
-    const fbRight = quiz.querySelector('[data-fb="right"]');
-    const fbMiss = quiz.querySelector('[data-fb="miss"]');
-    options.forEach(opt => {
+  // quiz
+  slides.forEach((slide) => {
+    if (!slide.dataset.quiz) return;
+    const opts = slide.querySelectorAll('.option');
+    const fbRight = slide.querySelector('[data-fb="right"]');
+    const fbMiss = slide.querySelector('[data-fb="miss"]');
+    opts.forEach((opt) => {
       opt.addEventListener('click', () => {
-        if (answered.has(qId)) return;
-        answered.add(qId);
-        const correct = opt.dataset.correct === 'true';
-        options.forEach(o => {
+        if (answered[slide.dataset.quiz]) return;
+        answered[slide.dataset.quiz] = true;
+        const isCorrect = opt.dataset.correct === 'true';
+        opts.forEach(o => {
           o.classList.add('disabled');
           if (o.dataset.correct === 'true') o.classList.add('correct');
         });
-        if (correct) {
-          score++;
-          fbRight.classList.add('show');
-        } else {
+        if (!isCorrect) {
+          opt.classList.remove('correct');
           opt.classList.add('wrong');
           const explainText = opt.dataset.explain || '';
-          const target = fbMiss.querySelector('[data-explain-text]');
-          if (target) target.textContent = explainText;
+          const slot = fbMiss.querySelector('[data-explain-text]');
+          if (slot) slot.textContent = explainText;
           fbMiss.classList.add('show');
+        } else {
+          score++;
+          fbRight.classList.add('show');
         }
       });
     });
   });
 
-  // Restart
+  // end screen
+  function updateEnd() {
+    const scoreEl = document.getElementById('score');
+    const msg = document.getElementById('endMsg');
+    if (scoreEl) scoreEl.textContent = score + ' / 6';
+    if (msg) {
+      if (score === 6) msg.textContent = 'Cravou. Você fechou a régua do mundo.';
+      else if (score >= 4) msg.textContent = 'Boa. A régua tá afiada. Bora pro Brasil.';
+      else if (score >= 2) msg.textContent = 'Deu pra pegar o essencial. Volta nos pontos que escaparam.';
+      else msg.textContent = 'Aula densa. Sem problema — revisa e segue.';
+    }
+  }
+
+  const endObserver = new MutationObserver(() => {
+    if (slides[total - 1].classList.contains('active')) updateEnd();
+  });
+  endObserver.observe(slides[total - 1], { attributes: true });
+
   document.getElementById('restart').addEventListener('click', () => {
-    current = 0;
     score = 0;
-    answered.clear();
-    document.querySelectorAll('.option').forEach(o => {
-      o.classList.remove('correct', 'wrong', 'disabled');
+    answered = {};
+    slides.forEach(s => {
+      const opts = s.querySelectorAll('.option');
+      opts.forEach(o => { o.classList.remove('correct', 'wrong', 'disabled'); });
+      const fbs = s.querySelectorAll('.feedback');
+      fbs.forEach(f => f.classList.remove('show'));
     });
-    document.querySelectorAll('.feedback').forEach(f => {
-      f.classList.remove('show');
-    });
-    update();
+    go(0);
   });
 
-  update();
+  updateProgress();
 </script>
 
 </body>
 </html>
-
